@@ -179,7 +179,7 @@ a {
   backdrop-filter: blur(8px);
   width: 100%;
   border-radius: 8px;
-  color: rgb(47, 35, 23);
+  color: rgb(28, 28, 28);
   text-align: center;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
   border: 1px solid white;
@@ -204,7 +204,7 @@ a {
 .text-subtitle {
   font-size: 1.2rem;
   line-height: 1.5;
-  color: #392b23;
+  color: #343434;
 }
 
 /* Responsivo */
