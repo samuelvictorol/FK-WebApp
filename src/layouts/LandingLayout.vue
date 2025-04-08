@@ -171,7 +171,7 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   filter: grayscale(100%);
-  z-index: -1; /* coloca a imagem atrás do conteúdo da seção */
+  z-index: -1; /* coloca a imagem atrás do co nteúdo da seção */
 }
 .content-overlay {
   background-color:#ffffffb6;
