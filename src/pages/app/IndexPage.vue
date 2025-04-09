@@ -1,10 +1,13 @@
 <template>
   <q-page class="flex flex-center">
-    <img
+    <div class="w100 text-h5 text-bold row justify-center">
+      Em Desenvolvimento...
+      <img
       alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+      src="/building.svg"
+      style="width: 300px; height: 300px"
+      >
+    </div>
   </q-page>
 </template>
 

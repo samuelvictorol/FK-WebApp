@@ -1,7 +1,7 @@
 <template>
     <q-page class="q-pa-md animate__animated animate__fadeIn">
         <!-- Breadcrumb -->
-        <q-breadcrumbs class="q-pa-sm  text-grey-8 rounded-borders" separator-icon="chevron_right">
+        <q-breadcrumbs class=" text-grey-8 rounded-borders" separator-icon="chevron_right">
             <q-breadcrumbs-el icon="home" label="Início" to="/admin" exact />
         </q-breadcrumbs>
 
@@ -17,10 +17,10 @@
             <!-- Ações -->
             <template #body-cell-actions="props">
                 <q-td align="center">
-                    <q-btn dense flat round color="green-14 " icon="visibility" :to="`/admin/form-template/${props.row.id}`">
+                    <q-btn dense flat round color="primary" icon="visibility">
                         <q-tooltip>Visualizar Template</q-tooltip>
                     </q-btn>
-                    <q-btn dense flat round icon="library_books" color="primary" :to="`/admin/form-respostas/${props.row.id}`">
+                    <q-btn dense flat round icon="library_books" color="blue">
                         <q-tooltip>Visualizar Respostas</q-tooltip>
                     </q-btn>
                 </q-td>

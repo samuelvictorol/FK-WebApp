@@ -6,7 +6,7 @@
         <q-toolbar-title>
           Flávia Kamila
         </q-toolbar-title>
-        <q-btn dense glossy label="Acessar" to="/admin" color="blue-14" icon-right="login" class="q-px-md" />
+        <q-btn dense glossy label="Acessar" to="/admin" color="secondary" icon-right="login" class="q-px-md" />
       </q-toolbar>
 
       <q-tabs align="center" class="text-bold">
@@ -116,7 +116,7 @@
               <q-input filled label="Nome" class="q-mb-md" />
               <q-input filled label="E-mail" type="email" class="q-mb-md" />
               <q-input filled label="Mensagem" type="textarea" class="q-mb-md" />
-              <q-btn label="Enviar Mensagem" color="blue-14" glossy class="w100" icon-right="send" type="submit" />
+              <q-btn label="Enviar Mensagem" color="primary" glossy class="w100" icon-right="send" type="submit" />
             </q-form>
           </div>
           <div class="w100 row no-wrap justify-center items-center">

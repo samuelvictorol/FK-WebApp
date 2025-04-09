@@ -1,7 +1,7 @@
 <template>
     <q-page class="q-pa-md animate__animated animate__fadeIn">
         <!-- Breadcrumb -->
-        <q-breadcrumbs class="q-pa-sm text-grey-8 rounded-borders" separator-icon="chevron_right">
+        <q-breadcrumbs class="text-grey-8 rounded-borders" separator-icon="chevron_right">
             <q-breadcrumbs-el icon="home" label="Início" to="/admin"  />
             <q-breadcrumbs-el icon="post_add" label="Criar Formulário" exact/>
         </q-breadcrumbs>

@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-grad-1 text-white">
-      <q-toolbar class="text-black">
+    <q-header class="bg-blue text-white">
+      <q-toolbar >
         <q-toolbar-title>
           Aplicativo
         </q-toolbar-title>
@@ -10,7 +10,7 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
+      <q-btn label="Página Inicial" icon="home" to="/" color="secondary" class="q-mx-md q-mt-xl"></q-btn>
     </q-drawer>
 
     <q-page-container>
