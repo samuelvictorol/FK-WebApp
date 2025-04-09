@@ -6,18 +6,18 @@
         <q-toolbar-title>
           Flávia Kamila
         </q-toolbar-title>
-        <q-btn dense glossy label="Acessar App" color="green" icon-right="login" class="q-px-md" />
+        <q-btn dense glossy label="Acessar" to="/admin" color="blue-14" icon-right="login" class="q-px-md" />
       </q-toolbar>
 
-      <q-tabs align="center">
+      <q-tabs align="center" class="text-bold">
         <q-route-tab >
-          <a href="#inicio">Início</a>
+          <a style="letter-spacing: .5px;" href="#inicio">Início</a>
         </q-route-tab>
         <q-route-tab>
-          <a href="#sobre">Sobre</a>
+          <a style="letter-spacing: .5px;" href="#sobre">Sobre</a>
         </q-route-tab>
         <q-route-tab>
-          <a href="#contato">Contato</a>
+          <a style="letter-spacing: .5px;" href="#contato">Contato</a>
         </q-route-tab>
       </q-tabs>
     </q-header>
@@ -33,8 +33,8 @@
               personalizadas</strong> com nosso <strong>formulário interativo</strong>
           </p>
 
-          <div class="flex flex-center q-mt-md">
-            <q-btn label="Criar Plano de Estudos" color="blue" glossy to="#" icon-right="library_books"
+          <div class="flex flex-center q-mt-md ">
+            <q-btn label="Criar Plano de Estudos" color="dark" to="/app" icon-right="library_books"
               class="q-pa-xl full-width full-width-sm" />
           </div>
         </div>
@@ -153,9 +153,10 @@ a {
   position: relative;
   min-height: 92vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* para esconder o excesso do pseudo-elemento */
+  align-items: flex-end; /* Alinha verticalmente ao fundo */
+  justify-content: center; /* Centraliza horizontalmente */
+  overflow: hidden;
+  padding: 2rem 1rem 4rem; /* Padding inferior para afastar do rodapé */
   z-index: 1;
 }
 
@@ -171,20 +172,23 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   filter: grayscale(100%);
-  z-index: -1; /* coloca a imagem atrás do co nteúdo da seção */
-}
-.content-overlay {
-  background-color:#ffffffb6;
-  max-width: 700px;
-  backdrop-filter: blur(8px);
-  width: 100%;
-  border-radius: 8px;
-  color: rgb(28, 28, 28);
-  text-align: center;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-  border: 1px solid white;
+  z-index: -1;
 }
 
+.content-overlay {
+  background-color: #ffffffd9;
+  max-width: 900px;
+  width: 100vw;
+  padding: 2rem;
+  text-align: center;
+  color: rgb(28, 28, 28);
+  backdrop-filter: blur(8px);
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  border: 2px solid white;
+  border-radius: 8px;
+}
+
+/* Utilitários e ajustes gerais */
 .section-default {
   width: 100%;
 }
@@ -194,7 +198,7 @@ a {
 }
 
 .responsive-img {
-  width: 100%;  
+  width: 100%;
   max-width: 500px;
   border-radius: 12px;
   display: block;
@@ -207,19 +211,16 @@ a {
   color: #343434;
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
+/* RESPONSIVO */
+@media (max-width: 1024px) {
   .content-overlay {
-    padding: 1rem;
-    border-radius: 12px;
+    padding: 1.5rem;
   }
 
-  .home-section {
-    padding: 1rem;
-    background-position: top;
+  h1 {
+    font-size: 2rem;
   }
 
-  h1,
   h2 {
     font-size: 1.5rem;
   }
@@ -227,9 +228,34 @@ a {
   p {
     font-size: 1rem;
   }
+}
+
+@media (max-width: 600px) {
+  .home-section {
+    padding: 1rem 1rem 3rem; /* Menor espaçamento embaixo */
+    align-items: flex-end;
+  }
+
+  .content-overlay {
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
 
   .section-default {
     padding: 2rem 1rem;
   }
 }
+
 </style>

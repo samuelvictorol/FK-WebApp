@@ -1,14 +1,10 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-primary text-white">
-      <q-toolbar>
+    <q-header class="bg-grad-1 text-white">
+      <q-toolbar class="text-black">
         <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          Title
+          Aplicativo
         </q-toolbar-title>
-
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
