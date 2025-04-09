@@ -26,7 +26,7 @@
 
       <!-- HOME -->
       <section id="inicio" class="q-pa-md home-section">
-        <div class="content-overlay q-pa-lg animate__animated animate__fadeInLeft animate__slow">
+        <div class="content-overlay q-pa-lg animate__animated animate__zoomIn animate__slower animate__delay-1s">
           <h1 class="text-h2 text-center q-mb-xl text-bold">Conheça o Aplicativo</h1>
           <p class="text-subtitle text-center q-pb-xl">
             Descubra seu <strong>perfil de aprendizagem</strong> e receba <strong>recomendações
@@ -176,15 +176,15 @@ a {
 }
 
 .content-overlay {
-  background-color: #ffffffd9;
+  background-color: #ffffffd1;
   max-width: 900px;
   width: 100vw;
   padding: 2rem;
   text-align: center;
   color: rgb(28, 28, 28);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 8px;
 }
 

@@ -16,7 +16,7 @@
         <q-separator />
         <q-item v-for="(option, index) in menuOptions" :key="index" :to="option.to" clickable>
           <q-item-section avatar>
-            <q-icon :name="option.icon" size="2em" color="primary" />
+            <q-icon :name="option.icon" size="2em" color="secondary" />
           </q-item-section>
           <q-item-section>{{ option.label }}</q-item-section>
         </q-item>
@@ -27,7 +27,7 @@
           </q-item-section>
           <q-item-section>Ajuda</q-item-section>
         </q-item>
-        <q-item clickable>
+        <q-item clickable @click="logout()">
           <q-item-section avatar>
             <q-icon name="logout" size="2em" color="grey-14" />
           </q-item-section>
@@ -46,11 +46,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const rightDrawerOpen = ref(false)
 const menuOptions = ref([
-  { icon: 'home', to: '/#', label: 'Inicio' },
-  { icon: 'add_circle', to: '/#', label: 'Novo Formulário' },
+  { icon: 'home', to: '/admin', label: 'Inicio' },
+  { icon: 'add_circle', to: '/admin/novo-form', label: 'Novo Formulário' },
   { icon: 'group  ', to: '/#', label: 'Usuários' },
 
 ])
@@ -58,6 +60,13 @@ const menuOptions = ref([
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
+
+function logout() {
+  const confirm = window.confirm('Você tem certeza que deseja sair?')
+  if (!confirm) return
+  router.push('/')
+}
+
 </script>
 <style scoped>
 </style>

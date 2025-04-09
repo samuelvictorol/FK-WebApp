@@ -15,7 +15,8 @@ const routes = [
     path: '/admin',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/admin/IndexPage.vue') }
+      { path: '', component: () => import('pages/admin/IndexPage.vue') },
+      { path: 'novo-form', component: () => import('pages/admin/NewFormTemplate.vue') }
     ]
   },
 
