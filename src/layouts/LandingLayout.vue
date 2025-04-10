@@ -229,6 +229,7 @@ a {
   }
   .parallax-img{
     background-size: contain;
+    background-attachment: scroll; /* Remove o fixed no mobile */
   }
   .content-overlay {
     padding: 1.5rem;
