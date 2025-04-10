@@ -11,7 +11,7 @@
             </q-card-section>
 
             <q-card-section>
-                <q-input color="blue-14" v-model="formTemplate.title" label="Título do Formulário" outlined>
+                <q-input color="secondary" v-model="formTemplate.title" label="Título do Formulário" outlined>
                     <template v-slot:append>
                         <q-icon name="title" class="q-mr-xs" color="primary" />
                     </template>
@@ -22,7 +22,7 @@
 
             <q-card-section>
                 <div class="text-subtitle1 q-mb-sm">Nova Pergunta</div>
-                <q-input color="blue-14" v-model="questionHandler.question" label="Pergunta" outlined class="q-mb-sm">
+                <q-input color="secondary" v-model="questionHandler.question" label="Pergunta" outlined class="q-mb-sm">
                     <template v-slot:append>
                         <q-icon name="help" class="q-mr-xs" color="primary" />
                     </template>
@@ -33,7 +33,7 @@
                     v-if="questionHandler.question">
                     <!-- opção -->
                     <div class="col-12 col-sm-5">
-                        <q-input color="blue-14" v-model="optionHandler.option" label="Opção" outlined>
+                        <q-input color="secondary" v-model="optionHandler.option" label="Opção" outlined>
                             <template v-slot:append>
                                 <q-icon name="question_answer" class="q-mr-xs" color="primary" />
                             </template>
@@ -72,7 +72,7 @@
 
                     <!-- botão adicionar opção -->
                     <div class="col-12 col-sm-2">
-                        <q-btn class="w100" color="blue-14" icon="add" glossy @click="pushOption"
+                        <q-btn class="w100" color="secondary" icon="add" glossy @click="pushOption"
                             :disable="!optionHandler.option || !optionHandler.tag" />
                     </div>
                 </div>
@@ -203,7 +203,6 @@ function enviarFormulario() {
 .q-card {
     border: 2px solid white;
     filter: drop-shadow(0 0 5px #2626268d);
-    background: #ECEDF3;
-    border-radius: 16px;
+    border-radius: 4px;
 }
 </style>

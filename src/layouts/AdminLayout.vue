@@ -11,15 +11,6 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- avatar circular do admin disponivel em public/ceo.jpeg -->
-        <q-item class="w100 row justify-center">
-          <q-item-section avatar>
-            <img src="/ceo.jpeg" alt="Admin" style="border-radius: 100%;border-bottom: 4px solid #26A69A" class="shadow-1 q-mb-md" width="150" height="150" />
-          </q-item-section>
-        </q-item>
-        <q-separator />
-
-
       <q-list class="bg-white text-grey-14 text-bold">
         <q-item-label class="text-h6 q-px-md q-my-md text-right">Menu</q-item-label>
         <q-separator />
@@ -49,6 +40,14 @@
 
     <q-page-container>
       <router-view />
+      <footer class="q-py-md bg-grey-2">
+        <div class="text-center text-grey-8">
+          © 2025 - Todos os direitos reservados - Flávia Kamila
+        </div>
+        <div class="text-center text-grey-8">
+          👨🏼‍💻 Development: <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor - 59.905.708/0001-34</a>
+        </div>
+      </footer>
     </q-page-container>
   </q-layout>
 </template>
@@ -61,6 +60,7 @@ const router = useRouter()
 const rightDrawerOpen = ref(false)
 const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Inicio' },
+  { icon: 'sell', to: '/admin/tags', label: 'Criar Tags' },
   { icon: 'add_circle', to: '/admin/novo-form', label: 'Novo Formulário' },
   { icon: 'group', to: '/admin/clientes', label: 'Usuários' },
 

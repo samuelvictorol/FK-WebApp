@@ -46,7 +46,7 @@ const columns = ref([
         label: 'Título',
         align: 'left',
         field: row => row.title,
-        classes: 'sticky-col bg-white',
+        classes: 'sticky-col bg-secondary text-bold text-white',
         headerClasses: 'sticky-col bg-grey-2',
     },
     {

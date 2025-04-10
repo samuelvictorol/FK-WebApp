@@ -4,6 +4,7 @@
 *{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
+    overflow-x: hidden;
 }
 
 html {
@@ -20,4 +21,17 @@ html {
     background: linear-gradient(to left,#fdfdfdcf, #dfe2e9e2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
     backdrop-filter: blur(8px);
+}
+
+tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+tr:hover {
+    background-color: #c5ffe2;
+}
+
+tr:nth-child(even) {
+    background-color: #f4f4f4;
 }
