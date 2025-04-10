@@ -1,5 +1,5 @@
 <template>
-    <q-page class="q-pa-md animate__animated animate__fadeIn">
+    <q-page class="q-pa-md column q-gutter-y-md full-height">
         <!-- Breadcrumb -->
         <q-breadcrumbs class="text-grey-8 rounded-borders" separator-icon="chevron_right">
             <q-breadcrumbs-el icon="home" label="Início" to="/admin" />
@@ -7,39 +7,47 @@
         </q-breadcrumbs>
 
         <!-- Cabeçalho -->
-        <div class="w100 row justify-between items-center q-my-md">
+        <div class="row justify-between items-center">
             <div class="text-h6">Clientes</div>
         </div>
 
-        <!-- Tabela -->
-        <q-table :rows="clientesRows" :columns="columns" row-key="name" class="my-sticky-table shadow-2"
-            :pagination="{ rowsPerPage: 10 }" flat bordered>
-            <!-- Ações por linha -->
-            <template v-slot:body-cell-actions="props">
-                <q-td :props="props">
-                    <q-btn dense flat color="primary" icon="visibility" @click="visualizarCliente(props.row)"
-                        title="Visualizar Cliente" />
-                </q-td>
-            </template>
-        </q-table>
+        <!-- Wrapper para scroll horizontal -->
+        <div class="q-mt-md q-pa-sm table-container">
+            <q-table :rows="clientesRows" :columns="columns" row-key="name" class="my-sticky-table shadow-2 bg-white"
+                :pagination="{ rowsPerPage: 10 }" flat bordered wrap-cells>
+                <!-- Ações por linha -->
+                <template v-slot:body-cell-actions="props">
+                    <q-td :props="props">
+                        <q-btn dense flat color="primary" icon="visibility" @click="visualizarCliente(props.row)"
+                            title="Visualizar Cliente">
+                        <q-tooltip>Visualizar Cliente</q-tooltip>
+                        </q-btn>
+                        <q-btn dense flat color="orange" icon="paid" @click="visualizarCliente(props.row)"
+                            title="Painel de Gastos">
+                        <q-tooltip>Visualizar Compras</q-tooltip>
+                        </q-btn>
+                    </q-td>
+                </template>
+            </q-table>
+        </div>
     </q-page>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const clientesRows = ref([
-    { name: 'João da Silva', perfil: 'Visual/Criativo', formulário: 'Formulário 1' },
-    { name: 'Maria Oliveira', perfil: 'Visual/Criativo', formulário: 'Formulário 2' },
-    { name: 'Carlos Santos', perfil: 'Visual/Criativo', formulário: 'Formulário 3' },
-    { name: 'Ana Costa', perfil: 'Visual/Criativo', formulário: 'Formulário 4' },
-    { name: 'Pedro Almeida', perfil: 'Visual/Criativo', formulário: 'Formulário 5' },
-    { name: 'Luana Ferreira', perfil: 'Visual/Criativo', formulário: 'Formulário 6' },
-    { name: 'Ricardo Lima', perfil: 'Visual/Criativo', formulário: 'Formulário 7' },
-    { name: 'Fernanda Rocha', perfil: 'Visual/Criativo', formulário: 'Formulário 8' },
-    { name: 'Bruno Martins', perfil: 'Visual/Criativo', formulário: 'Formulário 9' },
-    { name: 'Juliana Mendes', perfil: 'Visual/Criativo', formulário: 'Formulário 10' }
-]);
+    { name: 'João da Silva', perfil: 'joao21', planoAtual: 'Plano Premium', lucro: 'R$ 420,00' },
+    { name: 'Maria Oliveira', perfil: 'maria_oliveira', planoAtual: 'Plano Básico', lucro: 'R$ 150,00' },
+    { name: 'Carlos Pereira', perfil: 'carlospereira', planoAtual: 'Plano Avançado', lucro: 'R$ 300,00' },
+    { name: 'Ana Santos', perfil: 'anasantos', planoAtual: 'Plano Gratuito', lucro: 'R$ 00,00' },
+    { name: 'Lucas Almeida', perfil: 'lucasalmeida', planoAtual: 'Plano Básico', lucro: 'R$ 200,00' },
+    { name: 'Fernanda Costa', perfil: 'fernandacosta', planoAtual: 'Plano Avançado', lucro: 'R$ 350,00' },
+    { name: 'Ricardo Lima', perfil: 'ricardolima', planoAtual: 'Plano Premium', lucro: 'R$ 600,00' },
+    { name: 'Juliana Rocha', perfil: 'julianarocha', planoAtual: 'Plano Básico', lucro: 'R$ 180,00' },
+    { name: 'Gabriel Martins', perfil: 'gabrielmartins', planoAtual: 'Plano Avançado', lucro: 'R$ 400,00' },
+    { name: 'Patrícia Ferreira', perfil: 'patriciaferreira', planoAtual: 'Plano Premium', lucro: 'R$ 700,00' }
+])
 
 const columns = ref([
     {
@@ -47,7 +55,7 @@ const columns = ref([
         label: 'Nome',
         field: row => row.name,
         align: 'left',
-        classes: 'sticky-col bg-secondary text-white text-bold',
+        classes: 'sticky-col bg-accent text-white text-bold',
         headerClasses: 'sticky-col bg-grey-2 text-weight-bold'
     },
     {
@@ -57,9 +65,15 @@ const columns = ref([
         align: 'left'
     },
     {
-        name: 'formulário',
-        label: 'Formulário',
-        field: row => row.formulário,
+        name: 'planoAtual',
+        label: 'Plano Atual',
+        field: row => row.planoAtual,
+        align: 'left'
+    },
+    {
+        name: 'lucro',
+        label: 'Lucro',
+        field: row => row.lucro,
         align: 'left'
     },
     {
@@ -67,20 +81,24 @@ const columns = ref([
         label: 'Ações',
         align: 'center'
     }
-]);
+])
 
 function visualizarCliente(cliente) {
-    console.log('Visualizar cliente:', cliente);
-    // ou redirecionar para uma rota ex: `/admin/clientes/${cliente.id}`
+    console.log('Visualizar cliente:', cliente)
 }
 </script>
 
 <style scoped>
 .q-page {
-    background: #dfe2e9;
+    background: #f2f3f5;
 }
 
-/* Classe para tornar a primeira coluna sticky */
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Sticky para a primeira coluna */
 .my-sticky-table ::v-deep(.sticky-col) {
     position: sticky;
     left: 0;

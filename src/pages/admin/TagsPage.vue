@@ -1,13 +1,18 @@
 <template>
-    <q-page class="q-pa-md animate__animated animate__fadeIn">
+    <q-page class="q-pa-md">
+        <!-- Breadcrumb -->
+        <q-breadcrumbs class="text-grey-8 rounded-borders" separator-icon="chevron_right">
+            <q-breadcrumbs-el icon="home" label="Início" to="/admin" />
+            <q-breadcrumbs-el icon="sell" label="Gerenciar Tags" exact />
+        </q-breadcrumbs>
         <q-card class="q-pa-md q-mx-auto q-mt-lg" style="max-width: 600px; width: 100%;">
             <q-card-section>
                 <div class="text-h5">
                     <div class="row ">
                         Gerenciar Tags
                     </div>
-                    <q-btn class="q-mt-lg full-width" glossy color="secondary" icon="add" label="Criar Nova Tag"
-                    @click="showDialog = true" />
+                    <q-btn class="q-mt-lg full-width" glossy color="accent" icon="add" label="Nova Tag"
+                        @click="showDialog = true" />
                 </div>
             </q-card-section>
 
@@ -16,7 +21,7 @@
             <q-card-section>
                 <div class="row q-col-gutter-md q-gutter-y-md">
                     <div v-for="(tag, index) in tags" :key="index">
-                        <q-card class="bg-grey-2 row items-center q-pa-sm justify-between">
+                        <q-card class="bg-grey-2 row items-center q-pa-xs justify-between q-ma-xs">
                             <q-btn flat dense icon="delete" color="grey" @click="removeTag(index)" />
                             <div class="row items-center">
                                 <span class="text-subtitle1">{{ tag.label }}</span>

@@ -1,67 +1,68 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" class="bg-dark">
 
-    <q-header elevated class="bg-grad-1 text-black" height-hint="98">
+    <q-header elevated class="bg-grad-1 text-white shadow-2" height-hint="98" style="overflow: hidden;">
       <q-toolbar>
-        <q-toolbar-title class="text-bold">
+        <q-toolbar-title class="">
           Flávia Kamila
         </q-toolbar-title>
-        <q-btn dense glossy label="Acessar" to="/admin" color="secondary" icon-right="login" class="q-px-md" />
+        <q-btn dense glossy label="Acessar" to="/admin" color="orange" icon-right="login" class="q-px-md" />
       </q-toolbar>
 
       <q-tabs align="center">
-        <q-route-tab><a style="letter-spacing: .5px;" href="#inicio">Início</a></q-route-tab>
-        <q-route-tab><a style="letter-spacing: .5px;" href="#sobre">Sobre</a></q-route-tab>
-        <q-route-tab><a style="letter-spacing: .5px;" href="#contato">Contato</a></q-route-tab>
+        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#inicio">Início</a></q-route-tab>
+        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#sobre">Sobre</a></q-route-tab>
+        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#contato">Contato</a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#inicio"><q-icon name="home" size="md" color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#sobre"><q-icon name="contact_support" size="md" color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#contato"><q-icon name="mail" size="md" color="grey"></q-icon></a></q-route-tab>
       </q-tabs>
     </q-header>
 
     <q-page-container class="animate__animated animate__fadeIn">
 
       <!-- HOME -->
-      <section id="inicio" class="q-pa-md home-section">
-        <div class="content-overlay q-pa-lg animate__animated animate__zoomIn animate__slower animate__delay-1s">
+      <section id="inicio" class="q-pa-md home-section" style="border-bottom: 4px solid #2D2D2D">
+        <div class="content-overlay q-pa-lg q-mx-sm animate__animated animate__zoomIn animate__slower animate__delay-1s">
           <p class="text-subtitle text-center">
-            Descubra seu <strong>perfil de aprendizagem</strong> e receba um <strong>plano de estudos personalizado</strong> para atingir seus objetivos de forma eficiente.
+            Descubra seu <strong>perfil de aprendizagem</strong> e receba um <strong>plano de estudos
+              personalizado</strong> para atingir seus objetivos de forma eficiente.
           </p>
-
           <div class="flex flex-center q-mt-md">
-            <q-btn label="Comece Agora" color="secondary" glossy to="/app" icon-right="contact_support"
-              class="q-pa-sm full-width full-width-sm" />
+            <q-btn label="Comece Agora" color="secondary" to="/app" icon-right="contact_support"
+              class="q-py-lg full-width full-width-sm" />
           </div>
         </div>
       </section>
 
       <!-- SOBRE -->
       <section id="sobre" class="bg-grey-1">
-        <h2 class="text-h4 text-bold q-pl-md q-mb-md">Sobre o Aplicativo</h2>
-        <div>
-          <img src="/desc.png" id="sobre-img" alt="Ilustração" class="shadow-2">
-        </div>
+        <div id="parallax-sobre" class="parallax-img"></div>
         <div class="q-mb-xl q-px-md">
           <div class="q-gutter-md row items-center justify-center q-col-gutter-lg">
             <div class="col-12 col-md-6">
-              <img src="/sobre.png" alt="Sobre o app" class="greyscale responsive-img">
-              <p class="text-body1 q-mt-md">
-                Com uma abordagem humanizada e baseada em evidências, ajudo pessoas a entenderem como aprendem melhor e a encontrarem o seu ritmo de estudos ideal.
+              <p style="font-size:1.7em" class="text-bold q-mt-md">
+                Com uma abordagem humanizada e baseada em evidências, ajudo pessoas a entenderem como aprendem melhor e
+                a encontrarem o seu ritmo de estudos ideal.
               </p>
-              <p class="text-body1 q-mt-sm">
-                Acredito que cada trajetória é única — por isso, meu trabalho é guiar com empatia, escuta ativa e estratégias realmente eficazes.
+              <p style="font-size:1.2em" class="q-mt-sm q-mb-xl">
+                Acredito que cada trajetória é única — por isso, meu trabalho é guiar com empatia, escuta ativa e
+                estratégias realmente eficazes.
               </p>
             </div>
           </div>
 
-          <div class="row items-center q-col-gutter-xl">
-            <!-- Imagem ilustrativa -->
+          <div class="row items-center q-col-gutter-xl q-pt-lg q-px-xs">
             <div class="col-12 col-md-6">
-              <img src="/sobre2.png" alt="Quem sou" class="greyscale full-width rounded-borders" />
+              <img src="/sobre2.svg" alt="Quem sou" class="full-width rounded-borders" />
             </div>
 
-            <!-- Texto Quem Sou -->
             <div class="col-12 col-md-6">
-              <h2 class="text-h4 text-bold q-mb-md">Quem sou</h2>
+              <h2 class="text-h4 text-bold q-mb-md" style="overflow: hidden;">Quem sou</h2>
               <p class="text-body1">
-                Me chamo Flávia Kamila, sou especialista em educação personalizada e mentora de aprendizagem. Ao longo dos anos, acompanhei centenas de estudantes em sua jornada rumo à autonomia, autoconfiança e realização pessoal por meio dos estudos.
+                Me chamo Flávia Kamila, sou especialista em educação personalizada e mentora de aprendizagem. Ao longo
+                dos anos, acompanhei centenas de estudantes em sua jornada rumo à autonomia, autoconfiança e realização
+                pessoal por meio dos estudos.
               </p>
             </div>
           </div>
@@ -72,41 +73,48 @@
           <div class="col-12 col-md-6">
             <h3 class="text-h5 text-bold q-mb-sm q-pl-md">Missão</h3>
             <p class="text-body1 q-pl-md">
-              Promover uma educação personalizada, acessível e acolhedora, que respeite o tempo, os limites e as potências de cada pessoa.
+              Promover uma educação personalizada, acessível e acolhedora, que respeite o tempo, os limites e as
+              potências de cada pessoa.
             </p>
             <div class="col-12 col-md-6">
-              <img src="/sobre3.png" alt="Missão" class="greyscale full-width rounded-borders" />
+              <img src="/sobre.svg" alt="Missão" class="q-px-md rounded-borders" id="missao-img" />
             </div>
           </div>
 
           <div class="col-12 col-md-6">
             <h3 class="text-h5 text-bold q-mb-sm q-pl-md">Visão</h3>
             <p class="text-body1 q-pl-md">
-              Ser referência no desenvolvimento de estratégias de aprendizagem individualizadas, transformando vidas por meio do conhecimento.
+              Ser referência no desenvolvimento de estratégias de aprendizagem individualizadas, transformando vidas por
+              meio do conhecimento.
             </p>
             <div class="col-12 col-md-6">
-              <img src="/sobre4.png" alt="Visão" class="greyscale full-width rounded-borders" />
+              <img src="/sobre4.svg" alt="Visão" class="full-width rounded-borders" />
             </div>
           </div>
         </div>
       </section>
 
       <!-- CONTATO -->
-      <section id="contato" class="q-pa-xl section-default bg-grey-2">
+      <img id="contato" src="/contato.avif" class="shadow-2 mobile-only" style="width: 100vw!important"
+        alt="Ilustração">
+
+      <section class="q-px-xl section-default bg-grey-2">
         <div class="q-gutter-md row items-center justify-center q-col-gutter-lg">
           <div class="col-12 col-md-6">
-            <h2 class="text-h4 text-bold q-mb-md">Fale Comigo</h2>
+            <h2 class="text-h4 text-bold q-mb-md" style="overflow: hidden;">Fale Comigo</h2>
             <p class="text-body1 q-mb-md">
-              Tem alguma dúvida, sugestão ou deseja iniciar sua jornada de autoconhecimento nos estudos? Envie sua mensagem — será um prazer conversar com você!
+              Tem alguma dúvida, sugestão ou deseja iniciar sua jornada de autoconhecimento nos estudos? Envie sua
+              mensagem — será um prazer conversar com você!
             </p>
             <q-form>
               <q-input filled label="Nome" class="q-mb-md" />
               <q-input filled label="E-mail" type="email" class="q-mb-md" />
               <q-input filled label="Mensagem" type="textarea" class="q-mb-md" />
-              <q-btn label="Enviar Mensagem" color="primary" glossy class="w100" icon-right="send" type="submit" />
+              <q-btn label="Enviar Mensagem" color="green" glossy class="q-py-md w100" icon-right="send"
+                type="submit" />
             </q-form>
           </div>
-          <div class="w100 row no-wrap justify-center items-center">
+          <div class="w100 row no-wrap justify-center items-center q-mb-xl">
             <img src="/insta.png" style="width:40px" class="q-mr-md" alt="Instagram">
             <a class="cursor-pointer text-shadow" href="https://instagram.com/flaviakamilaf">@flaviakamilaf</a>
           </div>
@@ -125,8 +133,11 @@
     </q-page-container>
   </q-layout>
 </template>
+<script setup>
 
+const isMobile = window.innerWidth <= 1023
 
+</script>
 <style scoped>
 html {
   background: black;
@@ -139,12 +150,12 @@ a {
 
 .home-section {
   position: relative;
-  min-height: 92vh;
+  height: 89vh;
   display: flex;
-  align-items: flex-end; /* Alinha verticalmente ao fundo */
-  justify-content: center; /* Centraliza horizontalmente */
+  align-items: flex-end;
+  justify-content: center;
   overflow: hidden;
-  padding: 2rem 1rem 4rem; /* Padding inferior para afastar do rodapé */
+  padding: 2rem 1rem 4rem;
   z-index: 1;
 }
 
@@ -155,8 +166,8 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/homeDesk.svg');
-  background-size: contain;
+  background-image: url('/homeDesk.jpeg');
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
@@ -175,17 +186,18 @@ a {
   border-radius: 8px;
 }
 
-/* Utilitários e ajustes gerais */
 .section-default {
   width: 100%;
 }
 
 .greyscale {
-  filter: grayscale(1)
+  filter: grayscale(1);
 }
-#sobre-img{
+
+#sobre-img {
   object-fit: scale-down;
 }
+
 .responsive-img {
   width: 100%;
   max-width: 500px;
@@ -200,20 +212,38 @@ a {
   color: #343434;
 }
 
+.parallax-img {
+  background-image: url('/desc.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  width: 100%;
+}
+
 /* RESPONSIVO */
 @media (max-width: 1024px) {
   .home-section::before {
     background-image: url('/ceo2.jpeg');
     background-size: cover;
   }
+  .parallax-img{
+    background-size: contain;
+  }
   .content-overlay {
     padding: 1.5rem;
   }
-  #sobre-img{
+  #missao-img{
     width: 100%;
     max-width: 100%;
     height: auto;
   }
+  #sobre-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
   h1 {
     font-size: 2rem;
   }
@@ -229,24 +259,13 @@ a {
 
 @media (max-width: 600px) {
   .home-section {
-    min-height: 80vh; /* Ajuste para telas menores */
-    padding: 1rem 0 3rem; /* Menor espaçamento embaixo */
+    min-height: 80vh;
+    padding: 1rem 0 3rem;
     align-items: flex-end;
   }
-
-  .content-overlay {
-    padding: 1rem;
-    border-radius: 4px;
-  }
-
-  #sobre-img{
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-}
-  .home-section {
-    padding: 1rem 1rem 3rem; /* Menor espaçamento embaixo */
-    align-items: flex-end;
+  .parallax-img {
+    background-image: url('/descMob.png');
+    background-size: cover;
   }
 
   .content-overlay {
@@ -271,4 +290,22 @@ a {
   }
 }
 
+/* Visibilidade condicional */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
 </style>

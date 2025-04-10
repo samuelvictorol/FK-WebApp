@@ -1,84 +1,49 @@
 <template>
-    <q-page class="q-pa-md animate__animated animate__fadeIn">
+    <q-page class="q-pa-md q-gutter-y-md animate__animated animate__fadeIn column items-stretch full-height">
         <!-- Breadcrumb -->
-        <q-breadcrumbs class=" text-grey-8 rounded-borders" separator-icon="chevron_right">
-            <q-breadcrumbs-el icon="home" label="Início" to="/admin" exact />
+        <q-breadcrumbs class="text-grey-8 rounded-borders q-mb-sm" separator-icon="chevron_right">
+            <q-breadcrumbs-el icon="home" label="Início" exact />
         </q-breadcrumbs>
 
         <!-- Cabeçalho -->
-        <div class="w100 row justify-between items-center q-my-md">
-            <div class="text-h6">Formulários</div>
-            <q-btn color="secondary" label="Novo" icon-right="post_add" glossy to="/admin/novo-form" />
+        <div class="text-h4" style="overflow:hidden">Início</div>
+        <div class="text-subtitle1   q-mb-md">Olá, <strong>{{ userName }}</strong></div>
+        <q-card class="q-mx-xl">
+            <q-card-section class="">
+                <div class="text-subtitle2">💰 Saldo Atual: R$ 2850,00 <br>📈 Lucro Total: R$ 63021,94</div>
+            </q-card-section>
+        </q-card>
+        <div class="w100 row rounded-borders justify-center align-start">
+            <div class="column w45">
+                <q-btn class="w100 q-py-xl" label="Minhas Tags" to="/admin/tags" icon-right="sell" color="blue-14" glossy></q-btn>
+                <q-btn class="w100 q-py-xl q-mt-md" label="Meus Formulários" to="/admin/forms" icon-right="list_alt" color="purple-14" glossy></q-btn>
+            </div>
+            <div class="q-pa-xs"></div>
+            <div class="column w45">
+                <q-btn  class="w100 q-py-xl" label="Novo Formulário" icon-right="add_circle" to="/admin/novo-form" color="accent" glossy></q-btn>
+                <q-btn to="/admin/clientes" class="w100 q-py-xl q-mt-md" label="Meus Clientes" icon-right="group" color="orange-14" glossy></q-btn>
+            </div>
         </div>
-
-        <!-- Tabela -->
-        <q-table :rows="formsRows" :columns="columns" row-key="id" class="my-sticky-table shadow-2"
-            flat bordered :rows-per-page-options="[5, 10, 20]">
-            <!-- Ações -->
-            <template #body-cell-actions="props">
-                <q-td align="center">
-                    <q-btn dense flat round color="primary" icon="visibility">
-                        <q-tooltip>Visualizar Template</q-tooltip>
-                    </q-btn>
-                    <q-btn dense flat round icon="library_books" color="blue">
-                        <q-tooltip>Visualizar Respostas</q-tooltip>
-                    </q-btn>
-                </q-td>
-            </template>
-        </q-table>
     </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const formsRows = ref([
-    { id: 1, title: 'Formulário 1', createdAt: '04/04/2025', respostas: 10 },
-    { id: 2, title: 'Formulário 2', createdAt: '04/04/2025', respostas: 20 },
-    { id: 3, title: 'Formulário 3', createdAt: '04/04/2025', respostas: 30 },
-    { id: 4, title: 'Formulário 4', createdAt: '04/04/2025', respostas: 40 },
-    { id: 5, title: 'Formulário 5', createdAt: '04/04/2025', respostas: 50 },
-]);
-
-const columns = ref([
-    {
-        name: 'title',
-        label: 'Título',
-        align: 'left',
-        field: row => row.title,
-        classes: 'sticky-col bg-secondary text-bold text-white',
-        headerClasses: 'sticky-col bg-grey-2',
-    },
-    {
-        name: 'respostas',
-        label: 'Respostas',
-        align: 'left',
-        field: row => row.respostas,
-    },
-    {
-        name: 'createdAt',
-        label: 'Criado em',
-        align: 'left',
-        field: row => row.createdAt,
-    },
-    {
-        name: 'actions',
-        label: 'Ações',
-        align: 'center',
-        field: () => '',
-        sortable: false,
-    },
-]);
+const userName = ref('Flávia Kamila');
 </script>
 
 <style scoped>
-.q-page {
+.q-page{
     background: #dfe2e9
 }
+.hoverable-card {
+    transition: transform 0.2s;
+    min-height: 150px;
+    /* altura mínima para mobile */
+}
 
-.my-sticky-table ::v-deep(.sticky-col) {
-    position: sticky;
-    left: 0;
-    z-index: 1;
+.hoverable-card:hover {
+    transform: scale(1.03);
 }
 </style>

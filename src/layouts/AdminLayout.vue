@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-secondary text-white">
+    <q-header class="bg-accent text-white">
       <q-toolbar>
         <q-toolbar-title>
           Administrador
@@ -16,7 +16,7 @@
         <q-separator />
         <q-item v-for="(option, index) in menuOptions" :key="index" :to="option.to" clickable>
           <q-item-section avatar>
-            <q-icon :name="option.icon" size="2em" color="secondary" />
+            <q-icon :name="option.icon" size="2em" color="accent" />
           </q-item-section>
           <q-item-section>{{ option.label }}</q-item-section>
         </q-item>
@@ -41,11 +41,11 @@
     <q-page-container>
       <router-view />
       <footer class="q-py-md bg-grey-2">
-        <div class="text-center text-grey-8">
-          © 2025 - Todos os direitos reservados - Flávia Kamila
+        <div class="text-center text-grey-8 q-my-md">
+          © 2025 - Todos os direitos reservados<br>Flávia Kamila
         </div>
-        <div class="text-center text-grey-8">
-          👨🏼‍💻 Development: <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor - 59.905.708/0001-34</a>
+        <div class="text-center q-my-md text-grey-8">
+          👨🏼‍💻 Development by <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor</a>
         </div>
       </footer>
     </q-page-container>
@@ -59,10 +59,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const rightDrawerOpen = ref(false)
 const menuOptions = ref([
-  { icon: 'home', to: '/admin', label: 'Inicio' },
-  { icon: 'sell', to: '/admin/tags', label: 'Criar Tags' },
-  { icon: 'add_circle', to: '/admin/novo-form', label: 'Novo Formulário' },
-  { icon: 'group', to: '/admin/clientes', label: 'Usuários' },
+  { icon: 'home', to: '/admin', label: 'Início' },
+  { icon: 'sell', to: '/admin/tags', label: 'Tags' },
+  { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
+  { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
 
 ])
 
