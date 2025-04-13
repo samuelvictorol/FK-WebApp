@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-secondary text-white">
+    <q-header class="bg-accent text-white">
       <q-toolbar >
         <q-toolbar-title>
           Aplicativo
@@ -10,7 +10,7 @@
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <q-btn label="Página Inicial" icon="home" to="/" color="secondary" class="q-mx-md q-mt-xl"></q-btn>
+      <q-btn label="Página Inicial" icon="home" to="/" color="accent" class="q-mx-md q-mt-xl"></q-btn>
     </q-drawer>
 
     <q-page-container>
@@ -20,7 +20,7 @@
           © 2025 - Todos os direitos reservados - Flávia Kamila
         </div>
         <div class="text-center text-grey-8">
-          👨🏼‍💻 Development: <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor - 59.905.708/0001-34</a>
+          👨🏼‍💻 Development: <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor</a>
         </div>
       </footer>
     </q-page-container>
