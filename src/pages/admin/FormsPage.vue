@@ -34,11 +34,9 @@
 import { ref } from 'vue';
 
 const formsRows = ref([
-    { id: 1, title: 'Formulário 1', createdAt: '04/04/2025', respostas: 10 },
-    { id: 2, title: 'Formulário 2', createdAt: '04/04/2025', respostas: 20 },
-    { id: 3, title: 'Formulário 3', createdAt: '04/04/2025', respostas: 30 },
-    { id: 4, title: 'Formulário 4', createdAt: '04/04/2025', respostas: 40 },
-    { id: 5, title: 'Formulário 5', createdAt: '04/04/2025', respostas: 50 },
+    { id: 1, title: 'Cronótipo', createdAt: '04/04/2025', respostas: 10 },
+    { id: 2, title: 'Forma de Aprendizado', createdAt: '04/04/2025', respostas: 20 },
+    { id: 3, title: 'Estilo de Aprendizado', createdAt: '04/04/2025', respostas: 50 },
 ]);
 
 const columns = ref([
@@ -53,15 +51,15 @@ const columns = ref([
     {
         name: 'respostas',
         label: 'Respostas',
-        align: 'left',
+        align: 'center',
         field: row => row.respostas,
     },
-    {
-        name: 'createdAt',
-        label: 'Criado em',
-        align: 'left',
-        field: row => row.createdAt,
-    },
+    // {
+    //     name: 'createdAt',
+    //     label: 'Criado em',
+    //     align: 'left',
+    //     field: row => row.createdAt,
+    // },
     {
         name: 'actions',
         label: 'Ações',

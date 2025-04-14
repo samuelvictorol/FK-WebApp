@@ -18,7 +18,7 @@
                 <!-- Ações por linha -->
                 <template v-slot:body-cell-actions="props">
                     <q-td :props="props">
-                        <q-btn dense flat color="primary" icon="visibility" @click="visualizarCliente(props.row)"
+                        <q-btn dense flat color="primary" icon="account_circle" @click="visualizarCliente(props.row)"
                             title="Visualizar Cliente">
                         <q-tooltip>Visualizar Cliente</q-tooltip>
                         </q-btn>

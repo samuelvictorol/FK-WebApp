@@ -1,114 +1,132 @@
 <template>
-  <q-page class="q-pa-md flex flex-center bg-grey-1">
-    <q-card class="q-pa-md" style="max-width: 700px; width: 100%;">
+  <q-page class="q-pa-md bg-grey-1">
+    <q-card class="q-pa-md q-mx-auto" style="max-width: 700px">
       <q-card-section>
-        <div class="text-h5 text-accent text-bold">Descubra o Método Ideal de Aprendizado para você</div>
+        <div class="text-h5 text-accent text-bold">Descubra seu Cronotipo</div>
         <div class="text-subtitle2 text-grey">
-          Responda as perguntas para que possamos montar um plano de estudo personalizado.
+          Responda as perguntas para entender melhor seu padrão de energia e foco ao longo do dia.
         </div>
       </q-card-section>
 
       <q-separator />
 
       <q-card-section class="q-gutter-md">
-
-        <!-- Pergunta 1 -->
-        <div>
-          <div class="text-subtitle1">1. Qual das opções mais representa como você aprende melhor?</div>
+        <div v-for="(pergunta, index) in perguntasAtuais" :key="pergunta.id">
+          <div class="text-subtitle1">{{ getNumero(index) }} {{ pergunta.question }}</div>
           <q-option-group
+            v-model="respostas[pergunta.id]"
             type="radio"
-            v-model="respostas.estiloAprendizagem"
-            :options="[
-              { label: 'Assistindo vídeos ou demonstrações visuais', value: 'visual' },
-              { label: 'Ouvindo explicações em áudio ou podcasts', value: 'auditivo' },
-              { label: 'Lendo textos e escrevendo resumos', value: 'leitura_escrita' },
-              { label: 'Praticando com exercícios ou simulações', value: 'cinestesico' }
-            ]"
-            color="primary"
+            :options="pergunta.options.map(opt => ({ label: opt.option, value: opt.points }))"
+            color="accent"
           />
         </div>
-
-        <!-- Pergunta 2 -->
-        <div>
-          <div class="text-subtitle1">2. Em quais momentos do dia você sente mais foco e energia para estudar?</div>
-          <q-option-group
-            type="radio"
-            v-model="respostas.momentoPreferido"
-            :options="[
-              { label: 'Manhã (antes das 12h)', value: 'manha' },
-              { label: 'Tarde (12h às 18h)', value: 'tarde' },
-              { label: 'Noite (após as 18h)', value: 'noite' },
-              { label: 'Depende do dia', value: 'variavel' }
-            ]"
-            color="primary"
-          />
-        </div>
-
-        <!-- Pergunta 3 -->
-        <div>
-          <div class="text-subtitle1">3. Qual é sua principal dificuldade ao estudar?</div>
-          <q-option-group
-            type="checkbox"
-            v-model="respostas.dificuldades"
-            :options="[
-              { label: 'Falta de concentração', value: 'concentracao' },
-              { label: 'Ansiedade ou bloqueio', value: 'ansiedade' },
-              { label: 'Falta de organização ou rotina', value: 'organizacao' },
-              { label: 'Não entender o conteúdo', value: 'compreensao' }
-            ]"
-            color="primary"
-          />
-        </div>
-
-        <!-- Pergunta 4 -->
-        <div>
-          <div class="text-subtitle1">4. Quanto tempo por dia você está disposto a se dedicar aos estudos?</div>
-          <q-select
-            v-model="respostas.tempoDisponivel"
-            :options="[
-              '30 minutos', '1 hora', '2 horas', 'Mais de 2 horas'
-            ]"
-            label="Selecione uma opção"
-            outlined
-            color="primary"
-          />
-        </div>
-
-        <!-- Pergunta 5 -->
-        <div>
-          <q-input
-            v-model="respostas.objetivo"
-            label="5. Qual é seu principal objetivo com os estudos no momento?"
-            type="textarea"
-            outlined
-            color="primary"
-          />
-        </div>
-
       </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn label="Avançar" icon="arrow_forward" color="primary" @click="avancar" />
+      <q-card-actions align="between">
+        <q-btn flat label="Voltar" @click="voltar" :disable="etapaAtual === 1" />
+        <q-btn
+          label="Avançar"
+          icon-right="arrow_forward"
+          glossy
+          color="green"
+          @click="avancar"
+          :disable="!etapaCompleta"
+        />
       </q-card-actions>
     </q-card>
+
+    <!-- Barra de Progresso fixa -->
+    <q-footer class="bg-white text-accent q-pa-sm shadow-2" style="position: fixed; bottom: 0; width: 100%">
+      <q-linear-progress :value="progresso" color="accent" track-color="grey-3" />
+      <div class="text-center text-caption q-mt-xs">
+        {{ respondidas }} de {{ totalPerguntas }} respondidas
+      </div>
+    </q-footer>
   </q-page>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { api } from 'boot/axios'
 
-const respostas = ref({
-  estiloAprendizagem: '',
-  momentoPreferido: '',
-  dificuldades: [],
-  tempoDisponivel: '',
-  objetivo: ''
+const etapaAtual = ref(1)
+const respostas = ref({})
+const perguntas = ref([])
+
+const totalEtapas = 3
+
+api.post('http://localhost:5000/get_cronotype_form')
+  .then(res => {
+    perguntas.value = res.data
+  })
+  .catch(err => {
+    console.error('Erro ao buscar perguntas:', err)
+  })
+
+// Divide perguntas em etapas
+const perguntasPorEtapa = computed(() => {
+  const chunk = Math.ceil(perguntas.value.length / totalEtapas)
+  return Array.from({ length: totalEtapas }, (_, i) =>
+    perguntas.value.slice(i * chunk, (i + 1) * chunk)
+  )
 })
 
+const perguntasAtuais = computed(() => perguntasPorEtapa.value[etapaAtual.value - 1] || [])
+
+const etapaCompleta = computed(() =>
+  perguntasAtuais.value.every(p => respostas.value[p.id] !== undefined)
+)
+
 function avancar () {
-  console.log('Respostas parciais para plano personalizado:', respostas.value)
-  // Essa função pode redirecionar ou salvar no backend posteriormente
+  if (etapaAtual.value < totalEtapas) {
+    etapaAtual.value++
+  } else {
+    enviar()
+  }
 }
+
+function voltar () {
+  if (etapaAtual.value > 1) etapaAtual.value--
+}
+
+function enviar () {
+  // Monta as respostas detalhadas
+  const respostasDetalhadas = perguntas.value
+    .filter(p => respostas.value[p.id] !== undefined)
+    .map(p => {
+      const respostaSelecionada = p.options.find(o => o.points === respostas.value[p.id])
+      return {
+        id: p.id,
+        question: p.question,
+        resposta: respostaSelecionada?.option || '',
+        valor: respostaSelecionada?.points || 0
+      }
+    })
+
+  console.log('Enviando respostas:', JSON.stringify(respostasDetalhadas))
+
+  api.post('http://localhost:5000/send_cronotype_answers', respostasDetalhadas)
+    .then(res => {
+      console.log('Resposta do backend:', res.data)
+    })
+    .catch(err => {
+      console.error('Erro ao enviar respostas:', err)
+    })
+}
+
+function getNumero (index) {
+  const base = perguntasPorEtapa.value
+    .slice(0, etapaAtual.value - 1)
+    .reduce((acc, cur) => acc + cur.length, 0)
+  return `${base + index + 1}.`
+}
+
+// Progress bar
+const totalPerguntas = computed(() => perguntas.value.length)
+const respondidas = computed(() =>
+  Object.keys(respostas.value).filter(id => respostas.value[id] !== undefined).length
+)
+const progresso = computed(() => (respondidas.value / totalPerguntas.value))
 </script>
 
 <style scoped>
