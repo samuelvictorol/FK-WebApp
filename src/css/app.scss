@@ -36,13 +36,14 @@ tr {
     transition: all 0.3s ease;
 }
 
-tr:hover {
-    background-color: #c5ffe2;
-}
-
 tr:nth-child(even) {
     background-color: #f4f4f4;
 }
+
+tr:hover {
+    background-color: #d6f7fd;
+}
+
 
 .title-1{
     color: rgb(248, 248, 248);

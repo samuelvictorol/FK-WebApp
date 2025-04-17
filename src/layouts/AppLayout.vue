@@ -31,7 +31,10 @@
 import { ref } from 'vue'
 
 const rightDrawerOpen = ref(false)
-
+const menuOptions = ref([
+  { icon: 'account_circle', to: '/profile', label: 'Perfil' },
+  { icon: 'home', to: '/forms', label: 'Início' },
+])
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
