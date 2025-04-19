@@ -3,7 +3,7 @@
     <q-header class="bg-grad-2 text-white">
       <q-toolbar >
         <q-toolbar-title>
-          Aplicativo
+          usuario123
         </q-toolbar-title>
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
@@ -42,7 +42,7 @@
             Ajuda
           </q-item-section>
         </q-item>
-        <q-item clickable>
+        <q-item clickable @click="logout()">
           <q-item-section avatar>
             <q-icon name="logout" color="blue-14" />
           </q-item-section>
@@ -57,9 +57,10 @@
       <router-view />
       <footer class="q-py-md bg-grey-2">
         <div class="text-center text-grey-8">
-          © 2025 - Todos os direitos reservados - Flávia Kamila
+          © 2025 - Todos os direitos reservados <br>Flávia Kamila
         </div>
-        <div class="text-center text-grey-8">
+        <q-separator class="q-my-md" />
+        <div class="text-center text-grey-8 q-pb-lg">
           👨🏼‍💻 Development: <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor</a>
         </div>
       </footer>
@@ -69,7 +70,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const rightDrawerOpen = ref(false)
 const menuOptions = ref([
   { icon: 'home', to: '/app', label: 'Início' },
@@ -79,6 +82,13 @@ const menuOptions = ref([
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
+function logout() {
+  const confirmLogout = confirm('Você tem certeza que deseja sair?')
+  if (confirmLogout) {
+    router.push('/')
+  }
+}
+
 </script>
 <style scoped>
 </style>

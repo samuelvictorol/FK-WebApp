@@ -10,12 +10,9 @@
       </q-toolbar>
 
       <q-tabs align="center">
-        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#inicio">Início</a></q-route-tab>
-        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#sobre">Sobre</a></q-route-tab>
-        <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#contato">Contato</a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#inicio"><q-icon name="home" size="sm " color="grey"></q-icon></a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#sobre"><q-icon name="contact_support" size="sm" color="grey"></q-icon></a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#contato"><q-icon name="mail" size="sm" color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab ><a style="letter-spacing: .5px;" href="#inicio">Início</a></q-route-tab>
+        <q-route-tab ><a style="letter-spacing: .5px;" href="#sobre">Sobre</a></q-route-tab>
+        <q-route-tab ><a style="letter-spacing: .5px;" href="#contato">Contato</a></q-route-tab>
       </q-tabs>
     </q-header>
 

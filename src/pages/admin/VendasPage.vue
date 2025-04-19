@@ -5,7 +5,7 @@
             <q-breadcrumbs-el icon="home" label="Início" to="/admin" />
             <q-breadcrumbs-el icon="paid" label="Vendas" to="/admin" exact />
         </q-breadcrumbs>
-        <q-card class="q-pa-md q-mx-auto" style="max-width: 600px">
+        <q-card class="q-pa-sm q-mx-auto q-mt-lg" style="max-width: 600px">
             <q-card-section>
                 <div class="text-h5 text-primary text-bold">Resumo de Vendas</div>
                 <div class="q-mt-sm">
@@ -16,7 +16,7 @@
             </q-card-section>
         </q-card>
 
-        <div class="q-mt-xl">
+        <div class="q-mt-xl q-pb-lg">
             <q-card class="q-pa-md q-mx-auto" style="max-width: 600px">
                 <q-card-section>
                     <div class="text-h6 text-dark">Últimas Vendas</div>

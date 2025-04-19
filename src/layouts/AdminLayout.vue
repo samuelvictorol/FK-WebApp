@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-accent text-white">
+    <q-header class="bg-grad-1 text-white">
       <q-toolbar>
         <q-toolbar-title>
           Administrador
@@ -16,38 +16,28 @@
         <q-separator />
         <q-item v-for="(option, index) in menuOptions" :key="index" :to="option.to" clickable>
           <q-item-section avatar>
-            <q-icon :name="option.icon" size="2em" color="accent" />
+            <q-icon :name="option.icon" size="2em" color="blue" />
           </q-item-section>
           <q-item-section>{{ option.label }}</q-item-section>
         </q-item>
+      </q-list>
         <q-separator />
         <q-item clickable>
           <q-item-section avatar>
-            <q-icon name="help" size="2em" color="primary" />
+            <q-icon name="help" size="2em" color="blue-14" />
           </q-item-section>
           <q-item-section>Ajuda</q-item-section>
         </q-item>
         <q-item clickable @click="logout()">
           <q-item-section avatar>
-            <q-icon name="logout" size="2em" color="primary" />
+            <q-icon name="logout" size="2em" color="blue-14" />
           </q-item-section>
           <q-item-section>Sair</q-item-section>
         </q-item>
-        <q-separator />
-        <q-separator />
-        </q-list>
     </q-drawer>
 
     <q-page-container>
       <router-view />
-      <!-- <footer class="q-py-md bg-grey-2">
-        <div class="text-center text-grey-8 q-my-md">
-          © 2025 - Todos os direitos reservados<br>Flávia Kamila
-        </div>
-        <div class="text-center q-my-md text-grey-8">
-          👨🏼‍💻 Development by <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor</a>
-        </div>
-      </footer> -->
     </q-page-container>
   </q-layout>
 </template>
@@ -61,8 +51,8 @@ const rightDrawerOpen = ref(false)
 const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
-  // { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
-  // { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
+  { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
+  { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
 
 ])
 

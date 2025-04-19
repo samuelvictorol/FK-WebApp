@@ -17,7 +17,7 @@
             <!-- Ações -->
             <template #body-cell-actions="props">
                 <q-td align="center">
-                    <q-btn @click="openForm(props.row.title)" dense flat round color="primary" icon="visibility">
+                    <q-btn @click="openForm(props.row.title)" dense flat round color="green" icon="visibility">
                         <q-tooltip>Visualizar Template</q-tooltip>
                     </q-btn>
                     <q-btn @click="verRespostas(props.row.title)" dense flat round icon="library_books" color="blue">
@@ -81,7 +81,7 @@ const columns = ref([
         label: 'Título',
         align: 'left',
         field: row => row.title,
-        classes: 'sticky-col bg-accent text-bold text-white',
+        classes: 'sticky-col bg-blue text-bold text-white',
         headerClasses: 'sticky-col bg-grey-2',
     },
     {
