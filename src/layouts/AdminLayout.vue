@@ -40,14 +40,14 @@
 
     <q-page-container>
       <router-view />
-      <footer class="q-py-md bg-grey-2">
+      <!-- <footer class="q-py-md bg-grey-2">
         <div class="text-center text-grey-8 q-my-md">
           © 2025 - Todos os direitos reservados<br>Flávia Kamila
         </div>
         <div class="text-center q-my-md text-grey-8">
           👨🏼‍💻 Development by <a href="https://samuelvictorol.github.io/portfolio/" target="_blank" class="text-primary">Samuel Victor</a>
         </div>
-      </footer>
+      </footer> -->
     </q-page-container>
   </q-layout>
 </template>
@@ -61,8 +61,8 @@ const rightDrawerOpen = ref(false)
 const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
-  { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
-  { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
+  // { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
+  // { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
 
 ])
 

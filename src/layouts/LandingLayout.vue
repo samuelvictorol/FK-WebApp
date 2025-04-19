@@ -6,16 +6,16 @@
         <q-toolbar-title class="">
           Flávia Kamila
         </q-toolbar-title>
-        <q-btn dense glossy label="Acessar" to="/admin" color="orange" icon-right="login" class="q-px-md" />
+        <q-btn label="Acessar" to="/admin" icon-right="login" style="border: 1px solid #fafafa" class="q-px-md" />
       </q-toolbar>
 
       <q-tabs align="center">
         <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#inicio">Início</a></q-route-tab>
         <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#sobre">Sobre</a></q-route-tab>
         <q-route-tab v-if="!isMobile"><a style="letter-spacing: .5px;" href="#contato">Contato</a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#inicio"><q-icon name="home" size="md" color="grey"></q-icon></a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#sobre"><q-icon name="contact_support" size="md" color="grey"></q-icon></a></q-route-tab>
-        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#contato"><q-icon name="mail" size="md" color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#inicio"><q-icon name="home" size="sm " color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#sobre"><q-icon name="contact_support" size="sm" color="grey"></q-icon></a></q-route-tab>
+        <q-route-tab v-if="isMobile"><a style="letter-spacing: .5px;" href="#contato"><q-icon name="mail" size="sm" color="grey"></q-icon></a></q-route-tab>
       </q-tabs>
     </q-header>
 
@@ -29,8 +29,8 @@
               personalizado</strong> para atingir seus objetivos de forma eficiente.
           </p>
           <div class="flex flex-center q-mt-md">
-            <q-btn label="Comece Agora" color="secondary" to="/app" icon-right="contact_support"
-              class="q-py-lg full-width full-width-sm" />
+            <q-btn label="Comece Agora!" to="/app"
+              class="q-py-lg full-width btn-home full-width-sm" />
           </div>
         </div>
       </section>
@@ -291,7 +291,6 @@ a {
   }
 }
 
-/* Visibilidade condicional */
 .desktop-only {
   display: block;
 }
@@ -309,4 +308,14 @@ a {
     display: block !important;
   }
 }
+.btn-home {
+  background: linear-gradient(90deg, #0f0f0f, #141414);
+  color: #fafafa;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: 0px;
+  border: 1px solid rgb(255, 255, 255);
+  transition: all 0.3s ease;
+}
+
 </style>

@@ -27,7 +27,13 @@ html {
 .bg-grad-1{
     background: #161616c2;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #161616c2, #020202c6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom,#000000c2, #141414d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right,#000000a9, #141414d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    backdrop-filter: blur(8px);
+}
+.bg-grad-2{
+    background: #161616c2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #161616c2, #020202c6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right,#013fc5a9, #00a8e0d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     backdrop-filter: blur(8px);
 }
 

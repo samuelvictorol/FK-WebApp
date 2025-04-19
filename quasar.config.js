@@ -54,7 +54,8 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        BACKEND_URL: process.env.BACKEND_URL
+        BACKEND_URL: process.env.BACKEND_URL,
+        FK_ADMIN_PASSWORD: process.env.FK_ADMIN_PASSWORD,
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

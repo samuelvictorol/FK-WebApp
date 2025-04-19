@@ -8,7 +8,11 @@ const routes = [
     path: '/app',
     component: () => import('layouts/AppLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/app/IndexPage.vue') }
+      { path: '', component: () => import('src/pages/app/IndexPage.vue') },
+      { path: 'forms', component: () => import('src/pages/app/forms/FormsPage.vue') },
+      { path: 'form/cronotipo', component: () => import('src/pages/app/forms/CronotipoPage.vue') },
+      { path: 'form/forma-aprendizado', component: () => import('src/pages/app/forms/FormaAprendizadoPage.vue') },
+      { path: 'form/estilo-aprendizado', component: () => import('src/pages/app/forms/EstiloAprendizadoPage.vue') },
     ]
   },
   {
