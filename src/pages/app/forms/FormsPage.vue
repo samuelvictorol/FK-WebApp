@@ -36,7 +36,7 @@ const forms = ref([
         icon: 'person_add',
         color: 'primary',
         to: '/app/form/cronotipo',
-        img_url: 'https://images.unsplash.com/photo-1490724500206-cd5482e02b9e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        img_url: '/cron.avif',
     },
     {
         id: 2,
@@ -45,7 +45,7 @@ const forms = ref([
         icon: 'feedback',
         color: 'secondary',
         to: '/app/form/forma-aprendizado',
-        img_url: 'https://images.unsplash.com/photo-1686516922889-e807f392b373?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        img_url: '/forma.avif',
     },
     {
         id: 3,
@@ -54,7 +54,7 @@ const forms = ref([
         icon: 'contact_mail',
         color: 'accent',
         to: '/app/form/estilo-aprendizado',
-        img_url: 'https://plus.unsplash.com/premium_photo-1661761077411-d50cba031848?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        img_url: '/est.avif',
     },
 ]);
 
