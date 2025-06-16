@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-grad-2 text-white">
+    <q-header class="bg-grad-1 text-white shadow-2">
       <q-toolbar >
         <q-toolbar-title>
           usuario123
@@ -17,7 +17,7 @@
       <q-list>
         <q-item v-for="(option, index) in menuOptions" :key="index" :to="option.to">
           <q-item-section avatar>
-            <q-icon :name="option.icon" color="blue"/>
+            <q-icon :name="option.icon" color="purple-14"/>
           </q-item-section>
           <q-item-section class="text-bold text-grey-14">
             {{ option.label }}
@@ -28,7 +28,7 @@
       <q-list>
         <q-item clickable>
           <q-item-section avatar>
-            <q-icon name="account_circle" color="blue-14"/>
+            <q-icon name="account_circle" color="purple-14"/>
           </q-item-section>
           <q-item-section>
             Meu Perfil
@@ -36,7 +36,7 @@
         </q-item>
         <q-item clickable>
           <q-item-section avatar>
-            <q-icon name="help" color="blue-14"/>
+            <q-icon name="help" color="purple-14"/>
           </q-item-section>
           <q-item-section>
             Ajuda
@@ -44,7 +44,7 @@
         </q-item>
         <q-item clickable @click="logout()">
           <q-item-section avatar>
-            <q-icon name="logout" color="blue-14" />
+            <q-icon name="logout" color="purple-14" />
           </q-item-section>
           <q-item-section>
             Sair
@@ -77,7 +77,6 @@ const rightDrawerOpen = ref(false)
 const menuOptions = ref([
   { icon: 'home', to: '/app', label: 'Início' },
   { icon: 'list_alt', to: '/app/forms', label: 'Formulários' },
-  { icon: 'task_alt', to: '/app/results', label: 'Resultados' },
 ])
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value

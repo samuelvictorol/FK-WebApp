@@ -4,22 +4,25 @@
         <q-breadcrumbs class="text-grey-8 rounded-borders q-mb-sm" separator-icon="chevron_right">
             <q-breadcrumbs-el icon="home" label="Início" exact />
         </q-breadcrumbs>
-
-        <!-- Cabeçalho -->
+        <!-- Hero Banner -->
         <div class="text-h4" style="overflow:hidden">Início</div>
-        <div class="text-subtitle1 text-grey-14  q-mb-md"> <strong>{{ userRole }}</strong></div>
-        <div class="w100 row rounded-borders justify-center align-start">
-            <div class="w100 row no-wrap">
-                <q-btn to="/app/#" class="w100 q-py-xl q-mt-md q-mr-md" label="Meu Perfil"
-                    icon-right="account_circle" color="accent" glossy></q-btn>
-                <q-btn class="w100 q-py-xl" label="Formulários" to="/app/forms" icon-right="list_alt" color="blue-14"
-                    glossy></q-btn>
+        <div class="q-pa-lg q-mb-md bg-blue-1 rounded-borders column items-center text-center">
+            <div class="text-h5 text-bold text-blue-10">
+               🎯 Conheça o curso que transforma sua preparação para concursos!
             </div>
-            <div class="w100 row no-wrap">
-                <q-btn to="/app/#" class="q-mr-md w100 q-py-xl q-mt-md" label="Resultados"
-                    icon-right="task_alt" color="purple-14" glossy></q-btn>
-                <q-btn to="/app/#" class="w100 q-py-xl q-mt-md" label="Histórico de Compras" icon-right="paid"
-                    color="orange-14" glossy></q-btn>
+            <div class="text-subtitle1 q-mt-sm text-grey-9">
+
+            </div>
+            <q-btn label="🔗 Acesse agora o curso completo" color="primary" class="q-mt-md q-px-xl q-py-sm text-bold"
+                rounded glossy size="md" @click="irParaCurso" />
+        </div>
+        <!-- Cabeçalho -->
+        <div class="w100 row rounded-borders justify-center align-start q-pb-xl q-mb-xl">
+            <div class="w100 column no-wrap">
+                <q-btn class="w100 q-py-xl" label="Formulários e Perfil de Estudo" to="/app/forms" icon-right="list_alt" color="purple-14"
+                    glossy></q-btn>
+                <q-btn to="/app/#" class="w100 q-py-xl q-mr-md" label="Meu Perfil" icon-right="account_circle"
+                color="purple-14" flat></q-btn>
             </div>
         </div>
     </q-page>

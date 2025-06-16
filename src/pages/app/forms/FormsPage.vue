@@ -2,22 +2,21 @@
     <q-page class="q-pa-md q-gutter-y-md animate__animated animate__fadeIn column items-stretch full-height">
         <!-- Breadcrumb -->
         <q-breadcrumbs class="text-grey-8 rounded-borders q-mb-sm" separator-icon="chevron_right">
-            <q-breadcrumbs-el icon="home" label="Início" to="/app" />
+            <q-breadcrumbs-el icon="home" class="text-purple-14" label="Início" to="/app" />
             <q-breadcrumbs-el icon="home" label="Formulários" exact />
         </q-breadcrumbs>
 
         <div class="text-h4" style="overflow:hidden">Formulários</div>
-        <div>
-            <q-separator class="q-mb-md" color="grey-4" />
-            <div class="w100 row q-gutter-md justify-center items-start">
-                <q-card v-for="form in forms" :key="form.id" class="hoverable-card w45  q-mb-md" @click="router.push(form.to)" style="cursor: pointer; border-bottom: 4px solid #4F89D0;">
-                    <q-card-section class="q-pa-sm flex flex-center column items-center">
-                        <div class="text-h6 text-center q-my-sm text-blue text-bold">{{ form.name }}</div>
-                        <img :src="form.img_url" alt="imagem" width="100%" height="100%" class="rounded-borders" style="object-fit: cover; border-radius: 10px;" />
-                        <div class="text-subtitle2 text-center q-mb-xs q-px-sm q-mt-sm">{{ form.description }}</div>
-                    </q-card-section>
-                </q-card>
-            </div>
+        <div class="w100 row justify-center items-start">
+            <q-card v-for="form in forms" :key="form.id" class="hoverable-card q-mb-md"
+                @click="router.push(form.to)" style="cursor: pointer; border-bottom: 4px solid purple;">
+                <q-card-section class="q-pa-sm flex flex-center column items-center">
+                    <div class="text-h6 text-center q-my-sm text-purple text-bold">{{ form.name }}</div>
+                    <img :src="form.img_url" alt="imagem" width="100%" height="100%" class="rounded-borders"
+                        style="object-fit: cover; border-radius: 20px;" />
+                    <div class="text-subtitle2 text-center q-mb-xs q-px-xs q-mt-md">{{ form.description }}</div>
+                </q-card-section>
+            </q-card>
         </div>
     </q-page>
 </template>
@@ -68,13 +67,19 @@ const forms = ref([
 }
 
 .hoverable-card:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
+}
+
+.q-card {
+    width: 300px;
+    max-width: 100%;
+    margin: 10px;
+    cursor: pointer;
 }
 
 @media (max-width: 800px) {
     .q-card {
-        width: 90vw;
+        width: 100%
     }
 }
-
 </style>

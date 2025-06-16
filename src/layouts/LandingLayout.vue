@@ -104,9 +104,9 @@
               mensagem — será um prazer conversar com você!
             </p>
             <q-form>
-              <q-input filled label="Nome" class="q-mb-md" />
-              <q-input filled label="E-mail" type="email" class="q-mb-md" />
-              <q-input filled label="Mensagem" type="textarea" class="q-mb-md" />
+              <q-input color="purple" filled label="Nome" class="q-mb-md" />
+              <q-input color="purple" filled label="E-mail" type="email" class="q-mb-md" />
+              <q-input color="purple" filled label="Mensagem" type="textarea" class="q-mb-md" />
               <q-btn label="Enviar Mensagem" color="green" glossy class="q-py-md w100" icon-right="send"
                 type="submit" />
             </q-form>

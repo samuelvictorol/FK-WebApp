@@ -20,15 +20,12 @@
                     <q-btn @click="openForm(props.row.title)" dense flat round color="green" icon="visibility">
                         <q-tooltip>Visualizar Template</q-tooltip>
                     </q-btn>
-                    <q-btn @click="verRespostas(props.row.title)" dense flat round icon="library_books" color="blue">
-                        <q-tooltip>Visualizar Respostas</q-tooltip>
-                    </q-btn>
                 </q-td>
             </template>
         </q-table>
 
         <!-- Diálogo com respostas -->
-        <q-dialog v-model="dialog" persistent full-width>
+        <q-dialog v-model="dialog" full-width>
             <q-card style="max-width: 800px">
                 <q-card-section class="text-h6 text-primary">
                     {{ formHandleName }}
@@ -83,12 +80,6 @@ const columns = ref([
         field: row => row.title,
         classes: 'sticky-col bg-blue text-bold text-white',
         headerClasses: 'sticky-col bg-grey-2',
-    },
-    {
-        name: 'respostas',
-        label: 'Respostas',
-        align: 'center',
-        field: row => row.respostas,
     },
     {
         name: 'actions',

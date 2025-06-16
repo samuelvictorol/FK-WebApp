@@ -16,7 +16,7 @@
         <q-separator />
         <q-item v-for="(option, index) in menuOptions" :key="index" :to="option.to" clickable>
           <q-item-section avatar>
-            <q-icon :name="option.icon" size="2em" color="blue" />
+            <q-icon :name="option.icon" size="2em" color="purple" />
           </q-item-section>
           <q-item-section>{{ option.label }}</q-item-section>
         </q-item>

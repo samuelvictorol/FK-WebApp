@@ -64,19 +64,7 @@ const columns = ref([
         field: row => row.perfil,
         align: 'left'
     },
-    {
-        name: 'planoAtual',
-        label: 'Plano Atual',
-        field: row => row.planoAtual,
-        align: 'left'
-    },
-    {
-        name: 'lucro',
-        label: 'Lucro',
-        field: row => row.lucro,
-        align: 'left'
-    },
-    {
+        {
         name: 'actions',
         label: 'Ações',
         align: 'center'
