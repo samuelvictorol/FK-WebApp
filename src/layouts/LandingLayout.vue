@@ -81,13 +81,16 @@
               </h1>
 
               <p class="hero-sub safe-text fade-in delay-2">
-                Um produto digital com formulários inteligentes que analisam suas respostas e geram
+                Um complemento contendo material didático utilizando formulários inteligentes que analisam suas respostas e geram
                 um plano prático: como estudar, quando estudar e como manter constância — do seu jeito.
               </p>
 
               <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
                 <div class="col-12 col-sm-auto">
                   <q-btn class="btn-cta full-width text-grey-3" unelevated icon-right="arrow_forward" label="Começar agora" to="/app" />
+                </div>
+                <div class="col-12 col-sm-auto">
+                  <q-btn class="btn-cta-2 full-width text-grey-3" unelevated icon-right="apps" label="Curso Completo" to="/curso" />
                 </div>
                 <div class="col-12 col-sm-auto">
                   <q-btn class="btn-ghost-strong full-width" unelevated icon="play_circle" label="Ver como funciona" @click="scrollTo('como')" />
@@ -413,7 +416,7 @@
                 <q-input color="deep-purple-8" filled label="Nome" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="E-mail" type="email" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="Mensagem" type="textarea" class="q-mb-md" />
-                <q-btn label="Enviar mensagem" color="positive" glossy class="q-py-md full-width" icon-right="send" type="submit" />
+                <q-btn label="Enviar mensagem" color="deep-purple-14" glossy class="q-py-md full-width" icon-right="send" type="submit" />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
@@ -471,7 +474,7 @@
 
           <footer class="footer">
             <div class="text-body2">
-              © 2025 <strong>Flávia Kamila</strong>. Todos os direitos reservados.
+              © 2026 <strong>Flávia Kamila</strong>. Todos os direitos reservados.
             </div>
             <div class="text-body2 q-mt-xs">
               Desenvolvido por
@@ -648,6 +651,13 @@ function scrollTo(id) {
 
 .btn-cta {
   background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  color: #0b0b10;
+  font-weight: 900;
+  border-radius: 14px;
+  padding: 12px 18px;
+}
+.btn-cta-2 {
+  background: linear-gradient(-90deg, #7c3aed, #14b8a6);
   color: #0b0b10;
   font-weight: 900;
   border-radius: 14px;

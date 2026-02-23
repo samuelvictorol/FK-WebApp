@@ -1,20 +1,43 @@
 <template>
-    <q-page class="q-pa-md q-gutter-y-md animate__animated animate__fadeIn column items-stretch full-height">
-        <!-- Breadcrumb -->
-        <q-breadcrumbs class="text-grey-8 rounded-borders q-mb-sm" separator-icon="chevron_right">
-            <q-breadcrumbs-el icon="home" class="text-purple-14" label="Início" to="/app" />
-            <q-breadcrumbs-el icon="home" label="Formulários" exact />
+    <q-page class="q-pa-md page">
+        <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
+            <q-breadcrumbs-el icon="home" class="text-deep-purple-10" label="Início" to="/app" />
+            <q-breadcrumbs-el icon="list_alt" label="Formulários" exact />
         </q-breadcrumbs>
 
-        <div class="text-h4" style="overflow:hidden">Formulários</div>
-        <div class="w100 row justify-center items-start">
-            <q-card v-for="form in forms" :key="form.id" class="hoverable-card q-mb-md"
-                @click="router.push(form.to)" style="cursor: pointer; border-bottom: 4px solid purple;">
-                <q-card-section class="q-pa-sm flex flex-center column items-center">
-                    <div class="text-h6 text-center q-my-sm text-purple text-bold">{{ form.name }}</div>
-                    <img :src="form.img_url" alt="imagem" width="100%" height="100%" class="rounded-borders"
-                        style="object-fit: cover; border-radius: 20px;" />
-                    <div class="text-subtitle2 text-center q-mb-xs q-px-xs q-mt-md">{{ form.description }}</div>
+        <div class="head">
+            <div class="text-h4 text-weight-bold safe-text text-grey-3">Formulários</div>
+            <div class="text-subtitle2 text-grey-6 safe-text">
+                Escolha um formulário. Responda as perguntas no modo chat e receba um diagnóstico personalizado no
+                final.
+            </div>
+        </div>
+
+        <div class="grid">
+            <q-card v-for="form in forms" :key="form.id" class="form-card relative" bordered clickable v-ripple
+                @click="router.push(form.to)">
+                <div class="img-wrap">
+                    <img :src="form.img_url" alt="imagem" class="img" />
+                    <div class="img-overlay"></div>
+                    <div class="badge">
+                        <q-icon name="chat_bubble" size="16px" class="q-mr-xs" />
+                        Chat
+                    </div>
+                </div>
+
+                <q-card-section class=" q-pb-xl q-mb-md">
+                    <div class="text-h6 text-weight-bold safe-text">{{ form.name }}</div>
+                    <div class="text-body2 text-grey-6 q-mt-xs safe-text">{{ form.description }}</div>
+                </q-card-section>
+                <q-card-section class="q-pt-none absolute-bottom">
+
+                    <div class="w100 row no-wrap items-center justify-between">
+                        <q-chip dense class="chip">
+                            <q-icon name="schedule" size="16px" class="q-mr-xs" />
+                            5-10 min
+                        </q-chip>
+                        <q-btn flat class="go" label="Iniciar" icon-right="arrow_forward" />
+                    </div>
                 </q-card-section>
             </q-card>
         </div>
@@ -22,64 +45,145 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
+const router = useRouter()
 
 const forms = ref([
     {
         id: 1,
         name: 'Cronotipo',
-        description: 'Neste formulário você poderá descobrir seu cronotipo e como isso pode afetar sua produtividade.',
-        icon: 'person_add',
-        color: 'primary',
+        description: 'Descubra seu padrão de energia ao longo do dia e como estudar no seu melhor horário.',
         to: '/app/form/cronotipo',
-        img_url: '/cron.avif',
+        img_url: '/cron.avif'
     },
     {
         id: 2,
         name: 'Forma de Aprendizado',
-        description: 'Com este formulário, você poderá descobrir sua forma de aprendizado ideal e otimizar os pontos que são eficazes para seu perfil.',
-        icon: 'feedback',
-        color: 'secondary',
+        description: 'Entenda sua forma predominante (visual/auditiva/cinestésica) e otimize seus estudos.',
         to: '/app/form/forma-aprendizado',
-        img_url: '/forma.avif',
+        img_url: '/forma.avif'
     },
     {
         id: 3,
         name: 'Estilo de Aprendizado',
-        description: 'Aqui você poderá identificar o estilo de aprendizado mais adequado e como isso pode influenciar na absorção de conteúdos.',
-        icon: 'contact_mail',
-        color: 'accent',
+        description: 'Identifique seu estilo ideal e como isso influencia sua absorção e retenção de conteúdo.',
         to: '/app/form/estilo-aprendizado',
-        img_url: '/est.avif',
-    },
-]);
-
+        img_url: '/est.avif'
+    }
+])
 </script>
 
 <style scoped>
-.hoverable-card {
-    transition: transform 0.2s;
-    min-height: 150px;
-    /* altura mínima para mobile */
+:global(html),
+:global(body),
+:global(#q-app) {
+    overflow-x: clip;
 }
 
-.hoverable-card:hover {
-    transform: scale(1.01);
+:global(.row > [class*="col-"]) {
+    min-width: 0;
 }
 
-.q-card {
-    width: 300px;
-    max-width: 100%;
-    margin: 10px;
-    cursor: pointer;
+.page {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media (max-width: 800px) {
-    .q-card {
-        width: 100%
+.safe-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.crumbs {
+    background: rgba(255, 255, 255, .92);
+    border: 1px solid rgba(15, 23, 42, .08);
+    padding: 10px 12px;
+    border-radius: 14px;
+}
+
+.head {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.form-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .92);
+    border: 1px solid rgba(15, 23, 42, .08);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.form-card:hover {
+    transform: translateY(-3px);
+}
+
+.img-wrap {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .0), rgba(0, 0, 0, .55));
+}
+
+.badge {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(16, 16, 22, .78);
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #fff;
+    font-weight: 900;
+    font-size: .85rem;
+    backdrop-filter: blur(8px);
+}
+
+.chip {
+    background: rgba(124, 58, 237, .10);
+    border: 1px solid rgba(124, 58, 237, .18);
+    font-weight: 800;
+}
+
+.go {
+    font-weight: 900;
+}
+
+@media (max-width: 1023px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .img-wrap {
+        height: 160px;
     }
 }
 </style>
