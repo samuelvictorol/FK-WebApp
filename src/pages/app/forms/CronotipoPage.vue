@@ -3,7 +3,7 @@
     <q-breadcrumbs class="text-grey-8 rounded-borders q-mb-sm" separator-icon="chevron_right">
       <q-breadcrumbs-el class="text-purple-14" icon="home" label="Início" to="/app" />
       <q-breadcrumbs-el class="text-purple-14" icon="list_alt" label="Formulários" to="/app/forms" />
-      <q-breadcrumbs-el icon="article" label="Cronótipo" exact />
+      <q-breadcrumbs-el icon="article" label="Cronotipo" exact />
     </q-breadcrumbs>
 
     <q-card class="q-px-sm q-mx-auto bg-grey-1 q-mt-lg q-pb-sm" style="border:2px solid white;max-width: 700px">

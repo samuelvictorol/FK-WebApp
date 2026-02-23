@@ -30,8 +30,8 @@ const router = useRouter();
 const forms = ref([
     {
         id: 1,
-        name: 'Cronótipo',
-        description: 'Neste formulário você poderá descobrir seu cronótipo e como isso pode afetar sua produtividade.',
+        name: 'Cronotipo',
+        description: 'Neste formulário você poderá descobrir seu cronotipo e como isso pode afetar sua produtividade.',
         icon: 'person_add',
         color: 'primary',
         to: '/app/form/cronotipo',

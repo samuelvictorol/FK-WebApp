@@ -67,7 +67,7 @@ const resultado = ref('')
 const formHandleName = ref('')
 
 const formsRows = ref([
-    { id: 1, title: 'Cronótipo', createdAt: '04/04/2025', respostas: 10 },
+    { id: 1, title: 'Cronotipo', createdAt: '04/04/2025', respostas: 10 },
     { id: 2, title: 'Forma de Aprendizado', createdAt: '04/04/2025', respostas: 20 },
     { id: 3, title: 'Estilo de Aprendizado', createdAt: '04/04/2025', respostas: 50 },
 ]);
@@ -102,7 +102,7 @@ async function getForm(formUrl) {
 
 async function verRespostas(title) {
     switch (title) {
-        case 'Cronótipo':
+        case 'Cronotipo':
             await getForm('/form/cronotipo');
             break;
         case 'Forma de Aprendizado':
@@ -119,7 +119,7 @@ async function verRespostas(title) {
 async function openForm(title) {
     formHandleName.value = title;
     switch (title) {
-        case 'Cronótipo':
+        case 'Cronotipo':
             resultado.value = 'De 16 a 30 pontos – <strong>Vespertino Típico</strong>\nDe 31 a 41 pontos – <strong>Moderadamente Vespertino</strong>\nDe 42 a 58 pontos – <strong>Intermediário</strong>\nDe 56 a 69 pontos – <strong>Moderadamente Matutino</strong>'
             await getForm('/form/cronotipo');
             break;
