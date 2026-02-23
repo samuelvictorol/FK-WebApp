@@ -5,6 +5,10 @@ const routes = [
     component: () => import('layouts/LandingLayout.vue'),
   },
   {
+    path: '/login',
+    component: () => import('layouts/LoginLayout.vue'),
+  },
+  {
     path: '/app',
     component: () => import('layouts/AppLayout.vue'),
     children: [

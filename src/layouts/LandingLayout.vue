@@ -15,7 +15,7 @@
           <q-btn flat class="btn-ghost desktop-only" label="Contato" @click="scrollTo('contato')" />
 
           <q-btn dense unelevated class="btn-outline desktop-only" icon="login" label="Login" to="/login" />
-          <q-btn dense unelevated class="btn-primary text-grey-3" icon="person_add" label="Registrar" to="/registrar" />
+          <q-btn dense unelevated class="btn-primary text-grey-3" icon="person_add" label="Registrar" to="/login" />
 
           <q-btn dense flat round icon="menu" class="mobile-only">
             <q-menu class="menu-mobile" anchor="bottom right" self="top right">
@@ -145,7 +145,7 @@
                       <div class="price">
                         R$ <span class="price-big">49</span><span class="price-dec">,90</span>
                       </div>
-                      <div class="price-note">Pagamento único (edite depois)</div>
+                      <div class="price-note">Pagamento único</div>
                     </div>
                     <div class="col-auto">
                       <q-badge class="badge-highlight" rounded>Mais vendido</q-badge>
@@ -248,7 +248,7 @@
       </section>
 
       <!-- SOBRE -->
-      <section id="sobre" class="section section-light">
+      <section id="sobre" class="section section-light" :style="isMobile ? 'padding-top: 60px;' : 'padding-top: 0px;'">
         <div class="parallax-wrap desktop-only">
           <div class="parallax-img" />
           <div class="parallax-overlay" />
@@ -339,7 +339,7 @@
             <div class="kicker">Planos</div>
             <div class="section-title safe-text" style="overflow: hidden!important;">Um pacote direto ao ponto</div>
             <p class="section-sub safe-text">
-              Você compra, responde e recebe seu relatório personalizado. Sem mensalidade (edite depois se quiser).
+              Você compra, responde e recebe seu relatório personalizado. Sem mensalidade.
             </p>
           </div>
 
@@ -418,7 +418,7 @@
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a class="insta text-purple" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer" >
+                <a class="insta text-deep-purple-4" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer" >
                   @flaviakamilaf
                 </a>
               </div>
@@ -475,8 +475,8 @@
             </div>
             <div class="text-body2 q-mt-xs">
               Desenvolvido por
-              <a class="devlink" href="https://samuelvictorol.github.io/portfolio/" target="_blank" rel="noreferrer">
-                Samuel Victor
+              <a class="devlink" href="https://aitosoftwares.com/" target="_blank" rel="noreferrer">
+                AitoSoftwares
               </a>
             </div>
           </footer>
