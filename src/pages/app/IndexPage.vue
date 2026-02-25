@@ -8,10 +8,7 @@
     <!-- Header -->
     <div class="top row items-start justify-between q-mt-sm">
       <div>
-        <div class="text-h4 text-weight-bold safe-text text-grey-3">Início</div>
-        <div class="text-subtitle2 text-grey-6 safe-text">
-          Bem-vindo(a)! Vamos organizar seu perfil e começar pelos formulários.
-        </div>
+        <div class="text-h4 text-weight-bold safe-text text-grey-3 q-py-md">Início</div>
       </div>
 
       <q-chip class="plan-chip q-mt-xs text-deep-purple-4" dense>
@@ -105,7 +102,7 @@
               Cronotipo, forma e estilo — responda no modo chat e gere seu relatório.
             </div>
           </div>
-          <div class="icon-pill">
+          <div class="icon-pill absolute-top-right">
             <q-icon name="list_alt" size="22px" />
           </div>
         </q-card-section>
@@ -119,16 +116,16 @@
         <q-card-section class="row items-start justify-between">
           <div>
             <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
-            <div class="text-body2 text-grey-6 safe-text">
+            <div class="text-body2 text-grey-6 safe-text q-pb-xl">
               Veja seu progresso, histórico e dados do seu diagnóstico.
             </div>
           </div>
-          <div class="icon-pill">
+          <div class="icon-pill absolute-top-right">
             <q-icon name="account_circle" size="22px" />
           </div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
+        <q-card-section class="q-pt-none absolute-bottom">
           <q-btn flat class="go" label="Abrir" icon-right="arrow_forward" />
         </q-card-section>
       </q-card>

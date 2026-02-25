@@ -9,7 +9,6 @@
                     <div class="subtitle">Acesso Exclusivo</div>
                 </q-toolbar-title>
 
-                <q-btn dense unelevated class="btn-ghost desktop-only" label="Voltar ao site" to="/" />
             </q-toolbar>
         </q-header>
 

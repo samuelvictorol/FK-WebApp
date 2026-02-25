@@ -6,7 +6,6 @@
           <div class="brand-top">
             <div class="brand-text">
               <div class="brand-name">FláviaKamila</div>
-              <div class="brand-sub">Seu diagnóstico de aprendizagem</div>
             </div>
           </div>
         </q-toolbar-title>
@@ -23,11 +22,11 @@
     <q-drawer
       v-model="rightDrawerOpen"
       side="right"
-      class="app-drawer bg-deep-purple-10"
+      class="app-drawer bg-dark"
     >
       <div class="drawer-head">
         <div class="drawer-title text-grey-3">MENU</div>
-        <q-btn flat round icon="close" @click="rightDrawerOpen = false" />
+        <q-btn flat round icon="close" color="white" @click="rightDrawerOpen = false" />
       </div>
 
       <q-separator />

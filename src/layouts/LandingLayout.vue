@@ -69,9 +69,9 @@
         <div class="container hero-content">
           <div class="row items-center q-col-gutter-xl">
             <div class="col-12 col-md-7">
-              <div class="badge fade-in">
+              <div class="badge fade-in" style="font-size: .7rem;">
                 <q-icon name="verified" size="18px" class="q-mr-xs" />
-                Mentoria de aprendizagem com base em evidências
+                Métodos de aprendizagem com base em evidências
               </div>
 
               <h1 class="hero-title safe-text fade-in delay-1"  style="overflow: hidden!important;">
@@ -79,11 +79,11 @@
                 seu <span class="grad">cronotipo</span> e receba um
                 <span class="grad">relatório personalizado</span> para estudar melhor.
               </h1>
-
+<!-- 
               <p class="hero-sub safe-text fade-in delay-2">
                 Um complemento contendo material didático utilizando formulários inteligentes que analisam suas respostas e geram
                 um plano prático: como estudar, quando estudar e como manter constância — do seu jeito.
-              </p>
+              </p> -->
 
               <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
                 <div class="col-12 col-sm-auto">
