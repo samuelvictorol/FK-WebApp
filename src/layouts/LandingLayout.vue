@@ -8,7 +8,7 @@
         <q-toolbar-title class="brand-title">
           <div style="overflow: hidden!important;" class="text-weight-bold">
             <strong>Flávia</strong><strong>Kamila</strong></div>
-          <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Cronotipo •
+          <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Concursos •
             Estratégia de estudos</div>
         </q-toolbar-title>
 
@@ -80,7 +80,7 @@
                 Métodos de aprendizagem com base em evidências
               </div> -->
 
-              <h1 class="hero-title  safe-text fade-in delay-1" style="overflow: hidden!important;">
+              <h1 class="hero-title q-pa-xs safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s" style="overflow: hidden!important;">
                 Descubra seu <span class="grad">estilo de aprendizado</span>,
                 seu <span class="grad">cronotipo</span> e receba um
                 <span class="grad">relatório personalizado</span> para estudar melhor.
@@ -93,22 +93,22 @@
 
               <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta full-width text-grey-3" unelevated icon-right="arrow_forward"
+                  <q-btn class="btn-cta full-width text-grey-3 animate__animated animate__fadeInUp animate__slower animate__delay-2s" unelevated icon-right="arrow_forward"
                     label="Começar agora" to="/app" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta-2 full-width text-grey-3" unelevated icon-right="apps" label="Curso Completo"
+                  <q-btn class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s" unelevated icon-right="apps" label="Curso Completo"
                     to="/curso" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-ghost-strong full-width" unelevated icon="play_circle" label="Ver como funciona"
+                  <q-btn class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__slower animate__delay-5s" unelevated icon="play_circle" label="Ver como funciona"
                     @click="scrollTo('como')" />
                 </div>
               </div>
 
-              <div class="row q-col-gutter-sm q-mt-lg fade-in delay-4">
+              <div class="row q-col-gutter-sm q-mt-lg fade-in delay-4 ">
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card">
+                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-2s">
                     <q-card-section class="row items-center no-wrap">
                       <q-icon name="schedule" size="20px" class="q-mr-sm" />
                       <div>
@@ -119,7 +119,7 @@
                   </q-card>
                 </div>
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card">
+                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-3s">
                     <q-card-section class="row items-center no-wrap">
                       <q-icon name="psychology" size="20px" class="q-mr-sm" />
                       <div>
@@ -130,7 +130,7 @@
                   </q-card>
                 </div>
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card">
+                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-4s">
                     <q-card-section class="row items-center no-wrap">
                       <q-icon name="done_all" size="20px" class="q-mr-sm" />
                       <div>
@@ -649,8 +649,8 @@ function scrollTo(id) {
   inset: 0;
   background:
     radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .35), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(20, 184, 166, .22), transparent 55%),
-    linear-gradient(180deg, rgba(5, 5, 8, .55), rgba(5, 5, 8, .86));
+    radial-gradient(800px 400px at 80% 40%, rgba(148, 36, 253, 0.075), transparent 55%),
+    linear-gradient(180deg, rgba(5, 5, 8, .55), rgba(5, 5, 8, 0.253));
 }
 
 .hero-content {
@@ -674,6 +674,8 @@ function scrollTo(id) {
   font-size: clamp(2rem, 2.6vw, 3.1rem);
   line-height: 1.05;
   margin: 0;
+  background-color: #07070a0c;
+  backdrop-filter: blur(4px);
 }
 
 .grad {
@@ -746,7 +748,7 @@ function scrollTo(id) {
 
 .hero-card {
   background: #9E97F5;
-  background: linear-gradient(-90deg, #ba65ff77, #9d97f57e);
+  background: linear-gradient(-90deg, #2b034b77, #914cec7e);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 18px;
   backdrop-filter: blur(2px);
