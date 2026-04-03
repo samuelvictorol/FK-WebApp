@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf" class="page">
     <q-header elevated class="topbar " style="overflow: hidden!important;">
       <q-toolbar class="q-px-md">
-        <q-avatar square size="32px" class="q-mr-sm">
+        <q-avatar square size="32px" class="q-mr-sm rounded-borders">
           <img src="/logo.png" alt="Logo" />
         </q-avatar>
         <q-toolbar-title class="brand-title">

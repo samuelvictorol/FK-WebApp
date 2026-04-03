@@ -2,21 +2,21 @@
   <q-layout view="hHh lpR fFf" class="app-shell">
     <q-header elevated class="app-header">
       <q-toolbar class="q-px-md">
-        <q-avatar square size="32px" class="q-mr-sm">
+        <q-avatar square size="32px" class="q-mr-sm rounded-borders">
           <img src="/logo.png" alt="Logo" />
         </q-avatar>
         <q-toolbar-title class="brand">
           <div class="brand-top">
             <div class="brand-text">
-              <div class="brand-name">FláviaKamila</div>
+              <!-- <div class="brand-name">FláviaKamila</div> -->
               <div class="brand-sub" v-if="user.name">
-                Olá, {{ firstName }}
+                Olá, {{ firstName[0].toUpperCase() + firstName.slice(1).toLowerCase() }}
               </div>
             </div>
           </div>
         </q-toolbar-title>
 
-        <div class="user-pill desktop-only">
+        <div class="user-pill ">
           <span class="ellipsis">
             {{ user.role }}
           </span>
@@ -184,12 +184,12 @@ function clearBrowserSession() {
 
 function logout() {
   $q.dialog({
-    title: 'Sair',
+    title: '🔴 Sair',
     message: 'Você tem certeza que deseja sair?',
     cancel: true,
-    icon: 'logout',
     persistent: true,
     ok: {
+      icon: 'logout',
       label: 'Sair',
       color: 'negative',
       unelevated: true
@@ -249,12 +249,12 @@ function logout() {
 }
 
 .brand-name {
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.05;
 }
 
 .brand-sub {
-  font-size: .78rem;
+  font-size: .9rem;
   opacity: .85;
   margin-top: 2px;
 }
@@ -305,7 +305,7 @@ function logout() {
 }
 
 .drawer-active {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .18), rgba(20, 184, 166, .10));
+  background: linear-gradient(90deg, rgba(124, 58, 237, .18), rgba(124, 20, 184, 0.1));
   border-left: 3px solid rgba(167, 139, 250, .9);
 }
 

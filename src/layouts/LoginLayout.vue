@@ -3,7 +3,7 @@
     <q-header elevated class="topbar">
       <q-toolbar class="q-px-md">
         <q-btn flat round icon="arrow_back" to="/" class="q-mr-sm" />
-        <q-avatar square size="32px" class="q-mr-sm">
+        <q-avatar square size="32px" class="q-mr-sm rounded-borders">
           <img src="/logo.png" alt="Logo" />
         </q-avatar>
         <q-toolbar-title class="title">
@@ -61,15 +61,15 @@
                       <div class="text-h6 text-weight-bold">
                         {{ isLogin ? 'Login' : 'Criar conta' }}
                       </div>
-                      <div class="text-body2 text-grey-5">
-                        {{ isLogin ? 'Área do Usuário' : 'Cadastre-se para acessar a plataforma.' }}
+                      <div class="text-body2 text-grey-5 q-pb-sm">
+                        {{ isLogin ? 'Área do Usuário' : 'Cadastre-se grátis.' }}
                       </div>
                     </div>
 
                     <q-btn
                       flat
                       class="mode-switch"
-                      :label="isLogin ? 'Registrar' : 'Login'"
+                      :label="isLogin ? 'Registrar' : 'Já tenho conta'"
                       @click="toggleMode"
                     />
                   </div>
@@ -175,7 +175,7 @@
                     />
 
                     <div class="row items-center justify-between q-gutter-sm">
-                      <q-btn flat label="Voltar" to="/" />
+                      <q-btn flat label="início" to="/" />
                       <q-btn
                         type="submit"
                         class="btn-primary"

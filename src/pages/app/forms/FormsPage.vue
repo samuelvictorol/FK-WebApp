@@ -10,7 +10,7 @@
         </div>
 
         <div class="grid">
-            <q-card v-for="form in forms" :key="form.id" class="form-card relative" bordered clickable v-ripple
+            <q-card v-for="form in forms" :key="form.id" class="form-card cursor-pointer relative" bordered clickable v-ripple
                 @click="router.push(form.to)">
                 <div class="img-wrap">
                     <div class="row no-wrap w100 items-center justify-center q-pa-sm bg-dark">

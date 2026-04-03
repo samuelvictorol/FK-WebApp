@@ -30,25 +30,55 @@
 
         <div class="row q-col-gutter-sm q-mt-md">
           <div class="col-12 col-sm-auto">
-            <q-btn
-              label="Acessar o curso completo"
-              icon-right="arrow_forward"
-              class="btn-cta full-width text-grey-3"
-              unelevated
-              @click="irParaCurso"
-            />
+            <q-btn label="curso completo" icon-right="arrow_forward" class="btn-cta full-width text-grey-3"
+              unelevated @click="irParaCurso" />
           </div>
           <div class="col-12 col-sm-auto">
-            <q-btn
-              label="Ver formulários"
-              icon="list_alt"
-              class="btn-ghost full-width"
-              unelevated
-              to="/app/forms"
-            />
+            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3"
+              unelevated @click="irParaCurso" />
+          </div>
+          <div class="col-12 col-sm-auto">
+            <q-btn label="Ver formulários" icon="list_alt" class="btn-ghost full-width" unelevated to="/app/forms" />
           </div>
         </div>
+        <!-- Ações principais -->
+        <div class="grid q-mt-lg text-dark">
+          <q-card class="action-card" bordered clickable v-ripple @click="router.push('/app/forms')">
+            <q-card-section class="row items-start justify-between">
+              <div>
+                <div class="text-h6 text-weight-bold safe-text">Formulários</div>
+                <div class="text-body2 text-purple-14 text-bold safe-text">
+                  Cronotipo, forma e estilo — responda no modo chat e gere seu relatório.
+                </div>
+              </div>
+              <div class="icon-pill absolute-top-right">
+                <q-icon name="list_alt" size="22px" />
+              </div>
+            </q-card-section>
 
+            <q-card-section class="q-pt-none">
+              <q-btn flat class="go" label="Começar" icon-right="arrow_forward" to="/app/forms" />
+            </q-card-section>
+          </q-card>
+
+          <q-card class="action-card muted" bordered clickable v-ripple @click="router.push('/app/perfil')">
+            <q-card-section class="row items-start justify-between">
+              <div>
+                <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
+                <div class="text-body2 text-purple-14 text-bold safe-text q-pb-xl">
+                  Veja seu progresso, histórico e dados do seu diagnóstico.
+                </div>
+              </div>
+              <div class="icon-pill absolute-top-right">
+                <q-icon name="account_circle" size="22px" />
+              </div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none absolute-bottom">
+              <q-btn flat class="go" label="Abrir" icon-right="arrow_forward" to="/app/perfil" />
+            </q-card-section>
+          </q-card>
+        </div>
         <div class="row q-col-gutter-sm q-mt-lg">
           <div class="col-12 col-sm-4">
             <q-card flat class="mini">
@@ -87,81 +117,57 @@
       </q-card-section>
     </q-card>
 
-    <!-- Ações principais -->
-    <div class="grid q-mt-md">
-      <q-card class="action-card" bordered clickable v-ripple to="/app/forms">
-        <q-card-section class="row items-start justify-between">
-          <div>
-            <div class="text-h6 text-weight-bold safe-text">Formulários</div>
-            <div class="text-body2 text-purple-14 text-bold safe-text">
-              Cronotipo, forma e estilo — responda no modo chat e gere seu relatório.
-            </div>
-          </div>
-          <div class="icon-pill absolute-top-right">
-            <q-icon name="list_alt" size="22px" />
-          </div>
-        </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <q-btn flat class="go" label="Começar" icon-right="arrow_forward" to="/app/forms" />
-        </q-card-section>
-      </q-card>
-
-      <q-card class="action-card muted" bordered clickable v-ripple to="/app/#">
-        <q-card-section class="row items-start justify-between">
-          <div>
-            <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
-            <div class="text-body2 text-purple-14 text-bold safe-text q-pb-xl">
-              Veja seu progresso, histórico e dados do seu diagnóstico.
-            </div>
-          </div>
-          <div class="icon-pill absolute-top-right">
-            <q-icon name="account_circle" size="22px" />
-          </div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none absolute-bottom">
-          <q-btn flat class="go" label="Abrir" icon-right="arrow_forward" to="/app/perfil"/>
-        </q-card-section>
-      </q-card>
-    </div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const userRole = ref('Plano Gratuito')
+const router = useRouter()
 
-function irParaCurso () {
+function irParaCurso() {
   // coloque aqui sua URL (quando tiver)
   window.open('https://exemplo.com', '_blank')
 }
 </script>
 
 <style scoped>
-:global(html), :global(body), :global(#q-app) { overflow-x: clip; }
-:global(.row > [class*="col-"]) { min-width: 0; }
+:global(html),
+:global(body),
+:global(#q-app) {
+  overflow-x: clip;
+}
+
+:global(.row > [class*="col-"]) {
+  min-width: 0;
+}
 
 .page {
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.safe-text { overflow-wrap: anywhere; word-break: break-word; }
+.safe-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
 .crumbs {
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(15, 23, 42, .08);
   padding: 10px 12px;
   border-radius: 14px;
 }
 
-.top { gap: 12px; }
+.top {
+  gap: 12px;
+}
 
 .plan-chip {
-  background: linear-gradient(90deg, rgba(124,58,237,.14), rgba(20,184,166,.10));
-  border: 1px solid rgba(15,23,42,.10);
+  background: linear-gradient(90deg, rgba(124, 58, 237, .14), rgba(20, 184, 166, .10));
+  border: 1px solid rgba(15, 23, 42, .10);
   font-weight: 900;
 }
 
@@ -170,8 +176,8 @@ function irParaCurso () {
   position: relative;
   overflow: hidden;
   border-radius: 18px;
-  border: 1px solid rgba(15,23,42,.08);
-  background: rgba(16,16,22,.86);
+  border: 1px solid rgba(15, 23, 42, .08);
+  background: rgba(16, 16, 22, .86);
   color: #fff;
 }
 
@@ -179,17 +185,20 @@ function irParaCurso () {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 420px at 20% 25%, rgba(124,58,237,.32), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(20,184,166,.20), transparent 55%);
+    radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .32), transparent 60%),
+    radial-gradient(800px 400px at 80% 40%, rgba(110, 20, 184, 0.2), transparent 55%);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8,8,12,.35), rgba(8,8,12,.75));
+  background: linear-gradient(180deg, rgba(8, 8, 12, .35), rgba(8, 8, 12, .75));
 }
 
-.hero-content { position: relative; z-index: 2; }
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
 
 .kicker {
   display: inline-block;
@@ -201,8 +210,14 @@ function irParaCurso () {
   margin-bottom: 10px;
 }
 
-.hero-title { line-height: 1.12; }
-.hero-sub { max-width: 70ch; opacity: .92; }
+.hero-title {
+  line-height: 1.12;
+}
+
+.hero-sub {
+  max-width: 70ch;
+  opacity: .92;
+}
 
 .btn-cta {
   background: linear-gradient(90deg, #7c3aed, #9c68f7);
@@ -211,9 +226,10 @@ function irParaCurso () {
   border-radius: 14px;
   padding: 12px 18px;
 }
+
 .btn-ghost {
-  background: rgba(255,255,255,.10);
-  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .16);
   color: #fff;
   font-weight: 900;
   border-radius: 14px;
@@ -221,12 +237,19 @@ function irParaCurso () {
 }
 
 .mini {
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 16px;
 }
-.mini-title { font-weight: 900; }
-.mini-sub { font-size: .83rem; opacity: .9; }
+
+.mini-title {
+  font-weight: 900;
+}
+
+.mini-sub {
+  font-size: .83rem;
+  opacity: .9;
+}
 
 /* Actions grid */
 .grid {
@@ -237,15 +260,18 @@ function irParaCurso () {
 
 .action-card {
   border-radius: 18px;
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(15, 23, 42, .08);
   transition: transform .18s ease, box-shadow .18s ease;
   cursor: pointer;
 }
-.action-card:hover { transform: translateY(-3px); }
+
+.action-card:hover {
+  transform: translateY(-3px);
+}
 
 .action-card.muted {
-  background: rgba(255,255,255,.88);
+  background: rgba(255, 255, 255, .88);
 }
 
 .icon-pill {
@@ -255,13 +281,25 @@ function irParaCurso () {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(124,58,237,.14), rgba(20,184,166,.10));
-  border: 1px solid rgba(15,23,42,.08);
+  background: linear-gradient(90deg, rgba(124, 58, 237, .14), rgba(151, 20, 184, 0.1));
+  border: 1px solid rgba(15, 23, 42, .08);
 }
 
-.go { font-weight: 900; }
+.go {
+  font-weight: 900;
+}
+
+.btn-cta-green {
+  background: linear-gradient(90deg, rgba(41, 202, 1, 0.856), rgba(0, 168, 112, 0.836));
+  color: #0b0b10;
+  font-weight: 900;
+  border-radius: 14px;
+  padding: 12px 18px;
+}
 
 @media (max-width: 700px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
