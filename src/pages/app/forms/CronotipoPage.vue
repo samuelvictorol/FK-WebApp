@@ -43,15 +43,9 @@
             <!-- Respostas -->
             <div class="msg-row right">
               <div class="answers">
-                <q-btn
-                  v-for="opt in pergunta.options"
-                  :key="opt.points"
-                  unelevated
-                  class="bubble-option"
-                  :class="{ selected: respostas[pergunta.id] === opt.points }"
-                  :label="opt.option"
-                  @click="selecionar(pergunta.id, opt.points)"
-                />
+                <q-btn v-for="opt in pergunta.options" :key="opt.points" unelevated class="bubble-option"
+                  :class="{ selected: respostas[pergunta.id] === opt.points }" :label="opt.option"
+                  @click="selecionar(pergunta.id, opt.points)" />
               </div>
             </div>
 
@@ -74,14 +68,8 @@
           <div v-if="isCompleted" class="done-box q-mt-md">
             <q-icon name="check_circle" size="18px" class="q-mr-xs" />
             Concluído. Você pode editar respostas acima e recalcular quando quiser.
-            <q-btn
-              unelevated
-              class="btn-recalc q-ml-sm"
-              label="Recalcular"
-              icon="refresh"
-              :loading="loadingResultado"
-              @click="enviar(true)"
-            />
+            <q-btn unelevated class="btn-recalc q-ml-sm" label="Recalcular" icon="refresh" :loading="loadingResultado"
+              @click="enviar(true)" />
           </div>
 
           <!-- âncora pro scroll sempre cair no lugar certo -->
@@ -141,14 +129,8 @@
               </div>
 
               <div class="q-mt-sm">
-                <q-btn
-                  class="btn-pdf full-width text-grey-3"
-                  unelevated
-                  icon="download"
-                  label="Baixar PDF com histórico"
-                  :disable="!resultado"
-                  @click="baixarPdfHistorico()"
-                />
+                <q-btn class="btn-pdf full-width text-grey-3" unelevated icon="download"
+                  label="Baixar PDF com histórico" :disable="!resultado" @click="baixarPdfHistorico()" />
               </div>
             </div>
           </div>
@@ -329,16 +311,16 @@ function buildHistoricoHtml() {
 
 function baixarPdfHistorico() {
   Utils.gerarPDF({
-  titulo: resultado.value?.titulo,
-  descricao: resultado.value?.descricao,
-  nomeFormulario: 'Estilo de Aprendizado',
-  historico: perguntas.value.map((p) => ({
-    pergunta: p.question,
-    resposta: respostas.value[p.id] !== undefined
-      ? getSelectedLabelTag(p, respostas.value[p.id])
-      : '(sem resposta)'
-  }))
-}, 'estilo_aprendizado_historico')
+    titulo: resultado.value?.titulo,
+    descricao: resultado.value?.descricao,
+    nomeFormulario: 'Cronotipo',
+    historico: perguntas.value.map((p) => ({
+      pergunta: p.question,
+      resposta: respostas.value[p.id] !== undefined
+        ? getSelectedLabelPoints(p, respostas.value[p.id])
+        : '(sem resposta)'
+    }))
+  }, 'cronotipo_resultado')
 }
 
 // helper simples p/ evitar quebrar HTML no histórico
@@ -353,52 +335,132 @@ function escapeHtml(str) {
 </script>
 
 <style scoped>
-:global(html), :global(body), :global(#q-app) { overflow-x: clip; }
-:global(.row > [class*="col-"]) { min-width: 0; }
+:global(html),
+:global(body),
+:global(#q-app) {
+  overflow-x: clip;
+}
 
-.page { max-width: 900px; margin: 0 auto; }
-.safe-text { overflow-wrap: anywhere; word-break: break-word; }
+:global(.row > [class*="col-"]) {
+  min-width: 0;
+}
 
-.crumbs { background: rgba(255,255,255,.92); border: 1px solid rgba(15,23,42,.08); padding: 10px 12px; border-radius: 14px; }
-.shell { margin-top: 14px; border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.94); border: 1px solid rgba(15,23,42,.08); }
-.head { padding-bottom: 10px; }
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-.chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
-.chat-block { padding: 14px 8px; border-bottom: 1px solid rgba(15,23,42,.06); }
+.safe-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
-.msg-row { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 10px; }
-.left { justify-content: flex-start; }
-.right { justify-content: flex-end; }
-.sent { margin-top: -4px; }
+.crumbs {
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(15, 23, 42, .08);
+  padding: 10px 12px;
+  border-radius: 14px;
+}
 
-.avatar { border: 1px solid rgba(15,23,42,.10); background: #fff; }
+.shell {
+  margin-top: 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid rgba(15, 23, 42, .08);
+}
 
-.bubble { max-width: min(680px, 86%); padding: 10px 12px; border-radius: 16px; border: 1px solid rgba(15,23,42,.10); }
-.bubble-left { background: #ffffff; border-top-left-radius: 10px; }
-.bubble-right { background: linear-gradient(90deg, rgba(124,58,237,.16), rgba(20,184,166,.12)); border-top-right-radius: 10px; }
+.head {
+  padding-bottom: 10px;
+}
 
-.bubble-title { font-size: .78rem; opacity: .85; margin-bottom: 4px; }
-.bubble-text { line-height: 1.35; }
+.chat {
+  background: linear-gradient(180deg, rgba(124, 58, 237, .04), rgba(20, 184, 166, .03));
+}
 
-.answers { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; max-width: min(680px, 92%); }
+.chat-block {
+  padding: 14px 8px;
+  border-bottom: 1px solid rgba(15, 23, 42, .06);
+}
+
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.sent {
+  margin-top: -4px;
+}
+
+.avatar {
+  border: 1px solid rgba(15, 23, 42, .10);
+  background: #fff;
+}
+
+.bubble {
+  max-width: min(680px, 86%);
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, .10);
+}
+
+.bubble-left {
+  background: #ffffff;
+  border-top-left-radius: 10px;
+}
+
+.bubble-right {
+  background: linear-gradient(90deg, rgba(124, 58, 237, .16), rgba(20, 184, 166, .12));
+  border-top-right-radius: 10px;
+}
+
+.bubble-title {
+  font-size: .78rem;
+  opacity: .85;
+  margin-bottom: 4px;
+}
+
+.bubble-text {
+  line-height: 1.35;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  max-width: min(680px, 92%);
+}
+
 .bubble-option {
   border-radius: 999px;
   font-weight: 800;
   text-transform: none;
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(15,23,42,.10);
-  color: rgba(15,23,42,.92);
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(15, 23, 42, .10);
+  color: rgba(15, 23, 42, .92);
 }
+
 .bubble-option.selected {
-  background: linear-gradient(90deg, rgba(124,58,237,.22), rgba(20,184,166,.16));
-  border-color: rgba(124,58,237,.35);
+  background: linear-gradient(90deg, rgba(124, 58, 237, .22), rgba(20, 184, 166, .16));
+  border-color: rgba(124, 58, 237, .35);
 }
 
 .hint {
   display: inline-flex;
   align-items: center;
   font-size: .85rem;
-  color: rgba(15,23,42,.72);
+  color: rgba(15, 23, 42, .72);
   padding-left: 44px;
 }
 
@@ -406,8 +468,8 @@ function escapeHtml(str) {
   margin: 12px;
   padding: 12px;
   border-radius: 14px;
-  background: rgba(16,16,22,.04);
-  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(16, 16, 22, .04);
+  border: 1px solid rgba(15, 23, 42, .08);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -421,19 +483,33 @@ function escapeHtml(str) {
   border-radius: 12px;
 }
 
-.chat-bottom-anchor { width: 100%; height: 1px; }
+.chat-bottom-anchor {
+  width: 100%;
+  height: 1px;
+}
 
 .progress {
   position: fixed;
   bottom: 0;
   width: 100%;
-  border-top: 1px solid rgba(255,255,255,.12);
+  border-top: 1px solid rgba(255, 255, 255, .12);
   padding: 10px 12px;
 }
 
-.result-card { max-width: 560px; width: 92vw; border-radius: 16px; overflow: hidden; }
-.result-head { background: rgba(255,255,255,.96); }
-.result-chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
+.result-card {
+  max-width: 560px;
+  width: 92vw;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.result-head {
+  background: rgba(255, 255, 255, .96);
+}
+
+.result-chat {
+  background: linear-gradient(180deg, rgba(124, 58, 237, .04), rgba(20, 184, 166, .03));
+}
 
 .btn-pdf {
   background: linear-gradient(90deg, #7c3aed, #14b8a6);
