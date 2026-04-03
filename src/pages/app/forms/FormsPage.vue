@@ -1,5 +1,5 @@
 <template>
-    <q-page class="q-pa-md page">
+    <q-page class="q-pa-md q-pb-xl  q-mb-xl page">
         <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
             <q-breadcrumbs-el icon="home" class="text-deep-purple-10" label="Início" to="/app" />
             <q-breadcrumbs-el icon="list_alt" label="Formulários" exact />
@@ -28,7 +28,8 @@
 
                 <q-card-section class=" q-pb-xl q-mb-md">
                     <div class="text-h6 text-weight-bold safe-text">{{ form.name }}</div>
-                    <div class="text-body2 text-purple-14 text-bold q-mt-xs safe-text">{{ form.description }}</div>
+                    <div class="text-body2 text-bold q-mt-xs safe-text" :class="form.isFree ? 'text-green' : 'text-amber-10'"
+                    >{{ form.description }}</div>
                 </q-card-section>
                 <q-card-section class="q-pt-none absolute-bottom">
 

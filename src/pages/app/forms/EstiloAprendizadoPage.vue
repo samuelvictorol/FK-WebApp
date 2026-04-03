@@ -145,7 +145,11 @@
       </q-card>
     </q-dialog>
 
-    <q-footer class="progress bg-deep-purple-10">
+    <q-dialog v-model="dialogPagamento" :maximized="$q.screen.lt.sm">
+      <payment-component @close="dialogPagamento = false" />
+    </q-dialog>
+
+    <q-footer class="progress bg-grad">
       <q-linear-progress :value="progresso" color="white" track-color="deep-purple-8" />
       <div class="text-center text-caption q-mt-xs text-white">
         {{ respondidas }} de {{ totalPerguntas }} respondidas
@@ -156,8 +160,12 @@
 
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
+import { useQuasar } from 'quasar'
 import { api } from 'boot/axios'
 import { Utils } from '../Utils'
+import PaymentComponent from 'src/components/PaymentComponent.vue'
+
+const $q = useQuasar()
 
 const respostas = ref({})
 const perguntas = ref([])
@@ -166,6 +174,7 @@ const loadingPerguntas = ref(true)
 const loadingResultado = ref(false)
 
 const dialogResultado = ref(false)
+const dialogPagamento = ref(false)
 const resultado = ref(null)
 const autoSubmitted = ref(false)
 
@@ -197,6 +206,20 @@ const perguntasVisiveis = computed(() => {
   if (!perguntas.value.length) return []
   const end = Math.min(firstUnansweredIndex.value + 1, perguntas.value.length)
   return perguntas.value.slice(0, end)
+})
+
+const usuarioLogado = computed(() => {
+  try {
+    const raw = localStorage.getItem('auth_user')
+    return raw ? JSON.parse(raw) : {}
+  } catch {
+    return {}
+  }
+})
+
+const isPremium = computed(() => {
+  const role = String(usuarioLogado.value?.role || '').trim().toLowerCase()
+  return role === 'plano premium'.toLowerCase()
 })
 
 async function scrollToBottom(force = false) {
@@ -281,40 +304,40 @@ async function enviar(forceOpenDialog) {
   }
 }
 
-function buildHistoricoHtml() {
-  const items = perguntas.value.map((p, idx) => {
-    const tag = respostas.value[p.id]
-    const answer = tag !== undefined ? getSelectedLabelTag(p, tag) : '(sem resposta)'
-    return `
-      <div style="margin: 10px 0;">
-        <div><strong>${idx + 1}. ${escapeHtml(p.question)}</strong></div>
-        <div>Resposta: ${escapeHtml(answer)}</div>
-      </div>
-    `
-  }).join('')
-
-  return `
-    <h2>${escapeHtml(resultado.value?.titulo || 'Resultado')}</h2>
-    <div>${resultado.value?.descricao || ''}</div>
-    <hr />
-    <h3>Histórico (Perguntas e Respostas)</h3>
-    ${items}
-  `
-}
-
 function baixarPdfHistorico() {
-  const html = buildHistoricoHtml()
+  if (!isPremium.value) {
+    dialogPagamento.value = true
+
+    $q.notify({
+      type: 'warning',
+      message: 'Este PDF está disponível apenas para usuários do Plano Premium.',
+      icon: 'mdi-crown-outline',
+      position: 'top',
+      progress: true,
+      timeout: 3000,
+      actions: [
+        {
+          icon: 'mdi-close',
+          color: 'white',
+          round: true
+        }
+      ]
+    })
+
+    return
+  }
+
   Utils.gerarPDF({
-  titulo: resultado.value?.titulo,
-  descricao: resultado.value?.descricao,
-  nomeFormulario: 'Estilo de Aprendizado',
-  historico: perguntas.value.map((p) => ({
-    pergunta: p.question,
-    resposta: respostas.value[p.id] !== undefined
-      ? getSelectedLabelTag(p, respostas.value[p.id])
-      : '(sem resposta)'
-  }))
-}, 'estilo_aprendizado_historico')
+    titulo: resultado.value?.titulo,
+    descricao: resultado.value?.descricao,
+    nomeFormulario: 'Estilo de Aprendizado',
+    historico: perguntas.value.map((p) => ({
+      pergunta: p.question,
+      resposta: respostas.value[p.id] !== undefined
+        ? getSelectedLabelTag(p, respostas.value[p.id])
+        : '(sem resposta)'
+    }))
+  }, 'estilo_aprendizado_resultado')
 }
 
 function escapeHtml(str) {
@@ -328,7 +351,6 @@ function escapeHtml(str) {
 </script>
 
 <style scoped>
-/* mesmo CSS base do cronotipo */
 :global(html), :global(body), :global(#q-app) { overflow-x: clip; }
 :global(.row > [class*="col-"]) { min-width: 0; }
 
@@ -384,7 +406,7 @@ function escapeHtml(str) {
   gap: 8px;
 }
 
-.btn-recalc { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #0b0b10; font-weight: 900; border-radius: 12px; }
+.btn-recalc { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #ffffff; font-weight: 900; border-radius: 12px; }
 .chat-bottom-anchor { width: 100%; height: 1px; }
 
 .progress {

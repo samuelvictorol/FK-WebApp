@@ -3,7 +3,7 @@
     <q-header elevated class="app-header">
       <q-toolbar class="q-px-md">
         <q-avatar square size="32px" class="q-mr-sm rounded-borders">
-          <img src="/logo.png" alt="Logo" />
+          <img src="/kamila.png" alt="Logo" />
         </q-avatar>
         <q-toolbar-title class="brand">
           <div class="brand-top">
@@ -20,7 +20,7 @@
           <span class="ellipsis">
             {{ user.role }}
           </span>
-          <q-icon name="verified" class="q-ml-xs" />
+          <q-icon name="verified" class="q-ml-xs" :color="user.role.includes('Premium') ? 'green-14' : ''" />
         </div>
 
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" aria-label="Abrir menu" />

@@ -58,7 +58,7 @@
                   unelevated
                   color="negative"
                   icon="logout"
-                  label="Sair"
+                  label="Encerrar sessão"
                   @click="logout"
                 />
               </div>

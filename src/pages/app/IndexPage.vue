@@ -30,15 +30,15 @@
 
         <div class="row q-col-gutter-sm q-mt-md">
           <div class="col-12 col-sm-auto">
-            <q-btn label="curso completo" icon-right="arrow_forward" class="btn-cta full-width text-grey-3"
-              unelevated @click="irParaCurso" />
+            <q-btn label="curso completo" icon-right="arrow_forward" class="btn-cta full-width text-grey-3" unelevated
+              @click="irParaCurso" />
           </div>
           <div class="col-12 col-sm-auto">
-            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3"
-              unelevated @click="irParaCurso" />
+            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3" unelevated
+              @click="togglePaymentDialog" />
           </div>
           <div class="col-12 col-sm-auto">
-            <q-btn label="Ver formulários" icon="list_alt" class="btn-ghost full-width" unelevated to="/app/forms" />
+            <q-btn label="Descubra seu estilo" icon="list_alt" class="btn-ghost full-width" unelevated to="/app/forms" />
           </div>
         </div>
         <!-- Ações principais -->
@@ -116,21 +116,29 @@
         </div>
       </q-card-section>
     </q-card>
-
-
+    <q-dialog v-model="dialog" maximized persistent>
+      <payment-component @close="dialog = false" />
+    </q-dialog>
   </q-page>
 </template>
 
 <script setup>
+import PaymentComponent from 'src/components/PaymentComponent.vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const dialog = ref(false)
 const router = useRouter()
 
 function irParaCurso() {
   // coloque aqui sua URL (quando tiver)
   window.open('https://exemplo.com', '_blank')
 }
+
+function togglePaymentDialog() {
+  dialog.value = !dialog.value
+}
+
 </script>
 
 <style scoped>

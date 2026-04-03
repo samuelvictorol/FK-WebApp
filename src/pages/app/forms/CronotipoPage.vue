@@ -12,7 +12,7 @@
           Descubra seu Cronotipo
         </div>
         <div class="text-subtitle2 text-grey-6 q-mt-xs safe-text">
-          Uma pergunta por vez, estilo conversa. Você pode editar qualquer resposta anterior.
+          Entenda seus padrões naturais de sono e vigília para otimizar seu dia a dia.
         </div>
       </q-card-section>
 
@@ -157,7 +157,7 @@
     </q-dialog>
 
     <!-- Progresso fixo (pedido) -->
-    <q-footer class="progress bg-deep-purple-10">
+    <q-footer class="progress bg-grad">
       <q-linear-progress :value="progresso" color="white" track-color="deep-purple-8" />
       <div class="text-center text-caption q-mt-xs text-white">
         {{ respondidas }} de {{ totalPerguntas }} respondidas
@@ -328,7 +328,6 @@ function buildHistoricoHtml() {
 }
 
 function baixarPdfHistorico() {
-  const html = buildHistoricoHtml()
   Utils.gerarPDF({
   titulo: resultado.value?.titulo,
   descricao: resultado.value?.descricao,
@@ -417,7 +416,7 @@ function escapeHtml(str) {
 
 .btn-recalc {
   background: linear-gradient(90deg, #7c3aed, #14b8a6);
-  color: #0b0b10;
+  color: #ffffff;
   font-weight: 900;
   border-radius: 12px;
 }

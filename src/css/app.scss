@@ -48,3 +48,7 @@ html {
 h1, h2, h3, h4, h5, h6, .q-input, .q-btn{
     overflow: hidden!important;
 }
+
+.crumbs { background: rgba(255,255,255,.92); border: 1px solid rgba(15,23,42,.08); padding: 10px 12px; border-radius: 14px; }
+.shell { margin-top: 14px; border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.94); border: 1px solid rgba(15,23,42,.08); }
+.head { padding-bottom: 10px; }
