@@ -10,11 +10,6 @@
       <div>
         <div class="text-h4 text-weight-bold safe-text text-grey-3 q-py-md">Início</div>
       </div>
-
-      <q-chip class="plan-chip q-mt-xs text-deep-purple-4" dense>
-        <q-icon name="verified" class="q-mr-xs" />
-        {{ userRole }}
-      </q-chip>
     </div>
 
     <!-- Hero: Curso -->
@@ -98,7 +93,7 @@
         <q-card-section class="row items-start justify-between">
           <div>
             <div class="text-h6 text-weight-bold safe-text">Formulários</div>
-            <div class="text-body2 text-grey-6 safe-text">
+            <div class="text-body2 text-purple-14 text-bold safe-text">
               Cronotipo, forma e estilo — responda no modo chat e gere seu relatório.
             </div>
           </div>
@@ -116,7 +111,7 @@
         <q-card-section class="row items-start justify-between">
           <div>
             <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
-            <div class="text-body2 text-grey-6 safe-text q-pb-xl">
+            <div class="text-body2 text-purple-14 text-bold safe-text q-pb-xl">
               Veja seu progresso, histórico e dados do seu diagnóstico.
             </div>
           </div>
@@ -126,7 +121,7 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none absolute-bottom">
-          <q-btn flat class="go" label="Abrir" icon-right="arrow_forward" />
+          <q-btn flat class="go" label="Abrir" icon-right="arrow_forward" to="/app/perfil"/>
         </q-card-section>
       </q-card>
     </div>
@@ -210,7 +205,7 @@ function irParaCurso () {
 .hero-sub { max-width: 70ch; opacity: .92; }
 
 .btn-cta {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #7c3aed, #9c68f7);
   color: #0b0b10;
   font-weight: 900;
   border-radius: 14px;
@@ -245,6 +240,7 @@ function irParaCurso () {
   background: rgba(255,255,255,.92);
   border: 1px solid rgba(15,23,42,.08);
   transition: transform .18s ease, box-shadow .18s ease;
+  cursor: pointer;
 }
 .action-card:hover { transform: translateY(-3px); }
 

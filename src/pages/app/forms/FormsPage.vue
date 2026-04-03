@@ -7,10 +7,6 @@
 
         <div class="head">
             <div class="text-h4 text-weight-bold safe-text text-grey-3">Formulários</div>
-            <div class="text-subtitle2 text-grey-6 safe-text">
-                Escolha um formulário. Responda as perguntas no modo chat e receba um diagnóstico personalizado no
-                final.
-            </div>
         </div>
 
         <div class="grid">
@@ -27,7 +23,7 @@
 
                 <q-card-section class=" q-pb-xl q-mb-md">
                     <div class="text-h6 text-weight-bold safe-text">{{ form.name }}</div>
-                    <div class="text-body2 text-grey-6 q-mt-xs safe-text">{{ form.description }}</div>
+                    <div class="text-body2 text-purple-14 text-bold q-mt-xs safe-text">{{ form.description }}</div>
                 </q-card-section>
                 <q-card-section class="q-pt-none absolute-bottom">
 

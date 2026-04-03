@@ -1,21 +1,27 @@
 <template>
   <q-layout view="hHh lpR fFf" class="page">
-    <q-header elevated class="topbar "  style="overflow: hidden!important;">
-      <q-toolbar class="q-px-md" >
+    <q-header elevated class="topbar " style="overflow: hidden!important;">
+      <q-toolbar class="q-px-md">
+        <q-avatar square size="32px" class="q-mr-sm">
+          <img src="/logo.png" alt="Logo" />
+        </q-avatar>
         <q-toolbar-title class="brand-title">
-          <div style="overflow: hidden!important;" class="text-weight-bold"><strong>Flávia</strong><strong>Kamila</strong></div>
-          <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Cronotipo • Estratégia de estudos</div>
+          <div style="overflow: hidden!important;" class="text-weight-bold">
+            <strong>Flávia</strong><strong>Kamila</strong></div>
+          <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Cronotipo •
+            Estratégia de estudos</div>
         </q-toolbar-title>
 
-        <div class="row items-center q-gutter-sm" >
+        <div class="row items-center q-gutter-sm">
           <q-btn flat class="btn-ghost desktop-only" label="Início" @click="scrollTo('inicio')" />
           <q-btn flat class="btn-ghost desktop-only" label="Como funciona" @click="scrollTo('como')" />
           <q-btn flat class="btn-ghost desktop-only" label="Sobre" @click="scrollTo('sobre')" />
           <q-btn flat class="btn-ghost desktop-only" label="Planos" @click="scrollTo('planos')" />
           <q-btn flat class="btn-ghost desktop-only" label="Contato" @click="scrollTo('contato')" />
 
-          <q-btn dense unelevated class="btn-outline desktop-only" icon="login" label="Login" to="/login" />
-          <q-btn dense unelevated class="btn-primary text-grey-3" icon="person_add" label="Registrar" to="/login" />
+          <q-btn dense unelevated class="btn-outline " icon="login" label="Entrar" to="/login" />
+          <q-btn dense unelevated class="btn-primary desktop-only text-grey-3" icon="person_add" label="Registrar"
+            to="/login" />
 
           <q-btn dense flat round icon="menu" class="mobile-only">
             <q-menu class="menu-mobile" anchor="bottom right" self="top right">
@@ -49,10 +55,10 @@
                   <q-item-section avatar><q-icon name="person_add" /></q-item-section>
                   <q-item-section>Registrar</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup to="/admin">
+                <!-- <q-item clickable v-close-popup to="/admin">
                   <q-item-section avatar><q-icon name="admin_panel_settings" /></q-item-section>
                   <q-item-section>Admin</q-item-section>
-                </q-item>
+                </q-item> -->
               </q-list>
             </q-menu>
           </q-btn>
@@ -69,17 +75,17 @@
         <div class="container hero-content">
           <div class="row items-center q-col-gutter-xl">
             <div class="col-12 col-md-7">
-              <div class="badge fade-in" style="font-size: .7rem;">
+              <!-- <div class="badge fade-in" style="font-size: .7rem;">
                 <q-icon name="verified" size="18px" class="q-mr-xs" />
                 Métodos de aprendizagem com base em evidências
-              </div>
+              </div> -->
 
-              <h1 class="hero-title safe-text fade-in delay-1"  style="overflow: hidden!important;">
+              <h1 class="hero-title  safe-text fade-in delay-1" style="overflow: hidden!important;">
                 Descubra seu <span class="grad">estilo de aprendizado</span>,
                 seu <span class="grad">cronotipo</span> e receba um
                 <span class="grad">relatório personalizado</span> para estudar melhor.
               </h1>
-<!-- 
+              <!-- 
               <p class="hero-sub safe-text fade-in delay-2">
                 Um complemento contendo material didático utilizando formulários inteligentes que analisam suas respostas e geram
                 um plano prático: como estudar, quando estudar e como manter constância — do seu jeito.
@@ -87,13 +93,16 @@
 
               <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta full-width text-grey-3" unelevated icon-right="arrow_forward" label="Começar agora" to="/app" />
+                  <q-btn class="btn-cta full-width text-grey-3" unelevated icon-right="arrow_forward"
+                    label="Começar agora" to="/app" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta-2 full-width text-grey-3" unelevated icon-right="apps" label="Curso Completo" to="/curso" />
+                  <q-btn class="btn-cta-2 full-width text-grey-3" unelevated icon-right="apps" label="Curso Completo"
+                    to="/curso" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-ghost-strong full-width" unelevated icon="play_circle" label="Ver como funciona" @click="scrollTo('como')" />
+                  <q-btn class="btn-ghost-strong full-width" unelevated icon="play_circle" label="Ver como funciona"
+                    @click="scrollTo('como')" />
                 </div>
               </div>
 
@@ -138,25 +147,21 @@
               <q-card class="hero-card fade-in delay-2" bordered>
                 <q-card-section>
                   <div class="text-h6 text-weight-bold q-mb-xs">Diagnóstico + Relatório</div>
-                  <div class="text-subtitle2 text-grey-6 q-mb-md">
+                  <div class="text-subtitle2 text-green-1 q-mb-md">
                     Descubra seu perfil e leve um plano para aplicar ainda hoje.
                   </div>
 
                   <div class="row items-end q-col-gutter-sm q-mb-md">
                     <div class="col">
-                      <div class="price-label">A partir de</div>
                       <div class="price">
                         R$ <span class="price-big">49</span><span class="price-dec">,90</span>
                       </div>
-                      <div class="price-note">Pagamento único</div>
+                      <div class="price-note">Acesso Vitalício</div>
                     </div>
                     <div class="col-auto">
                       <q-badge class="badge-highlight" rounded>Mais vendido</q-badge>
                     </div>
                   </div>
-
-                  <q-separator />
-
                   <div class="q-mt-md">
                     <div class="pack-title">Pacote incluído</div>
 
@@ -179,8 +184,10 @@
                       </div>
                     </div>
 
-                    <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Quero meu relatório" icon-right="auto_awesome" to="/app" />
-                    <q-btn class="btn-outline-soft q-mt-sm full-width" unelevated label="Já tenho conta — fazer login" icon="login" to="/login" />
+                    <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Quero meu relatório"
+                      icon-right="auto_awesome" to="/app" />
+                    <q-btn class="btn-outline-soft q-mt-sm full-width" unelevated label="Já tenho conta" icon="login"
+                      to="/login" />
                   </div>
                 </q-card-section>
               </q-card>
@@ -196,7 +203,8 @@
         <div class="container">
           <div class="section-head">
             <div class="kicker">Como funciona</div>
-            <h2 class="section-title safe-text" style="overflow: hidden!important;">Você responde. O sistema calcula. Você aplica.</h2>
+            <h2 class="section-title safe-text" style="overflow: hidden!important;">Você responde. O sistema calcula.
+              Você aplica.</h2>
             <p class="section-sub safe-text">
               Simples e direto: o objetivo é te dar clareza e um caminho prático, sem enrolação.
             </p>
@@ -260,7 +268,8 @@
         <div class="container">
           <div class="section-head">
             <div class="kicker">Sobre</div>
-            <h2 class="section-title safe-text" style="overflow: hidden!important;">Humanizado, realista e aplicável.</h2>
+            <h2 class="section-title safe-text" style="overflow: hidden!important;">Humanizado, realista e aplicável.
+            </h2>
             <p class="section-sub safe-text">
               Estratégias de estudo não funcionam iguais pra todo mundo — por isso aqui a regra é personalizar.
             </p>
@@ -270,13 +279,13 @@
             <div class="col-12 col-md-6">
               <q-card class="about-card" bordered>
                 <q-card-section class="row items-center q-col-gutter-md">
-                  <div class="col-auto" >
+                  <div class="col-auto">
                     <q-avatar style="overflow: hidden!important;" size="72px" class="about-avatar">
                       <img src="/kamila.png" alt="Flávia Kamila" />
                     </q-avatar>
                   </div>
                   <div class="col">
-                    <div class="text-h6 text-weight-bold" >Flávia Kamila</div>
+                    <div class="text-h6 text-weight-bold">Flávia Kamila</div>
                     <div class="text-body2 text-grey-7 safe-text">
                       Advogada, mãe e aprovada em diversos concursos públicos.
                       Mentora de aprendizagem com foco em autonomia e constância.
@@ -323,7 +332,8 @@
                 <q-card-section>
                   <div class="text-h6 text-weight-bold">Visão</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
-                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com propósito.
+                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com
+                    propósito.
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pt-none">
@@ -355,14 +365,14 @@
                       <div class="text-h6 text-weight-bold">Diagnóstico + Relatório</div>
                       <div class="text-body2 text-grey-4">Ideal para iniciar com clareza e método</div>
                     </div>
-                    <q-badge class="badge-highlight" rounded>Recomendado</q-badge>
+                    <q-badge class="badge-highlight" rounded>Acesso Ilimitado</q-badge>
                   </div>
 
                   <div class="price-line q-mt-md">
                     <div class="price">
                       R$ <span class="price-big">49</span><span class="price-dec">,90</span>
                     </div>
-                    <div class="text-caption text-grey-4">Pagamento único (você altera depois)</div>
+                    <div class="text-caption text-grey-4">Pagamento único</div>
                   </div>
 
                   <q-separator class="q-my-md" />
@@ -387,7 +397,8 @@
                     </div>
                   </div>
 
-                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Garantir meu relatório" icon-right="arrow_forward" to="/app" />
+                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Garantir meu relatório"
+                    icon-right="arrow_forward" to="/app" />
                   <div class="text-caption text-grey-5 q-mt-sm">
                     Ao continuar, você será direcionado para os formulários do diagnóstico.
                   </div>
@@ -399,7 +410,7 @@
       </section>
 
       <!-- CONTATO -->
-      <section id="contato"  class="section section-light">
+      <section id="contato" class="section section-light">
         <div class="container">
           <div class="row items-start q-col-gutter-xl">
             <div class="col-12 col-md-6">
@@ -416,12 +427,14 @@
                 <q-input color="deep-purple-8" filled label="Nome" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="E-mail" type="email" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="Mensagem" type="textarea" class="q-mb-md" />
-                <q-btn label="Enviar mensagem" color="deep-purple-14" glossy class="q-py-md full-width" icon-right="send" type="submit" />
+                <q-btn label="Enviar mensagem" color="deep-purple-14" glossy class="q-py-md full-width"
+                  icon-right="send" type="submit" />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a class="insta text-deep-purple-4" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer" >
+                <a class="insta text-deep-purple-4" href="https://instagram.com/flaviakamilaf" target="_blank"
+                  rel="noreferrer">
                   @flaviakamilaf
                 </a>
               </div>
@@ -433,7 +446,8 @@
                   <div class="text-h6 text-weight-bold">Dica rápida</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
                     Se você sente que estuda muito e rende pouco, quase sempre o problema é:
-                    <span class="text-weight-bold">método errado</span> ou <span class="text-weight-bold">horário errado</span>.
+                    <span class="text-weight-bold">método errado</span> ou <span class="text-weight-bold">horário
+                      errado</span>.
                     O diagnóstico resolve os dois.
                   </div>
 
@@ -464,7 +478,8 @@
                     </div>
                   </div>
 
-                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Fazer o diagnóstico agora" icon-right="auto_awesome" to="/app" />
+                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Fazer o diagnóstico agora"
+                    icon-right="auto_awesome" to="/app" />
                 </q-card-section>
               </q-card>
             </div>
@@ -510,7 +525,8 @@ function scrollTo(id) {
 :global(#q-app) {
   width: 100%;
   max-width: 100%;
-  overflow-x: clip; /* evita scrollbar aparecer/sumir */
+  overflow-x: clip;
+  /* evita scrollbar aparecer/sumir */
 }
 
 :global(*),
@@ -544,36 +560,65 @@ function scrollTo(id) {
 }
 
 /* Responsivo helpers */
-.desktop-only { display: block; }
-.mobile-only { display: none; }
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 1023px) {
-  .desktop-only { display: none !important; }
-  .mobile-only { display: block !important; }
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
 }
 
 /* ===============================
    HEADER
    =============================== */
 .topbar {
-  background: linear-gradient(90deg, rgba(124,58,237,.22), rgba(20,184,166,.14));
+  background: linear-gradient(90deg, rgba(112, 58, 237, 0.22), rgba(198, 148, 255, 0.603));
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
 
-.brand-avatar { border: 1px solid rgba(255,255,255,.2); }
-.brand-title { line-height: 1.1; }
-.brand-sub { font-size: .78rem; opacity: .85; }
+.brand-avatar {
+  border: 1px solid rgba(255, 255, 255, .2);
+}
 
-.btn-ghost { color: rgba(255,255,255,.92); letter-spacing: .4px; }
-.btn-outline { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+.brand-title {
+  line-height: 1.1;
+}
+
+.brand-sub {
+  font-size: .78rem;
+  opacity: .85;
+}
+
+.btn-ghost {
+  color: rgba(255, 255, 255, .92);
+  letter-spacing: .4px;
+}
+
+.btn-outline {
+  border: 1px solid rgba(255, 255, 255, .35);
+  color: #fff;
+}
+
 .btn-primary {
   background: linear-gradient(90deg, #7c3aed, #14b8a6);
   color: #0b0b10;
   font-weight: 800;
 }
+
 .menu-mobile {
-  background: rgba(10,10,14,.98);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(10, 10, 14, .98);
+  border: 1px solid rgba(255, 255, 255, .08);
   border-radius: 14px;
 }
 
@@ -585,7 +630,8 @@ function scrollTo(id) {
   min-height: 92vh;
   display: flex;
   align-items: center;
-  overflow: hidden; /* garante clip do bg */
+  overflow: hidden;
+  /* garante clip do bg */
   padding: 86px 0 40px;
 }
 
@@ -602,18 +648,21 @@ function scrollTo(id) {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 420px at 20% 25%, rgba(124,58,237,.35), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(20,184,166,.22), transparent 55%),
-    linear-gradient(180deg, rgba(5,5,8,.55), rgba(5,5,8,.86));
+    radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .35), transparent 60%),
+    radial-gradient(800px 400px at 80% 40%, rgba(20, 184, 166, .22), transparent 55%),
+    linear-gradient(180deg, rgba(5, 5, 8, .55), rgba(5, 5, 8, .86));
 }
 
-.hero-content { position: relative; z-index: 2; }
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
 
 .badge {
   display: inline-flex;
   align-items: center;
-  background: rgba(255,255,255,.09);
-  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .14);
   padding: 8px 12px;
   border-radius: 999px;
   font-size: .9rem;
@@ -638,7 +687,7 @@ function scrollTo(id) {
   margin-top: 12px;
   font-size: 1.05rem;
   line-height: 1.45;
-  color: rgba(255,255,255,.86);
+  color: rgba(255, 255, 255, .86);
   max-width: 58ch;
 }
 
@@ -656,6 +705,7 @@ function scrollTo(id) {
   border-radius: 14px;
   padding: 12px 18px;
 }
+
 .btn-cta-2 {
   background: linear-gradient(-90deg, #7c3aed, #14b8a6);
   color: #0b0b10;
@@ -665,8 +715,8 @@ function scrollTo(id) {
 }
 
 .btn-ghost-strong {
-  background: rgba(255,255,255,.10);
-  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .16);
   color: #fff;
   border-radius: 14px;
   padding: 12px 18px;
@@ -674,65 +724,108 @@ function scrollTo(id) {
 
 .btn-outline-soft {
   background: transparent;
-  border: 1px solid rgba(255,255,255,.18);
-  color: rgba(255,255,255,.92);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .92);
   border-radius: 14px;
 }
 
 .mini-card {
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 16px;
 }
-.mini-title { font-weight: 800; }
-.mini-sub { font-size: .83rem; opacity: .9; }
+
+.mini-title {
+  font-weight: 800;
+}
+
+.mini-sub {
+  font-size: .83rem;
+  opacity: .9;
+}
 
 .hero-card {
-  background: rgba(16,16,22,.72);
-  border: 1px solid rgba(255,255,255,.12);
+  background: #9E97F5;
+  background: linear-gradient(-90deg, #ba65ff77, #9d97f57e);
+  border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 18px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
   max-width: 100%;
 }
 
-.price-label { font-size: .85rem; opacity: .85; }
-.price { font-weight: 900; letter-spacing: .4px; }
-.price-big { font-size: 2.3rem; }
-.price-dec { font-size: 1.25rem; opacity: .9; }
-.price-note { font-size: .78rem; opacity: .82; margin-top: 4px; }
+.price-label {
+  font-size: .85rem;
+  opacity: .85;
+}
+
+.price {
+  font-weight: 900;
+  letter-spacing: .4px;
+}
+
+.price-big {
+  font-size: 4rem;
+}
+
+.price-dec {
+  font-size: 1.25rem;
+  opacity: .9;
+}
+
+.price-note {
+  font-size: .78rem;
+  opacity: .82;
+  margin-top: 4px;
+}
 
 .badge-highlight {
-  background: linear-gradient(90deg, rgba(167,139,250,.22), rgba(94,234,212,.18));
-  border: 1px solid rgba(255,255,255,.12);
+  background: linear-gradient(90deg, rgba(167, 139, 250, .22), rgba(94, 234, 212, .18));
+  border: 1px solid rgba(255, 255, 255, .12);
   color: #fff;
 }
 
-.pack-title { font-weight: 800; letter-spacing: .2px; }
-.check { color: #5eead4; margin-right: 10px; margin-top: 2px; }
+.pack-title {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.check {
+  color: #5eead4;
+  margin-right: 10px;
+  margin-top: 2px;
+}
 
 .scroll-down {
   position: absolute;
   left: 50%;
   bottom: 14px;
   transform: translateX(-50%);
-  color: rgba(255,255,255,.85);
+  color: rgba(255, 255, 255, .85);
   z-index: 3;
 }
 
 @media (max-width: 1023px) {
-  .hero-bg { background-image: url('/ceo2.jpeg'); }
-  .hero { padding-top: 74px; min-height: 95vh; }
+  .hero-bg {
+    background-image: url('/ceo2.jpeg');
+  }
+
+  .hero {
+    padding-top: 74px;
+    min-height: 95vh;
+  }
 }
 
 /* ===============================
    SECTIONS
    =============================== */
-.section { padding: 74px 0; }
+.section {
+  padding: 74px 0;
+}
 
 .section-dark {
-  background: radial-gradient(900px 420px at 30% 20%, rgba(124,58,237,.16), transparent 60%),
-              radial-gradient(800px 400px at 80% 60%, rgba(20,184,166,.10), transparent 60%),
-              #07070a;
+  background: radial-gradient(900px 420px at 30% 20%, rgba(124, 58, 237, .16), transparent 60%),
+    radial-gradient(800px 400px at 80% 60%, rgba(20, 184, 166, .10), transparent 60%),
+    #07070a;
 }
 
 .section-light {
@@ -740,8 +833,17 @@ function scrollTo(id) {
   color: #0f172a;
 }
 
-.section-head { text-align: center; max-width: 820px; margin: 0 auto; }
-.section-head.left { text-align: left; margin: 0; }
+.section-head {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.section-head.left {
+  text-align: left;
+  margin: 0;
+}
+
 .kicker {
   display: inline-block;
   font-weight: 900;
@@ -751,30 +853,41 @@ function scrollTo(id) {
   opacity: .85;
   margin-bottom: 10px;
 }
+
 .section-title {
   font-size: clamp(1.6rem, 2.1vw, 2.2rem);
   line-height: 1.12;
   margin: 0;
 }
-.section-sub { margin-top: 10px; opacity: .9; line-height: 1.5; }
+
+.section-sub {
+  margin-top: 10px;
+  opacity: .9;
+  line-height: 1.5;
+}
 
 /* Feature cards */
 .feature-card {
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .10);
   border-radius: 18px;
   transition: transform .2s ease, border-color .2s ease;
 }
-.feature-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.20); }
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, .20);
+}
 
 .feature-icon {
-  width: 44px; height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(124,58,237,.25), rgba(20,184,166,.18));
-  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(90deg, rgba(124, 58, 237, .25), rgba(20, 184, 166, .18));
+  border: 1px solid rgba(255, 255, 255, .14);
 }
 
 /* CTA strip */
@@ -785,15 +898,24 @@ function scrollTo(id) {
   align-items: center;
   padding: 18px;
   border-radius: 18px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .10);
 }
+
 @media (max-width: 600px) {
-  .cta-strip { flex-direction: column; align-items: stretch; }
+  .cta-strip {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 /* Parallax desktop */
-.parallax-wrap { position: relative; height: 44vh; overflow: hidden; }
+.parallax-wrap {
+  position: relative;
+  height: 44vh;
+  overflow: hidden;
+}
+
 .parallax-img {
   position: absolute;
   inset: 0;
@@ -802,30 +924,61 @@ function scrollTo(id) {
   background-position: center;
   background-attachment: fixed;
 }
+
 .parallax-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(246,247,251,.0), rgba(246,247,251,1));
+  background: linear-gradient(180deg, rgba(246, 247, 251, .0), rgba(246, 247, 251, 1));
 }
 
 /* About / info */
-.about-card, .info-card, .contact-card { border-radius: 18px; background: #ffffff; }
-.about-avatar { border: 1px solid rgba(15,23,42,.12); }
-.chip { background: rgba(124,58,237,.10); border: 1px solid rgba(124,58,237,.18);overflow: hidden!important; }
-.img-soft { border-radius: 18px; border: 1px solid rgba(15,23,42,.10); }
+.about-card,
+.info-card,
+.contact-card {
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.about-avatar {
+  border: 1px solid rgba(15, 23, 42, .12);
+}
+
+.chip {
+  background: rgba(124, 58, 237, .10);
+  border: 1px solid rgba(124, 58, 237, .18);
+  overflow: hidden !important;
+}
+
+.img-soft {
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, .10);
+}
 
 /* Pricing */
 .pricing-card {
   border-radius: 18px;
-  background: rgba(16,16,22,.78);
-  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(16, 16, 22, .78);
+  border: 1px solid rgba(255, 255, 255, .12);
   color: #fff;
   backdrop-filter: blur(10px);
   max-width: 100%;
 }
-.price-line { display: grid; gap: 6px; }
-.check2 { color: #5eead4; margin-right: 10px; margin-top: 2px; }
-.pack-item2 { color: rgba(255,255,255,.92); line-height: 1.25; }
+
+.price-line {
+  display: grid;
+  gap: 6px;
+}
+
+.check2 {
+  color: #5eead4;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.pack-item2 {
+  color: rgba(255, 255, 255, .92);
+  line-height: 1.25;
+}
 
 /* Contact (SEM 100vw => sem flash) */
 .contact-hero {
@@ -838,19 +991,32 @@ function scrollTo(id) {
   background: #ffffff;
   padding: 16px;
   border-radius: 18px;
-  border: 1px solid rgba(15,23,42,.08);
+  border: 1px solid rgba(15, 23, 42, .08);
 }
 
-.insta { color: #0f172a; font-weight: 900; text-decoration: none; }
-.tip { border-radius: 16px; background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.12); }
+.insta {
+  color: #0f172a;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.tip {
+  border-radius: 16px;
+  background: rgba(124, 58, 237, .08);
+  border: 1px solid rgba(124, 58, 237, .12);
+}
 
 /* Footer */
-.footer { text-align: center; opacity: .9; }
+.footer {
+  text-align: center;
+  opacity: .9;
+}
+
 .devlink {
   font-weight: 900;
   color: #0f172a;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(15,23,42,.35);
+  border-bottom: 1px dashed rgba(15, 23, 42, .35);
 }
 
 /* ===============================
@@ -861,12 +1027,26 @@ function scrollTo(id) {
   opacity: 0;
   animation: fade .55s ease forwards;
 }
-.delay-1 { animation-delay: .08s; }
-.delay-2 { animation-delay: .16s; }
-.delay-3 { animation-delay: .24s; }
-.delay-4 { animation-delay: .32s; }
+
+.delay-1 {
+  animation-delay: .08s;
+}
+
+.delay-2 {
+  animation-delay: .16s;
+}
+
+.delay-3 {
+  animation-delay: .24s;
+}
+
+.delay-4 {
+  animation-delay: .32s;
+}
 
 @keyframes fade {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 </style>

@@ -3,9 +3,12 @@
     <q-header elevated class="topbar">
       <q-toolbar class="q-px-md">
         <q-btn flat round icon="arrow_back" to="/" class="q-mr-sm" />
+        <q-avatar square size="32px" class="q-mr-sm">
+          <img src="/logo.png" alt="Logo" />
+        </q-avatar>
         <q-toolbar-title class="title">
           Flávia Kamila
-          <div class="subtitle">Acesso Exclusivo</div>
+          <div class="subtitle">Registre-se ou faça login</div>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
