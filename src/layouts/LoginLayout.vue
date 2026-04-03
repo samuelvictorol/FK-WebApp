@@ -62,7 +62,7 @@
                         {{ isLogin ? 'Login' : 'Criar conta' }}
                       </div>
                       <div class="text-body2 text-grey-5">
-                        {{ isLogin ? 'Entre para continuar.' : 'Cadastre-se para acessar a plataforma.' }}
+                        {{ isLogin ? 'Área do Usuário' : 'Cadastre-se para acessar a plataforma.' }}
                       </div>
                     </div>
 

@@ -13,6 +13,11 @@
             <q-card v-for="form in forms" :key="form.id" class="form-card relative" bordered clickable v-ripple
                 @click="router.push(form.to)">
                 <div class="img-wrap">
+                    <div class="row no-wrap w100 items-center justify-center q-pa-sm bg-dark">
+                        <q-icon name="verified" size="16px" class="q-mr-xs" :color="form.isFree ? 'green-14' : 'amber-10'" />
+                        <div :class="['text-xs', form.isFree ? 'text-green-14' : 'text-amber-10', 'font-bold']" class="text-bold">
+                            {{ form.isFree ? 'Gratuito' : 'Premium' }}</div>
+                    </div>
                     <img :src="form.img_url" alt="imagem" class="img" />
                     <div class="img-overlay"></div>
                     <div class="badge">
@@ -30,7 +35,7 @@
                     <div class="w100 row no-wrap items-center justify-between">
                         <q-chip dense class="chip">
                             <q-icon name="schedule" size="16px" class="q-mr-xs" />
-                            5-10 min
+                            {{ form.tempo }}
                         </q-chip>
                         <q-btn flat class="go" label="Iniciar" icon-right="arrow_forward" />
                     </div>
@@ -41,6 +46,7 @@
 </template>
 
 <script setup>
+import { is } from 'quasar';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -52,21 +58,27 @@ const forms = ref([
         name: 'Cronotipo',
         description: 'Descubra seu padrão de energia ao longo do dia e como estudar no seu melhor horário.',
         to: '/app/form/cronotipo',
-        img_url: '/cron.avif'
+        img_url: '/cron.avif',
+        tempo: '5-10 min',
+        isFree: true
     },
     {
         id: 2,
         name: 'Forma de Aprendizado',
         description: 'Entenda sua forma predominante (visual/auditiva/cinestésica) e otimize seus estudos.',
         to: '/app/form/forma-aprendizado',
-        img_url: '/forma.avif'
+        img_url: '/forma.avif',
+        tempo: '10-15 min',
+        isFree: false
     },
     {
         id: 3,
         name: 'Estilo de Aprendizado',
         description: 'Identifique seu estilo ideal e como isso influencia sua absorção e retenção de conteúdo.',
         to: '/app/form/estilo-aprendizado',
-        img_url: '/est.avif'
+        img_url: '/est.avif',
+        tempo: '3-7 min',
+        isFree: false
     }
 ])
 </script>

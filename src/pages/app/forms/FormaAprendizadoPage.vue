@@ -313,7 +313,17 @@ function buildHistoricoHtml() {
 
 function baixarPdfHistorico() {
   const html = buildHistoricoHtml()
-  Utils.gerarPDF(resultado.value.titulo, html, 'forma_aprendizado_historico')
+  Utils.gerarPDF({
+  titulo: resultado.value?.titulo,
+  descricao: resultado.value?.descricao,
+  nomeFormulario: 'Estilo de Aprendizado',
+  historico: perguntas.value.map((p) => ({
+    pergunta: p.question,
+    resposta: respostas.value[p.id] !== undefined
+      ? getSelectedLabelTag(p, respostas.value[p.id])
+      : '(sem resposta)'
+  }))
+}, 'estilo_aprendizado_historico')
 }
 
 function escapeHtml(str) {

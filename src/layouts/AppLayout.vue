@@ -187,6 +187,7 @@ function logout() {
     title: 'Sair',
     message: 'Você tem certeza que deseja sair?',
     cancel: true,
+    icon: 'logout',
     persistent: true,
     ok: {
       label: 'Sair',
