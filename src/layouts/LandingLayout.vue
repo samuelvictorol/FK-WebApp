@@ -308,7 +308,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <img src="/missao.svg" alt="Sobre" class="img-soft full-width" />
+              <img src="/missao.png" alt="Sobre" class="img-soft full-width" />
             </div>
           </div>
 
@@ -337,7 +337,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pt-none">
-                  <img src="/visao.svg" alt="Visão" class="img-soft full-width" />
+                  <img src="/visao.png" alt="Visão" class="img-soft full-width" />
                 </q-card-section>
               </q-card>
             </div>

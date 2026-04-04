@@ -69,9 +69,24 @@
 
         <template #body-cell-actions="props">
           <q-td :props="props">
-            <q-btn dense flat icon="account_circle" class="act act-primary" @click="visualizarCliente(props.row)">
-              <q-tooltip>Visualizar Cliente</q-tooltip>
-            </q-btn>
+            <div class="row items-center no-wrap">
+              <q-btn dense flat icon="account_circle" class="act act-primary" @click="visualizarCliente(props.row)">
+                <q-tooltip>Visualizar Cliente</q-tooltip>
+              </q-btn>
+
+              <q-btn
+                dense
+                flat
+                :icon="isPremium(props.row.planoAtual) ? 'workspace_premium' : 'toggle_off'"
+                :class="isPremium(props.row.planoAtual) ? 'act act-premium' : 'act act-free'"
+                :loading="updatingUserId === props.row._id"
+                @click="alternarPlano(props.row)"
+              >
+                <q-tooltip>
+                  {{ isPremium(props.row.planoAtual) ? 'Tornar Gratuito' : 'Tornar Premium' }}
+                </q-tooltip>
+              </q-btn>
+            </div>
           </q-td>
         </template>
       </q-table>
@@ -137,6 +152,7 @@ import { api } from 'boot/axios'
 const $q = useQuasar()
 
 const loading = ref(false)
+const updatingUserId = ref('')
 const dialogCliente = ref(false)
 const clienteSelecionado = ref(null)
 
@@ -214,21 +230,27 @@ function mapUserToRow(user) {
     email: user?.email || '-',
     phone: user?.phone || user?.telefone || '-',
     perfil: extractPerfil(user),
-    planoAtual: role || 'Sem plano',
+    planoAtual: normalizePlano(role),
     lucro: Number(user?.lucro || 0)
   }
 }
 
 function extractPerfil(user) {
-  if (user?.email) {
-    return user.email
-  }
-
-  if (user?.phone) {
-    return user.phone
-  }
-
+  if (user?.email) return user.email
+  if (user?.phone) return user.phone
   return user?._id || '-'
+}
+
+function normalizePlano(role) {
+  const normalized = String(role || '').toLowerCase()
+
+  if (normalized.includes('premium')) return 'Plano Premium'
+  if (normalized.includes('free') || normalized.includes('gratuito')) return 'Plano Gratuito'
+  return role || 'Sem plano'
+}
+
+function isPremium(plano) {
+  return String(plano || '').toLowerCase().includes('premium')
 }
 
 function formatMoney(value) {
@@ -242,7 +264,7 @@ function getPlanoColor(plano) {
   const normalized = String(plano || '').toLowerCase()
 
   if (normalized.includes('premium')) return 'amber-10'
-  if (normalized.includes('free')) return 'grey-7'
+  if (normalized.includes('free') || normalized.includes('gratuito')) return 'grey-7'
   if (normalized.includes('básico') || normalized.includes('basico')) return 'warning'
   return 'primary'
 }
@@ -252,6 +274,74 @@ function visualizarCliente(cliente) {
   dialogCliente.value = true
 }
 
+async function alternarPlano(cliente) {
+  const nextRole = isPremium(cliente.planoAtual) ? 'Plano Gratuito' : 'Plano Premium'
+  const acao = isPremium(cliente.planoAtual) ? 'tornar gratuito' : 'tornar premium'
+
+  try {
+    const confirmed = await abrirConfirmacao(cliente, nextRole, acao)
+    if (!confirmed) return
+
+    updatingUserId.value = cliente._id
+
+    const { data } = await api.post(`/admin/give-role/${cliente._id}/${encodeURIComponent(nextRole)}`)
+
+    const novoEhPremium = nextRole.toLowerCase().includes('premium')
+    cliente.planoAtual = nextRole
+    cliente.lucro = novoEhPremium ? 49.9 : 0
+
+    if (clienteSelecionado.value?._id === cliente._id) {
+      clienteSelecionado.value = { ...cliente }
+    }
+
+    $q.notify({
+      type: 'positive',
+      message: data?.message || `Usuário atualizado para ${nextRole}`,
+      icon: 'mdi-check-circle-outline',
+      position: 'top',
+      progress: true,
+      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
+    })
+  } catch (error) {
+    if (error === 'cancelled') return
+
+    console.error('[ADMIN_GIVE_ROLE_ERROR]', error)
+
+    $q.notify({
+      type: 'negative',
+      message: error?.response?.data?.message || 'Erro ao atualizar plano do usuário',
+      icon: 'mdi-alert-circle-outline',
+      position: 'top',
+      progress: true,
+      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
+    })
+  } finally {
+    updatingUserId.value = ''
+  }
+}
+
+function abrirConfirmacao(cliente, nextRole, acao) {
+  return new Promise((resolve, reject) => {
+    $q.dialog({
+      title: 'Alterar plano',
+      message: `Deseja ${acao} o usuário ${cliente.name || 'selecionado'} para ${nextRole}?`,
+      cancel: true,
+      persistent: true,
+      ok: {
+        label: 'Confirmar',
+        color: 'primary',
+        unelevated: true
+      },
+      cancel: {
+        label: 'Cancelar',
+        flat: true
+      }
+    })
+      .onOk(() => resolve(true))
+      .onCancel(() => reject('cancelled'))
+      .onDismiss(() => {})
+  })
+}
 </script>
 
 <style scoped>
@@ -322,7 +412,8 @@ function visualizarCliente(cliente) {
 }
 
 .act-primary { color: #c4b5fd; }
-.act-money { color: #99f6e4; }
+.act-premium { color: #fcd34d; }
+.act-free { color: #93c5fd; }
 
 .detail-card {
   width: min(92vw, 620px);

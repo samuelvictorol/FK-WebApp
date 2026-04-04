@@ -18,8 +18,6 @@
       <div class="hero-overlay"></div>
 
       <q-card-section class="hero-content">
-        <div class="kicker">Recomendação</div>
-
         <div class="text-h5 text-weight-bold safe-text hero-title">
           🎯 Conheça o curso que transforma sua preparação para concursos!
         </div>
