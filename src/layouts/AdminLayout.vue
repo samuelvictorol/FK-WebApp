@@ -75,10 +75,10 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-onBeforeMount(() => {
+onMounted(() => {
   const password = window.prompt('Digite a senha de acesso ao painel administrativo:')
   if (password !== 'flaviakamila-app@123') {
     window.alert('Senha incorreta! Redirecionando para a página de login.')

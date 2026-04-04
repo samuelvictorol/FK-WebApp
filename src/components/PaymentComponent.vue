@@ -4,89 +4,18 @@
       <div>
         <div class="payment-kicker">Acesso premium</div>
         <div class="text-h5 text-weight-bold safe-text">
-          Libere seu acesso completo
+          Libere o Acesso Completo
         </div>
-        <div class="text-body2 text-grey-4 q-mt-xs safe-text">
-          Gere seu link de pagamento e conclua em poucos instantes.
-        </div>
+        
       </div>
 
-      <q-btn
-        flat
-        round
-        dense
-        icon="close"
-        color="white"
-        @click="emit('close')"
-      />
+      <q-btn flat round dense icon="close" color="white" @click="emit('close')" />
     </q-card-section>
 
     <q-separator />
 
     <div class="payment-scroll">
       <q-card-section class="q-pa-md">
-        <q-banner
-          v-if="user.email"
-          inline-actions
-          rounded
-          class="info-banner q-mb-md"
-        >
-          <template #avatar>
-            <q-icon name="mail" />
-          </template>
-          O link será criado para a conta:
-          <strong>{{ user.email }}</strong>
-        </q-banner>
-
-        <q-banner
-          v-else
-          inline-actions
-          rounded
-          class="warning-banner q-mb-md"
-        >
-          <template #avatar>
-            <q-icon name="warning" />
-          </template>
-          Não foi possível identificar o e-mail do usuário logado.
-        </q-banner>
-
-        <div class="cards-grid q-mb-md">
-          <q-card flat bordered class="mini-card">
-            <q-card-section class="row items-start no-wrap">
-              <q-icon name="bolt" size="22px" class="card-icon q-mr-sm" />
-              <div>
-                <div class="mini-title">Acesso rápido</div>
-                <div class="mini-sub">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis.
-                </div>
-              </div>
-            </q-card-section>
-          </q-card>
-
-          <q-card flat bordered class="mini-card">
-            <q-card-section class="row items-start no-wrap">
-              <q-icon name="verified" size="22px" class="card-icon q-mr-sm" />
-              <div>
-                <div class="mini-title">Benefícios extras</div>
-                <div class="mini-sub">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae.
-                </div>
-              </div>
-            </q-card-section>
-          </q-card>
-
-          <q-card flat bordered class="mini-card">
-            <q-card-section class="row items-start no-wrap">
-              <q-icon name="description" size="22px" class="card-icon q-mr-sm" />
-              <div>
-                <div class="mini-title">Relatórios completos</div>
-                <div class="mini-sub">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus.
-                </div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
 
         <q-card flat bordered class="summary-card q-mb-md">
           <q-card-section>
@@ -105,24 +34,59 @@
             </div>
 
             <div class="summary-row">
-              <span>Status do link</span>
-              <strong>{{ payment.status || 'Ainda não gerado' }}</strong>
+              <span>Preço</span>
+              <strong style="font-size: 1rem;" class="text-green-14">R$ 49,90</strong>
             </div>
           </q-card-section>
         </q-card>
+        <div class="cards-grid q-mb-md">
+          <q-card flat bordered class="mini-card">
+            <q-card-section class="row items-start no-wrap">
+              <q-icon name="bolt" size="22px" class="card-icon q-mr-sm" />
+              <div>
+                <div class="mini-title">Aprovação mais rápida</div>
+                <div class="mini-sub">Otimize seu tempo com processos de aprovação mais eficientes.</div>
+              </div>
+            </q-card-section>
+          </q-card>
 
-        <q-input
-          v-model.trim="email"
-          filled
-          label="E-mail do pagamento"
-          type="email"
-          class="bg-purple-1 q-mb-md"
-          readonly
-        >
+          <q-card flat bordered class="mini-card">
+            <q-card-section class="row items-start no-wrap">
+              <q-icon name="verified" size="22px" class="card-icon q-mr-sm" />
+              <div>
+                <div class="mini-title">Acesso Premium</div>
+                <div class="mini-sub">
+                  Receba todos os resultados do Forms com análises personalizadas pro seu perfil. 
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
+
+          <q-card flat bordered class="mini-card">
+            <q-card-section class="row items-start no-wrap">
+              <q-icon name="description" size="22px" class="card-icon q-mr-sm" />
+              <div>
+                <div class="mini-title">Rotina de Estudos</div>
+                <div class="mini-sub">
+                  Melhore seu aprendizado com uma rotina de estudos personalizada, baseada no seu desempenho e necessidades.
+                  </div>
+              </div>
+            </q-card-section>
+          </q-card>
+        </div>
+        <q-input v-model.trim="email" filled label="E-mail do pagamento" type="email"
+          class="bg-purple-1 q-mb-md rounded-borders" readonly>
           <template #prepend>
             <q-icon name="mail" />
           </template>
         </q-input>
+        <q-banner v-if="user.email" inline-actions rounded class="info-banner q-mb-md">
+          <template #avatar>
+            <q-icon name="mail" />
+          </template>
+          O link será criado para a conta:
+          <strong>{{ user.email }}</strong>
+        </q-banner>
 
         <div v-if="payment.payment_url" class="result-box q-mb-md">
           <div class="text-subtitle2 text-weight-bold q-mb-xs">
@@ -135,25 +99,13 @@
 
           <div class="row q-col-gutter-sm q-mt-sm">
             <div class="col-12 col-sm-auto">
-              <q-btn
-                unelevated
-                color="positive"
-                icon="open_in_new"
-                label="Abrir link"
-                class="full-width"
-                @click="openPaymentLink"
-              />
+              <q-btn unelevated color="positive" icon="open_in_new" label="Abrir link" class="full-width"
+                @click="openPaymentLink" />
             </div>
 
             <div class="col-12 col-sm-auto">
-              <q-btn
-                outline
-                color="white"
-                icon="content_copy"
-                label="Copiar link"
-                class="full-width"
-                @click="copyPaymentLink"
-              />
+              <q-btn outline color="white" icon="content_copy" label="Copiar link" class="full-width"
+                @click="copyPaymentLink" />
             </div>
           </div>
         </div>
@@ -163,21 +115,10 @@
     <q-separator />
 
     <q-card-actions align="right" class="q-pa-md payment-actions">
-      <q-btn
-        flat
-        label="Fechar"
-        color="grey-4"
-        @click="emit('close')"
-      />
-      <q-btn
-        unelevated
-        class="btn-payment"
-        icon="credit_card"
-        :label="payment.payment_url ? 'Gerar novo link' : 'Quero acesso premium'"
-        :loading="loading"
-        :disable="!email"
-        @click="criarLinkPagamento"
-      />
+      <q-btn flat label="Fechar" color="grey-4" @click="emit('close')" />
+      <q-btn unelevated class="btn-payment" icon="credit_card"
+        :label="payment.payment_url ? 'Gerar novo link' : 'Quero acesso premium'" :loading="loading" :disable="!email"
+        @click="criarLinkPagamento" />
     </q-card-actions>
   </q-card>
 </template>
@@ -322,7 +263,7 @@ function notifyTop(message, type = 'positive') {
   background:
     radial-gradient(700px 280px at 15% 20%, rgba(124, 58, 237, .30), transparent 60%),
     radial-gradient(700px 260px at 85% 30%, rgba(0, 168, 112, .18), transparent 60%),
-    linear-gradient(135deg, rgba(12,12,18,.98), rgba(22,22,30,.98));
+    linear-gradient(135deg, rgba(12, 12, 18, .98), rgba(22, 22, 30, .98));
   flex-shrink: 0;
 }
 
@@ -344,7 +285,7 @@ function notifyTop(message, type = 'positive') {
   font-weight: 900;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.75);
+  color: rgba(255, 255, 255, .75);
   margin-bottom: 8px;
 }
 
@@ -367,16 +308,13 @@ function notifyTop(message, type = 'positive') {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
 }
 
 .mini-card {
   border-radius: 18px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
   color: #fff;
-  min-height: 120px;
 }
 
 .card-icon {
@@ -387,19 +325,18 @@ function notifyTop(message, type = 'positive') {
 .mini-title {
   font-weight: 900;
   line-height: 1.2;
-  margin-bottom: 6px;
 }
 
 .mini-sub {
   font-size: .87rem;
-  color: rgba(255,255,255,.72);
+  color: rgba(255, 255, 255, .72);
   line-height: 1.45;
 }
 
 .summary-card {
   border-radius: 18px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
   color: #fff;
 }
 
@@ -409,7 +346,7 @@ function notifyTop(message, type = 'positive') {
   justify-content: space-between;
   gap: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
 }
 
 .summary-row:last-child {
@@ -427,7 +364,7 @@ function notifyTop(message, type = 'positive') {
   word-break: break-word;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255,255,255,.06);
+  background: rgba(255, 255, 255, .06);
   color: #d7ffe8;
   font-size: .92rem;
   line-height: 1.45;
