@@ -296,7 +296,7 @@ async function alternarPlano(cliente) {
 
     $q.notify({
       type: 'positive',
-      message: data?.message || `Usuário atualizado para ${nextRole}`,
+      message: `Plano do Usuário atualizado com sucesso.`,
       icon: 'mdi-check-circle-outline',
       position: 'top',
       progress: true,
