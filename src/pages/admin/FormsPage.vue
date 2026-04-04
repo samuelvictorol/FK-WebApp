@@ -49,7 +49,7 @@
 
         <q-card-section class="dlg-body scroll">
           <div v-for="(q, idx) in perguntasRespostas" :key="idx" class="q-mb-lg">
-            <div class="text-subtitle1 text-weight-bold safe-text">
+            <div class="text-subtitle1 text-weight-bold text-white safe-text">
               {{ idx + 1 }}. {{ q.question }}
             </div>
 

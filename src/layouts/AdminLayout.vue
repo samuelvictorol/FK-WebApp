@@ -46,12 +46,12 @@
       <q-separator dark class="q-my-sm" />
 
       <q-list>
-        <q-item clickable class="menu-item">
+        <!-- <q-item clickable class="menu-item">
           <q-item-section avatar>
             <q-icon name="help" size="22px" class="menu-icon-alt" />
           </q-item-section>
           <q-item-section class="safe-text">Ajuda</q-item-section>
-        </q-item>
+        </q-item> -->
 
         <q-item clickable class="menu-item" @click="logout()">
           <q-item-section avatar>
@@ -75,8 +75,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+onBeforeMount(() => {
+  const password = window.prompt('Digite a senha de acesso ao painel administrativo:')
+  if (password !== 'flaviakamila-app@123') {
+    window.alert('Senha incorreta! Redirecionando para a página de login.')
+    window.location.href = '/login'
+  } 
+})
 
 const router = useRouter()
 const rightDrawerOpen = ref(false)
@@ -85,7 +93,7 @@ const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
   { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
-  { icon: 'paid', to: '/admin/vendas', label: 'Vendas' }
+  // { icon: 'paid', to: '/admin/vendas', label: 'Vendas' }
 ])
 
 function toggleRightDrawer () {

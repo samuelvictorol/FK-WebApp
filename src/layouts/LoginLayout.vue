@@ -173,7 +173,17 @@
                       label="Li e aceito os termos de uso"
                       color="deep-purple-6"
                     />
-
+                    <q-btn
+                      v-if="!isLogin"
+                      flat
+                      label="Ver termos"
+                      color="deep-purple-4"
+                      @click="$q.dialog({
+                        title: 'Termos de Uso',
+                        message: termosDeUso,
+                        ok: { label: 'Fechar', color: 'deep-purple-6' }
+                      })"
+                    />
                     <div class="row items-center justify-between q-gutter-sm">
                       <q-btn flat label="início" to="/" />
                       <q-btn
@@ -201,7 +211,8 @@ import { reactive, ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { api } from 'boot/axios'
-
+import { TermosDeUso } from 'src/TermosDeUso'
+const termosDeUso = TermosDeUso
 const router = useRouter()
 const $q = useQuasar()
 
