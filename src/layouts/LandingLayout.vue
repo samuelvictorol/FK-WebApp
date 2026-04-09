@@ -844,7 +844,7 @@ function scrollTo(id) {
 
 .section-dark {
   background: radial-gradient(900px 420px at 30% 20%, rgba(124, 58, 237, .16), transparent 60%),
-    radial-gradient(800px 400px at 80% 60%, rgba(184, 20, 170, 0.1), transparent 60%),
+    radial-gradient(800px 400px at 80% 60%, rgba(20, 184, 166, .10), transparent 60%),
     #07070a;
 }
 
