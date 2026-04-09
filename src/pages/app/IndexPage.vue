@@ -18,35 +18,14 @@
       <div class="hero-overlay"></div>
 
       <q-card-section class="hero-content">
-        <div class="text-h5 text-weight-bold safe-text hero-title">
-          🎯 Conheça o curso que transforma sua preparação para concursos!
-        </div>
-
-        <div class="text-body2 text-grey-2 q-mt-xs safe-text hero-sub">
-          Um caminho mais claro, com método e constância. Se você quer estudar com estratégia, esse é o próximo passo.
-        </div>
-
-        <div class="row q-col-gutter-sm q-mt-md">
-          <div class="col-12 col-sm-auto">
-            <q-btn label="curso completo" icon-right="arrow_forward" class="btn-cta full-width text-grey-3" unelevated
-              @click="irParaCurso" />
-          </div>
-          <div class="col-12 col-sm-auto">
-            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3" unelevated
-              @click="togglePaymentDialog" />
-          </div>
-          <div class="col-12 col-sm-auto">
-            <q-btn label="Descubra seu estilo" icon="list_alt" class="btn-ghost full-width" unelevated to="/app/forms" />
-          </div>
-        </div>
         <!-- Ações principais -->
-        <div class="grid q-mt-lg text-dark">
+        <div class="grid text-dark">
           <q-card class="action-card" bordered clickable v-ripple @click="router.push('/app/forms')">
             <q-card-section class="row items-start justify-between">
               <div>
                 <div class="text-h6 text-weight-bold safe-text">Formulários</div>
                 <div class="text-body2 text-purple-14 text-bold safe-text">
-                  Cronotipo, forma e estilo — responda no modo chat e gere seu relatório.
+                  Cronotipo, Forma e Estilo — Descubra a forma ideal para você.
                 </div>
               </div>
               <div class="icon-pill absolute-top-right">
@@ -64,7 +43,7 @@
               <div>
                 <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
                 <div class="text-body2 text-purple-14 text-bold safe-text q-pb-xl">
-                  Veja seu progresso, histórico e dados do seu diagnóstico.
+                  Veja os dados do seu perfil.
                 </div>
               </div>
               <div class="icon-pill absolute-top-right">
@@ -77,6 +56,29 @@
             </q-card-section>
           </q-card>
         </div>
+        <!-- <div class="text-h5 text-weight-bold safe-text hero-title">
+          🎯 Conheça o curso que transforma sua preparação para concursos!
+        </div> -->
+
+        <div class="text-body2 text-grey-2 q-mt-lg safe-text hero-sub">
+          Um caminho mais claro, com método e constância. Se você quer estudar com estratégia, esse é o próximo passo.
+        </div>
+
+        <div class="row q-col-gutter-sm q-mt-md">
+          <div class="col-12 col-sm-auto">
+            <q-btn label="PDF Grátis" icon-right="arrow_forward" class="btn-cta full-width text-grey-3" unelevated
+              @click="irParaCurso" />
+          </div>
+          <div class="col-12 col-sm-auto">
+            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3" unelevated
+              @click="togglePaymentDialog" />
+          </div>
+          <div class="col-12 col-sm-auto">
+            <q-btn label="Descubra seu estilo" icon="list_alt" class="btn-ghost full-width" unelevated
+              to="/app/forms" />
+          </div>
+        </div>
+
         <div class="row q-col-gutter-sm q-mt-lg">
           <div class="col-12 col-sm-4">
             <q-card flat class="mini">
@@ -130,7 +132,7 @@ const router = useRouter()
 
 function irParaCurso() {
   // coloque aqui sua URL (quando tiver)
-  window.open('https://exemplo.com', '_blank')
+  window.open('https://flaviakamila.com.br', '_blank')
 }
 
 function togglePaymentDialog() {

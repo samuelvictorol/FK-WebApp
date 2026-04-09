@@ -102,7 +102,7 @@
         <q-separator />
 
         <q-card-section v-if="clienteSelecionado">
-          <div class="detail-grid">
+          <div class="detail-grid q-mb-md">
             <div class="detail-item">
               <div class="detail-label">Nome</div>
               <div class="detail-value">{{ clienteSelecionado.name || '-' }}</div>
@@ -133,9 +133,91 @@
               <div class="detail-value">{{ formatMoney(clienteSelecionado.lucro) }}</div>
             </div>
 
-            <div class="detail-item">
+            <div class="detail-item detail-item-full">
               <div class="detail-label">ID</div>
               <div class="detail-value break-all">{{ clienteSelecionado._id || '-' }}</div>
+            </div>
+          </div>
+
+          <q-separator class="q-my-md" />
+
+          <div class="text-subtitle1 text-weight-bold q-mb-md">Alterar senha</div>
+
+          <!-- <q-input
+            v-model="passwordForm.currentPassword"
+            filled
+            dark
+            color="primary"
+            label="Senha atual"
+            :type="showCurrentPassword ? 'text' : 'password'"
+            class="q-mb-md"
+          >
+            <template #append>
+              <q-icon
+                :name="showCurrentPassword ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="showCurrentPassword = !showCurrentPassword"
+              />
+            </template>
+          </q-input> -->
+
+          <q-input
+            v-model="passwordForm.newPassword"
+            filled
+            dark
+            color="primary"
+            label="Nova senha"
+            :type="showNewPassword ? 'text' : 'password'"
+            class="q-mb-md"
+          >
+            <template #append>
+              <q-icon
+                :name="showNewPassword ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="showNewPassword = !showNewPassword"
+              />
+            </template>
+          </q-input>
+
+          <q-input
+            v-model="passwordForm.confirmPassword"
+            filled
+            dark
+            color="primary"
+            label="Confirmar nova senha"
+            :type="showConfirmPassword ? 'text' : 'password'"
+            class="q-mb-md"
+          >
+            <template #append>
+              <q-icon
+                :name="showConfirmPassword ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="showConfirmPassword = !showConfirmPassword"
+              />
+            </template>
+          </q-input>
+
+          <div class="row q-col-gutter-sm">
+            <div class="col-12 col-sm-6">
+              <q-btn
+                unelevated
+                class="full-width act act-save"
+                icon="lock_reset"
+                label="Salvar nova senha"
+                :loading="changingPassword"
+                @click="alterarSenhaCliente"
+              />
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <q-btn
+                unelevated
+                class="full-width act act-danger"
+                icon="delete_forever"
+                label="Remover usuário"
+                :loading="deletingUser"
+                @click="removerCliente"
+              />
             </div>
           </div>
         </q-card-section>
@@ -153,8 +235,21 @@ const $q = useQuasar()
 
 const loading = ref(false)
 const updatingUserId = ref('')
+const changingPassword = ref(false)
+const deletingUser = ref(false)
+
 const dialogCliente = ref(false)
 const clienteSelecionado = ref(null)
+
+const showCurrentPassword = ref(false)
+const showNewPassword = ref(false)
+const showConfirmPassword = ref(false)
+
+const passwordForm = ref({
+  currentPassword: '',
+  newPassword: '',
+  confirmPassword: ''
+})
 
 const clientesRows = ref([])
 
@@ -269,8 +364,21 @@ function getPlanoColor(plano) {
   return 'primary'
 }
 
+function resetPasswordForm() {
+  passwordForm.value = {
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  }
+
+  showCurrentPassword.value = false
+  showNewPassword.value = false
+  showConfirmPassword.value = false
+}
+
 function visualizarCliente(cliente) {
-  clienteSelecionado.value = cliente
+  clienteSelecionado.value = { ...cliente }
+  resetPasswordForm()
   dialogCliente.value = true
 }
 
@@ -289,6 +397,11 @@ async function alternarPlano(cliente) {
     const novoEhPremium = nextRole.toLowerCase().includes('premium')
     cliente.planoAtual = nextRole
     cliente.lucro = novoEhPremium ? 49.9 : 0
+
+    const index = clientesRows.value.findIndex(item => item._id === cliente._id)
+    if (index !== -1) {
+      clientesRows.value[index] = { ...cliente }
+    }
 
     if (clienteSelecionado.value?._id === cliente._id) {
       clienteSelecionado.value = { ...cliente }
@@ -320,6 +433,106 @@ async function alternarPlano(cliente) {
   }
 }
 
+async function alterarSenhaCliente() {
+  if (!clienteSelecionado.value) return
+
+  // if (!passwordForm.value.currentPassword?.trim()) {
+  //   return notifyNegative('Informe a senha atual')
+  // }
+
+  if (!passwordForm.value.newPassword?.trim()) {
+    return notifyNegative('Informe a nova senha')
+  }
+
+  if (passwordForm.value.newPassword.trim().length < 4) {
+    return notifyNegative('A nova senha deve ter pelo menos 4 caracteres')
+  }
+
+  if (passwordForm.value.newPassword.trim() !== passwordForm.value.confirmPassword.trim()) {
+    return notifyNegative('A confirmação da senha não confere')
+  }
+
+  try {
+    changingPassword.value = true
+
+    const payload = {
+      currentPassword: passwordForm.value.currentPassword.trim(),
+      newPassword: passwordForm.value.newPassword.trim()
+    }
+
+    if (clienteSelecionado.value.email && clienteSelecionado.value.email !== '-') {
+      payload.email = clienteSelecionado.value.email.trim()
+    } else if (clienteSelecionado.value.phone && clienteSelecionado.value.phone !== '-') {
+      payload.phone = clienteSelecionado.value.phone.trim()
+    } else {
+      return notifyNegative('Usuário sem e-mail ou telefone para localizar a conta')
+    }
+
+    const { data } = await api.put('/auth/change-password', payload)
+
+    resetPasswordForm()
+
+    $q.notify({
+      type: 'positive',
+      message: data?.message || 'Senha alterada com sucesso',
+      icon: 'mdi-check-circle-outline',
+      position: 'top',
+      progress: true,
+      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
+    })
+  } catch (error) {
+    console.error('[AUTH_CHANGE_PASSWORD_ERROR]', error)
+    notifyNegative(error?.response?.data?.message || 'Erro ao alterar senha')
+  } finally {
+    changingPassword.value = false
+  }
+}
+
+async function removerCliente() {
+  if (!clienteSelecionado.value?._id) return
+
+  try {
+    const confirmed = await abrirConfirmacaoExclusao(clienteSelecionado.value)
+    if (!confirmed) return
+
+    deletingUser.value = true
+
+    const payload = {}
+
+    if (clienteSelecionado.value.email && clienteSelecionado.value.email !== '-') {
+      payload.email = clienteSelecionado.value.email.trim()
+    } else if (clienteSelecionado.value.phone && clienteSelecionado.value.phone !== '-') {
+      payload.phone = clienteSelecionado.value.phone.trim()
+    } else {
+      payload.userId = clienteSelecionado.value._id
+    }
+
+    const { data } = await api.delete('/auth/delete-acc', { data: payload })
+
+    clientesRows.value = clientesRows.value.filter(item => item._id !== clienteSelecionado.value._id)
+
+    dialogCliente.value = false
+    clienteSelecionado.value = null
+    resetPasswordForm()
+
+    $q.notify({
+      type: 'positive',
+      message: data?.message || 'Usuário removido com sucesso',
+      icon: 'mdi-check-circle-outline',
+      position: 'top',
+      progress: true,
+      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
+    })
+  } catch (error) {
+    if (error === 'cancelled') return
+
+    console.error('[AUTH_DELETE_ACC_ERROR]', error)
+    notifyNegative(error?.response?.data?.message || 'Erro ao remover usuário')
+  } finally {
+    deletingUser.value = false
+  }
+}
+
 function abrirConfirmacao(cliente, nextRole, acao) {
   return new Promise((resolve, reject) => {
     $q.dialog({
@@ -339,7 +552,39 @@ function abrirConfirmacao(cliente, nextRole, acao) {
     })
       .onOk(() => resolve(true))
       .onCancel(() => reject('cancelled'))
-      .onDismiss(() => {})
+  })
+}
+
+function abrirConfirmacaoExclusao(cliente) {
+  return new Promise((resolve, reject) => {
+    $q.dialog({
+      title: 'Remover usuário',
+      message: `Deseja remover permanentemente o usuário ${cliente.name || 'selecionado'}?`,
+      cancel: true,
+      persistent: true,
+      ok: {
+        label: 'Remover',
+        color: 'negative',
+        unelevated: true
+      },
+      cancel: {
+        label: 'Cancelar',
+        flat: true
+      }
+    })
+      .onOk(() => resolve(true))
+      .onCancel(() => reject('cancelled'))
+  })
+}
+
+function notifyNegative(message) {
+  $q.notify({
+    type: 'negative',
+    message,
+    icon: 'mdi-alert-circle-outline',
+    position: 'top',
+    progress: true,
+    actions: [{ icon: 'mdi-close', color: 'white', round: true }]
   })
 }
 </script>
@@ -415,8 +660,20 @@ function abrirConfirmacao(cliente, nextRole, acao) {
 .act-premium { color: #fcd34d; }
 .act-free { color: #93c5fd; }
 
+.act-save {
+  color: #86efac;
+  border-color: rgba(134, 239, 172, .35);
+  background: rgba(134, 239, 172, .08);
+}
+
+.act-danger {
+  color: #fca5a5;
+  border-color: rgba(252, 165, 165, .35);
+  background: rgba(239, 68, 68, .08);
+}
+
 .detail-card {
-  width: min(92vw, 620px);
+  width: min(94vw, 720px);
   background: #111318;
   color: #fff;
   border-radius: 18px;
@@ -433,6 +690,10 @@ function abrirConfirmacao(cliente, nextRole, acao) {
   border-radius: 12px;
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.08);
+}
+
+.detail-item-full {
+  grid-column: 1 / -1;
 }
 
 .detail-label {
@@ -453,6 +714,10 @@ function abrirConfirmacao(cliente, nextRole, acao) {
 @media (max-width: 768px) {
   .detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .detail-item-full {
+    grid-column: auto;
   }
 }
 </style>

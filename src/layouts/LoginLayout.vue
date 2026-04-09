@@ -17,42 +17,7 @@
       <q-page class="q-pa-md flex flex-center">
         <div class="container">
           <div class="row q-col-gutter-xl items-center">
-            <div class="col-12 col-md-6">
-              <div class="kicker">Entrar ou criar conta</div>
-              <h1 class="headline safe-text">
-                Tenha seu <span class="grad">acesso liberado</span> em poucos segundos.
-              </h1>
-              <p class="sub safe-text">
-                Faça login ou crie sua conta para entrar na área do aplicativo.
-              </p>
-
-              <div class="row q-col-gutter-sm q-mt-md">
-                <div class="col-12 col-sm-6">
-                  <q-card flat class="mini-card">
-                    <q-card-section class="row items-center no-wrap">
-                      <q-icon name="mdi-shield-lock-outline" size="20px" class="q-mr-sm" />
-                      <div>
-                        <div class="mini-title">Acesso seguro</div>
-                        <div class="mini-sub">seus dados protegidos</div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
-                </div>
-
-                <div class="col-12 col-sm-6">
-                  <q-card flat class="mini-card">
-                    <q-card-section class="row items-center no-wrap">
-                      <q-icon name="mdi-lightning-bolt-outline" size="20px" class="q-mr-sm" />
-                      <div>
-                        <div class="mini-title">Rápido</div>
-                        <div class="mini-sub">entre em instantes</div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
-                </div>
-              </div>
-            </div>
-
+          
             <div class="col-12 col-md-6">
               <q-card class="auth-card" bordered>
                 <q-card-section class="q-pb-sm">
@@ -198,6 +163,41 @@
                   </q-form>
                 </q-card-section>
               </q-card>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="kicker">Entrar ou criar conta</div>
+              <h1 class="headline safe-text">
+                Tenha seu <span class="grad">acesso liberado</span> em poucos segundos.
+              </h1>
+              <p class="sub safe-text">
+                Faça login ou crie sua conta para entrar na área do aplicativo.
+              </p>
+
+              <div class="row q-col-gutter-sm q-mt-md">
+                <div class="col-12 col-sm-6">
+                  <q-card flat class="mini-card">
+                    <q-card-section class="row items-center no-wrap">
+                      <q-icon name="mdi-shield-lock-outline" size="20px" class="q-mr-sm" />
+                      <div>
+                        <div class="mini-title">Acesso seguro</div>
+                        <div class="mini-sub">seus dados protegidos</div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <q-card flat class="mini-card">
+                    <q-card-section class="row items-center no-wrap">
+                      <q-icon name="mdi-lightning-bolt-outline" size="20px" class="q-mr-sm" />
+                      <div>
+                        <div class="mini-title">Rápido</div>
+                        <div class="mini-sub">entre em instantes</div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -392,7 +392,7 @@ async function handleSubmit() {
   min-height: 100vh;
   background:
     radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .26), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(20, 184, 166, .16), transparent 55%),
+    radial-gradient(800px 400px at 80% 40%, rgba(110, 20, 184, 0.16), transparent 55%),
     #07070a;
   color: #f4f4f5;
 }
@@ -405,7 +405,7 @@ async function handleSubmit() {
 }
 
 .topbar {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .22), rgba(20, 184, 166, .14));
+  background: linear-gradient(90deg, rgba(124, 58, 237, .22), rgba(110, 20, 184, 0.14));
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
@@ -436,7 +436,7 @@ async function handleSubmit() {
 }
 
 .grad {
-  background: linear-gradient(90deg, #a78bfa, #5eead4);
+  background: linear-gradient(90deg, #a78bfa, #6d37ec);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -480,7 +480,7 @@ async function handleSubmit() {
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #7c3aed, #7614b8);
   color: #f5f5f5;
   font-weight: 900;
   border-radius: 14px;

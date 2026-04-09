@@ -267,7 +267,7 @@ function formatMoney(value) {
 }
 
 .kpi-teal{
-  background: radial-gradient(900px 500px at 100% 0%, rgba(20,184,166,.24), transparent 60%),
+  background: radial-gradient(900px 500px at 100% 0%, rgba(132, 20, 184, 0.24), transparent 60%),
               rgba(255,255,255,.03);
 }
 

@@ -2,11 +2,11 @@
   <q-layout view="hHh lpR fFf" class="page">
     <q-header elevated class="topbar " style="overflow: hidden!important;">
       <q-toolbar class="q-px-md">
-        <q-avatar square size="32px" class="q-mr-sm rounded-borders">
+        <!-- <q-avatar square size="32px" class="q-mr-sm rounded-borders">
           <img src="/logo.png" alt="Logo" />
-        </q-avatar>
+        </q-avatar> -->
         <q-toolbar-title class="brand-title">
-          <div style="overflow: hidden!important;" class="text-weight-bold">
+          <div style="overflow: hidden!important;" class="">
             <strong>Flávia</strong><strong>Kamila</strong></div>
           <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Concursos •
             Estratégia de estudos</div>
@@ -80,10 +80,10 @@
                 Métodos de aprendizagem com base em evidências
               </div> -->
 
-              <h1 class="hero-title q-pa-xs safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s" style="overflow: hidden!important;">
-                Descubra seu <span class="grad">estilo de aprendizado</span>,
-                seu <span class="grad">cronotipo</span> e receba um
-                <span class="grad">relatório personalizado</span> para estudar melhor.
+              <h1 class="hero-title q-pa-md rounded-borders safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s" style="overflow: hidden!important;">
+                💡 Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span class="grad">Forma de Aprendizado</span> ideal para <span class="grad">você</span>.
+                <!-- e receba um
+                <span class="grad">relatório personalizado</span> para estudar melhor. -->
               </h1>
               <!-- 
               <p class="hero-sub safe-text fade-in delay-2">
@@ -97,8 +97,8 @@
                     label="Começar agora" to="/app" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s" unelevated icon-right="apps" label="Curso Completo"
-                    to="/curso" />
+                  <q-btn class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s" unelevated icon-right="apps" label="PDF GRÁTIS"
+                    @click="openNewTab('https://flaviakamila.com.br')" />
                 </div>
                 <div class="col-12 col-sm-auto">
                   <q-btn class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__slower animate__delay-5s" unelevated icon="play_circle" label="Ver como funciona"
@@ -427,13 +427,13 @@
                 <q-input color="deep-purple-8" filled label="Nome" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="E-mail" type="email" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="Mensagem" type="textarea" class="q-mb-md" />
-                <q-btn label="Enviar mensagem" color="deep-purple-14" glossy class="q-py-md full-width"
-                  icon-right="send" type="submit" />
+                <q-btn label="Enviar mensagem" class="btn-cta q-py-md text-white full-width"
+                  icon-right="send" @click="redirectToWpp()" />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a class="insta text-deep-purple-4" href="https://instagram.com/flaviakamilaf" target="_blank"
+                <a class="text-bold grad" href="https://instagram.com/flaviakamilaf" target="_blank"
                   rel="noreferrer">
                   @flaviakamilaf
                 </a>
@@ -508,6 +508,21 @@
 import { ref } from 'vue';
 
 const isMobile = window.innerWidth < 650;
+
+function openNewTab(url) {
+  window.open(url, '_blank');
+}
+
+function redirectToWpp() {
+  // cria uma mensagem captando pelo email do formulário e redireciona para o whatsapp com a mensagem pronta para enviar, usando a API do whatsapp. O número de telefone do destinatário é +5511999999999.
+  const name = document.querySelector('input[label="Nome"]').value;
+  const email = document.querySelector('input[label="E-mail"]').value;
+  const message = document.querySelector('textarea[label="Mensagem"]').value;
+  const whatsappMessage = `Olá, meu nome é ${name} (${email}). ${message}`;
+  const whatsappUrl = `https://wa.me/5561995451717?text=${encodeURIComponent(whatsappMessage)}`;
+  window.open(whatsappUrl, '_blank');
+}
+
 
 function scrollTo(id) {
   const el = document.getElementById(id)
@@ -611,7 +626,7 @@ function scrollTo(id) {
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #963aed, #6114b8);
   color: #0b0b10;
   font-weight: 800;
 }
@@ -642,15 +657,17 @@ function scrollTo(id) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: grayscale(100%) brightness(0.75);
+
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .35), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(148, 36, 253, 0.075), transparent 55%),
-    linear-gradient(180deg, rgba(5, 5, 8, .55), rgba(5, 5, 8, 0.253));
+    radial-gradient(900px 420px at 20% 25%, #9424fd13, transparent 60%),
+    radial-gradient(800px 400px at 80% 40%, #7c3aed38, transparent 55%),
+    linear-gradient(180deg, rgba(5, 5, 8, 0.171), rgba(5, 5, 8, 0.034));
 }
 
 .hero-content {
@@ -674,12 +691,12 @@ function scrollTo(id) {
   font-size: clamp(2rem, 2.6vw, 3.1rem);
   line-height: 1.05;
   margin: 0;
-  background-color: #07070a0c;
-  backdrop-filter: blur(4px);
+  background-color: #00000094;
+  backdrop-filter: blur(12px);
 }
 
 .grad {
-  background: linear-gradient(90deg, #a78bfa, #5eead4);
+  background: linear-gradient(90deg, #a78bfa, #a02cff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -701,7 +718,7 @@ function scrollTo(id) {
 }
 
 .btn-cta {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #6f27a0, #6114b8);
   color: #0b0b10;
   font-weight: 900;
   border-radius: 14px;
@@ -709,7 +726,7 @@ function scrollTo(id) {
 }
 
 .btn-cta-2 {
-  background: linear-gradient(-90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(-90deg, #6f27a0, #6114b8);
   color: #0b0b10;
   font-weight: 900;
   border-radius: 14px;
@@ -735,6 +752,7 @@ function scrollTo(id) {
   background: rgba(255, 255, 255, .08);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 16px;
+  backdrop-filter: blur(8px);
 }
 
 .mini-title {
@@ -826,7 +844,7 @@ function scrollTo(id) {
 
 .section-dark {
   background: radial-gradient(900px 420px at 30% 20%, rgba(124, 58, 237, .16), transparent 60%),
-    radial-gradient(800px 400px at 80% 60%, rgba(20, 184, 166, .10), transparent 60%),
+    radial-gradient(800px 400px at 80% 60%, rgba(184, 20, 170, 0.1), transparent 60%),
     #07070a;
 }
 
@@ -888,7 +906,7 @@ function scrollTo(id) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(124, 58, 237, .25), rgba(20, 184, 166, .18));
+  background: linear-gradient(90deg, rgba(135, 47, 236, 0.568), rgba(64, 20, 184, 0.18));
   border: 1px solid rgba(255, 255, 255, .14);
 }
 
@@ -925,6 +943,7 @@ function scrollTo(id) {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  filter: grayscale(100%) brightness(0.75);
 }
 
 .parallax-overlay {

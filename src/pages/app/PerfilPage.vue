@@ -3,7 +3,7 @@
     <div class="page-container">
       <div class="row q-col-gutter-md">
         <div class="col-12">
-          <q-card class="bg-grad-1 page-hero-card" flat bordered>
+          <q-card class="bg-grad-2 page-hero-card" flat bordered>
             <q-card-section class="row items-center q-col-gutter-md">
               <div class="col-12 col-md-auto flex flex-center">
                 <q-avatar size="90px" class="hero-avatar">

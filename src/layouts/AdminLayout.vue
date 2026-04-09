@@ -63,7 +63,7 @@
 
       <div class="drawer-footer">
         <div class="text-caption text-grey-6">
-          © 2026 • Admin Panel
+          © 2026 • developed by <a href="https://aitosoftwares.com" target="_blank" class="text-primary">AitoSoftwares</a>
         </div>
       </div>
     </q-drawer>
@@ -115,13 +115,13 @@ function logout () {
 
 .admin{
   background: radial-gradient(900px 500px at 10% 0%, rgba(124,58,237,.25), transparent 60%),
-              radial-gradient(800px 480px at 90% 20%, rgba(20,184,166,.18), transparent 60%),
+              radial-gradient(800px 480px at 90% 20%, rgba(132, 20, 184, 0.18), transparent 60%),
               #0b0b10;
   min-height: 100vh;
 }
 
 .header{
-  background: linear-gradient(90deg, rgba(124,58,237,.65), rgba(20,184,166,.35));
+  background: linear-gradient(90deg, rgba(124,58,237,.65), rgba(105, 20, 184, 0.35));
   backdrop-filter: blur(10px);
 }
 

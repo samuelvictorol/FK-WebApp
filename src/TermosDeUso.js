@@ -1,7 +1,5 @@
 const TermosDeUso = `📄 TERMOS DE USO – PLATAFORMA
 
-Última atualização: {{DATA}}
-
 Bem-vindo(a)! Ao acessar ou utilizar esta plataforma, você concorda com os termos e condições abaixo. Caso não concorde, não utilize o serviço.
 
 1. SOBRE A PLATAFORMA
@@ -102,12 +100,14 @@ Recomendamos que o usuário revise periodicamente.
 
 Em caso de dúvidas ou suporte:
 
-📧 Email: {{SEU_EMAIL}}
-📱 WhatsApp: {{SEU_WHATSAPP}}
+📧 Email: samuel.softdev@outlook.com
+📱 WhatsApp: 61981748795
 
 13. ACEITE
 
 Ao utilizar esta plataforma, você declara que:
+
+Desenvolvido por aitosoftwares.com
 
 Leu
 Compreendeu

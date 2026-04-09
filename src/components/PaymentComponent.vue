@@ -6,7 +6,6 @@
         <div class="text-h5 text-weight-bold safe-text">
           Libere o Acesso Completo
         </div>
-        
       </div>
 
       <q-btn flat round dense icon="close" color="white" @click="emit('close')" />
@@ -39,13 +38,16 @@
             </div>
           </q-card-section>
         </q-card>
+
         <div class="cards-grid q-mb-md">
           <q-card flat bordered class="mini-card">
             <q-card-section class="row items-start no-wrap">
               <q-icon name="bolt" size="22px" class="card-icon q-mr-sm" />
               <div>
                 <div class="mini-title">Aprovação mais rápida</div>
-                <div class="mini-sub">Otimize seu tempo com processos de aprovação mais eficientes.</div>
+                <div class="mini-sub">
+                  Otimize seu tempo com processos de aprovação mais eficientes.
+                </div>
               </div>
             </q-card-section>
           </q-card>
@@ -56,7 +58,7 @@
               <div>
                 <div class="mini-title">Acesso Premium</div>
                 <div class="mini-sub">
-                  Receba todos os resultados do Forms com análises personalizadas pro seu perfil. 
+                  Receba todos os resultados do Forms com análises personalizadas pro seu perfil.
                 </div>
               </div>
             </q-card-section>
@@ -69,23 +71,43 @@
                 <div class="mini-title">Rotina de Estudos</div>
                 <div class="mini-sub">
                   Melhore seu aprendizado com uma rotina de estudos personalizada, baseada no seu desempenho e necessidades.
-                  </div>
+                </div>
               </div>
             </q-card-section>
           </q-card>
         </div>
-        <q-input v-model.trim="email" filled label="E-mail do pagamento" type="email"
-          class="bg-purple-1 q-mb-md rounded-borders" readonly>
+
+        <q-input
+          v-model.trim="email"
+          filled
+          label="E-mail do pagamento"
+          type="email"
+          class="bg-purple-1 q-mb-md rounded-borders"
+          readonly
+        >
           <template #prepend>
             <q-icon name="mail" />
           </template>
         </q-input>
+
         <q-banner v-if="user.email" inline-actions rounded class="info-banner q-mb-md">
           <template #avatar>
             <q-icon name="mail" />
           </template>
           O link será criado para a conta:
           <strong>{{ user.email }}</strong>
+        </q-banner>
+
+        <q-banner
+          v-if="payment.status === 'paid'"
+          inline-actions
+          rounded
+          class="success-banner q-mb-md"
+        >
+          <template #avatar>
+            <q-icon name="verified" />
+          </template>
+          Pagamento identificado com sucesso. Seu acesso premium já foi liberado.
         </q-banner>
 
         <div v-if="payment.payment_url" class="result-box q-mb-md">
@@ -99,13 +121,25 @@
 
           <div class="row q-col-gutter-sm q-mt-sm">
             <div class="col-12 col-sm-auto">
-              <q-btn unelevated color="positive" icon="open_in_new" label="Abrir link" class="full-width"
-                @click="openPaymentLink" />
+              <q-btn
+                unelevated
+                color="positive"
+                icon="open_in_new"
+                label="Abrir link"
+                class="full-width"
+                @click="openPaymentLink"
+              />
             </div>
 
             <div class="col-12 col-sm-auto">
-              <q-btn outline color="white" icon="content_copy" label="Copiar link" class="full-width"
-                @click="copyPaymentLink" />
+              <q-btn
+                outline
+                color="white"
+                icon="content_copy"
+                label="Copiar link"
+                class="full-width"
+                @click="copyPaymentLink"
+              />
             </div>
           </div>
         </div>
@@ -116,9 +150,15 @@
 
     <q-card-actions align="right" class="q-pa-md payment-actions">
       <q-btn flat label="Fechar" color="grey-4" @click="emit('close')" />
-      <q-btn unelevated class="btn-payment" icon="credit_card"
-        :label="payment.payment_url ? 'Gerar novo link' : 'Quero acesso premium'" :loading="loading" :disable="!email"
-        @click="criarLinkPagamento" />
+      <q-btn
+        unelevated
+        class="btn-payment"
+        icon="credit_card"
+        :label="payment.payment_url ? 'Gerar novo link' : 'Quero acesso premium'"
+        :loading="loading"
+        :disable="!email"
+        @click="criarLinkPagamento"
+      />
     </q-card-actions>
   </q-card>
 </template>
@@ -126,17 +166,23 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useQuasar, copyToClipboard } from 'quasar'
+import { useRoute, useRouter } from 'vue-router'
 import { api } from 'boot/axios'
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'premium-activated'])
 const $q = useQuasar()
+const route = useRoute()
+const router = useRouter()
 
 const loading = ref(false)
 const email = ref('')
 const payment = ref({
-  id: '',
   payment_url: '',
-  status: ''
+  status: '',
+  order_nsu: '',
+  transaction_nsu: '',
+  receipt_url: '',
+  capture_method: ''
 })
 
 const user = computed(() => {
@@ -150,6 +196,7 @@ const user = computed(() => {
 
 onMounted(() => {
   email.value = user.value?.email || ''
+  handleInfinitePayReturn()
 })
 
 async function criarLinkPagamento() {
@@ -162,13 +209,14 @@ async function criarLinkPagamento() {
 
   try {
     const { data } = await api.post('/pay/criar-link', {
-      email: email.value.trim()
+      email: email.value.trim().toLowerCase()
     })
 
     payment.value = {
-      id: data?.id || '',
+      ...payment.value,
       payment_url: data?.payment_url || '',
-      status: data?.status || ''
+      status: data?.status || 'pending',
+      order_nsu: data?.order_nsu || email.value.trim().toLowerCase()
     }
 
     if (!payment.value.payment_url) {
@@ -176,6 +224,9 @@ async function criarLinkPagamento() {
     }
 
     notifyTop('Link de pagamento criado com sucesso', 'positive')
+
+    // Se quiser abrir direto sem exigir clique:
+    window.open(payment.value.payment_url, '_blank', 'noopener,noreferrer')
   } catch (error) {
     console.error('[PAYMENT_COMPONENT] erro ao criar link:', error)
     notifyTop(
@@ -188,6 +239,64 @@ async function criarLinkPagamento() {
   } finally {
     loading.value = false
   }
+}
+
+function handleInfinitePayReturn() {
+  const orderNsu = route.query.order_nsu || ''
+  const transactionNsu = route.query.transaction_nsu || ''
+  const receiptUrl = route.query.receipt_url || ''
+  const captureMethod = route.query.capture_method || ''
+  const slug = route.query.slug || ''
+
+  if (!orderNsu && !transactionNsu && !slug) return
+
+  payment.value = {
+    ...payment.value,
+    status: transactionNsu ? 'paid' : 'processing',
+    order_nsu: String(orderNsu),
+    transaction_nsu: String(transactionNsu),
+    receipt_url: String(receiptUrl),
+    capture_method: String(captureMethod)
+  }
+
+  if (
+    orderNsu &&
+    user.value?.email &&
+    String(orderNsu).toLowerCase().trim() === String(user.value.email).toLowerCase().trim()
+  ) {
+    updateLocalUserPremium()
+    emit('premium-activated')
+    notifyTop('Pagamento retornou com sucesso. Estamos liberando seu premium.', 'positive')
+  } else {
+    notifyTop('Retorno de pagamento identificado.', 'info')
+  }
+
+  clearPaymentQueryParams()
+}
+
+function updateLocalUserPremium() {
+  try {
+    const raw = localStorage.getItem('auth_user')
+    if (!raw) return
+
+    const parsed = JSON.parse(raw)
+    parsed.role = 'Plano Premium'
+    localStorage.setItem('auth_user', JSON.stringify(parsed))
+  } catch (error) {
+    console.error('[PAYMENT_COMPONENT] erro ao atualizar auth_user local:', error)
+  }
+}
+
+function clearPaymentQueryParams() {
+  const newQuery = { ...route.query }
+
+  delete newQuery.order_nsu
+  delete newQuery.transaction_nsu
+  delete newQuery.receipt_url
+  delete newQuery.capture_method
+  delete newQuery.slug
+
+  router.replace({ query: newQuery }).catch(() => {})
 }
 
 function openPaymentLink() {
@@ -300,14 +409,15 @@ function notifyTop(message, type = 'positive') {
   border: 1px solid rgba(124, 58, 237, .22);
 }
 
-.warning-banner {
-  background: rgba(255, 193, 7, .10);
-  color: #fff2bf;
-  border: 1px solid rgba(255, 193, 7, .18);
+.success-banner {
+  background: rgba(0, 168, 112, .12);
+  color: #d7ffe8;
+  border: 1px solid rgba(0, 168, 112, .22);
 }
 
 .cards-grid {
   display: grid;
+  gap: 12px;
 }
 
 .mini-card {
@@ -376,6 +486,12 @@ function notifyTop(message, type = 'positive') {
   font-weight: 900;
   border-radius: 12px;
   padding: 10px 16px;
+}
+
+@media (min-width: 781px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 780px) {

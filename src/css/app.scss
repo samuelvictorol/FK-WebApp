@@ -27,17 +27,16 @@ html {
     width: 45%;
 }
 
-.bg-grad-1{
+.bg-grad{
     background: #161616c2;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #161616c2, #020202c6);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right,#000000c4, #141414d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     backdrop-filter: blur(8px);
 }
 .bg-grad-2{
-    background: #161616c2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #161616c2, #020202c6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right,#013fc5a9, #00a8e0d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    backdrop-filter: blur(8px);
+    background: #5601c5a9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #5601c5a9, #882bf3d1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right,#5601c5a9, #882bf3d1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .title-1{
