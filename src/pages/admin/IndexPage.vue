@@ -75,7 +75,7 @@
 
       <q-card-section>
         <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-6">
             <q-btn
               class="action-btn btn-purple full-width"
               unelevated
@@ -85,7 +85,7 @@
             />
           </div>
 
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-6">
             <q-btn
               class="action-btn btn-blue full-width"
               unelevated
@@ -94,7 +94,7 @@
               to="/admin/clientes"
             />
           </div>
-
+<!-- 
           <div class="col-12 col-md-4">
             <q-btn
               class="action-btn btn-teal full-width"
@@ -103,7 +103,7 @@
               label="Painel de Vendas"
               to="/admin/vendas"
             />
-          </div>
+          </div> -->
         </div>
       </q-card-section>
     </q-card>
