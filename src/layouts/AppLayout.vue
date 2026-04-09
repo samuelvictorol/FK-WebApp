@@ -95,6 +95,12 @@
           <q-item-section>Sair</q-item-section>
         </q-item>
       </q-list>
+      <div class="drawer-footer">
+        <div class="text-caption text-grey-6">
+          © 2026 • Desenvolvido por <a href="https://aitosoftwares.com" target="_blank"
+            class="text-primary">AitoSoftwares</a>
+        </div>
+      </div>
     </q-drawer>
 
     <q-page-container class="app-container">

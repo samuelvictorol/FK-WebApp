@@ -7,7 +7,8 @@
         </q-avatar> -->
         <q-toolbar-title class="brand-title">
           <div style="overflow: hidden!important;" class="">
-            <strong>Flávia</strong><strong>Kamila</strong></div>
+            <strong>Flávia</strong><strong>Kamila</strong>
+          </div>
           <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Concursos •
             Estratégia de estudos</div>
         </q-toolbar-title>
@@ -80,8 +81,11 @@
                 Métodos de aprendizagem com base em evidências
               </div> -->
 
-              <h1 class="hero-title q-pa-md rounded-borders safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s" style="overflow: hidden!important;">
-                💡 Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span class="grad">Forma de Aprendizado</span> ideal para <span class="grad">você</span>.
+              <h1
+                class="hero-title q-pa-md rounded-borders safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s"
+                style="overflow: hidden!important;">
+                💡 Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span
+                  class="grad">Forma de Aprendizado</span> ideal para <span class="grad">você</span>.
                 <!-- e receba um
                 <span class="grad">relatório personalizado</span> para estudar melhor. -->
               </h1>
@@ -93,16 +97,20 @@
 
               <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta full-width text-grey-3 animate__animated animate__fadeInUp animate__slower animate__delay-2s" unelevated icon-right="arrow_forward"
-                    label="Começar agora" to="/app" />
+                  <q-btn
+                    class="btn-cta full-width text-grey-3 animate__animated animate__fadeInUp animate__slower animate__delay-2s"
+                    unelevated icon-right="arrow_forward" label="Começar agora" to="/app" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s" unelevated icon-right="apps" label="PDF GRÁTIS"
+                  <q-btn
+                    class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s"
+                    unelevated icon-right="apps" label="PDF GRÁTIS"
                     @click="openNewTab('https://flaviakamila.com.br')" />
                 </div>
                 <div class="col-12 col-sm-auto">
-                  <q-btn class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__slower animate__delay-5s" unelevated icon="play_circle" label="Ver como funciona"
-                    @click="scrollTo('como')" />
+                  <q-btn
+                    class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__slower animate__delay-5s"
+                    unelevated icon="play_circle" label="Ver como funciona" @click="scrollTo('como')" />
                 </div>
               </div>
 
@@ -427,14 +435,13 @@
                 <q-input color="deep-purple-8" filled label="Nome" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="E-mail" type="email" class="q-mb-md" />
                 <q-input color="deep-purple-8" filled label="Mensagem" type="textarea" class="q-mb-md" />
-                <q-btn label="Enviar mensagem" class="btn-cta q-py-md text-white full-width"
-                  icon-right="send" @click="redirectToWpp()" />
+                <q-btn label="Enviar mensagem" class="btn-cta q-py-md text-white full-width" icon-right="send"
+                  @click="redirectToWpp()" />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a class="text-bold grad" href="https://instagram.com/flaviakamilaf" target="_blank"
-                  rel="noreferrer">
+                <a class="text-bold grad" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer">
                   @flaviakamilaf
                 </a>
               </div>
@@ -496,6 +503,13 @@
               <a class="devlink" href="https://aitosoftwares.com/" target="_blank" rel="noreferrer">
                 AitoSoftwares
               </a>
+            </div>
+            <div class="w100 row justify-center ">
+              <q-btn flat round class="q-mt-md" to="/admin">
+                <q-avatar square size="32px" class="rounded-borders">
+                  <img src="/logo.png" alt="Logo" />
+                </q-avatar>
+              </q-btn>
             </div>
           </footer>
         </div>

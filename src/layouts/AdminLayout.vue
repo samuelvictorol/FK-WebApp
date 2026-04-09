@@ -63,7 +63,7 @@
 
       <div class="drawer-footer">
         <div class="text-caption text-grey-6">
-          © 2026 • developed by <a href="https://aitosoftwares.com" target="_blank" class="text-primary">AitoSoftwares</a>
+          © 2026 • Desenvolvido por <a href="https://aitosoftwares.com" target="_blank" class="text-primary">AitoSoftwares</a>
         </div>
       </div>
     </q-drawer>
@@ -80,9 +80,9 @@ import { useRouter } from 'vue-router'
 
 onMounted(() => {
   const password = window.prompt('Digite a senha de acesso ao painel administrativo:')
-  if (password !== 'flaviakamila-app@123') {
-    window.alert('Senha incorreta! Redirecionando para a página de login.')
-    window.location.href = '/login'
+  if (password !== 'flaviakamila-app@123' || password !== 'Flaviakamila-app@123') {
+    window.alert('Senha incorreta! Redirecionando para a página inicial.')
+    window.location.href = '/'
   } 
 })
 
@@ -175,15 +175,7 @@ function logout () {
   color: #99f6e4; /* teal claro */
 }
 
-.drawer-footer{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 12px 16px;
-  border-top: 1px solid rgba(255,255,255,.06);
-  background: rgba(255,255,255,.02);
-}
+
 
 .container{
   background: transparent;
