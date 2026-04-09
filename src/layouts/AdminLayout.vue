@@ -80,7 +80,7 @@ import { useRouter } from 'vue-router'
 
 onMounted(() => {
   const password = window.prompt('Digite a senha de acesso ao painel administrativo:')
-  if (password !== 'flaviakamila-app@123' || password !== 'Flaviakamila-app@123') {
+  if (password !== 'flaviakamila-app@123' && password !== 'Flaviakamila-app@123') {
     window.alert('Senha incorreta! Redirecionando para a página inicial.')
     window.location.href = '/'
   } 

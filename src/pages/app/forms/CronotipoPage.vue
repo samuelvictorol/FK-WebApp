@@ -477,7 +477,7 @@ function escapeHtml(str) {
 }
 
 .btn-recalc {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #7c3aed, #5b14b8);
   color: #ffffff;
   font-weight: 900;
   border-radius: 12px;
@@ -512,7 +512,7 @@ function escapeHtml(str) {
 }
 
 .btn-pdf {
-  background: linear-gradient(90deg, #7c3aed, #14b8a6);
+  background: linear-gradient(90deg, #7c3aed, #9214b8);
   color: #0b0b10;
   font-weight: 900;
   border-radius: 14px;

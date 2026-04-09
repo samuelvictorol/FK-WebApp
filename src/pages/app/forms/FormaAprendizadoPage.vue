@@ -394,7 +394,7 @@ function escapeHtml(str) {
 .hint { display: inline-flex; align-items: center; font-size: .85rem; color: rgba(15,23,42,.72); padding-left: 44px; }
 
 .done-box { margin: 12px; padding: 12px; border-radius: 14px; background: rgba(16,16,22,.04); border: 1px solid rgba(15,23,42,.08); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-.btn-recalc { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #ffffff; font-weight: 900; border-radius: 12px; }
+.btn-recalc { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #ffffff; font-weight: 900; border-radius: 12px; }
 .chat-bottom-anchor { width: 100%; height: 1px; }
 
 .progress { position: fixed; bottom: 0; width: 100%; border-top: 1px solid rgba(255,255,255,.12); padding: 10px 12px; }
@@ -403,5 +403,5 @@ function escapeHtml(str) {
 .result-head { background: rgba(255,255,255,.96); }
 .result-chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
 
-.btn-pdf { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #0b0b10; font-weight: 900; border-radius: 14px; }
+.btn-pdf { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #0b0b10; font-weight: 900; border-radius: 14px; }
 </style>

@@ -82,9 +82,9 @@
               </div> -->
 
               <h1
-                class="hero-title q-pa-md rounded-borders safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s"
-                style="overflow: hidden!important;">
-                💡 Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span
+                class="hero-title q-pa-md  safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s"
+                style="overflow: hidden!important; border-radius: 14px;">
+                Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span
                   class="grad">Forma de Aprendizado</span> ideal para <span class="grad">você</span>.
                 <!-- e receba um
                 <span class="grad">relatório personalizado</span> para estudar melhor. -->

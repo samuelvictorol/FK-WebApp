@@ -406,7 +406,7 @@ function escapeHtml(str) {
   gap: 8px;
 }
 
-.btn-recalc { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #ffffff; font-weight: 900; border-radius: 12px; }
+.btn-recalc { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #ffffff; font-weight: 900; border-radius: 12px; }
 .chat-bottom-anchor { width: 100%; height: 1px; }
 
 .progress {
@@ -421,5 +421,5 @@ function escapeHtml(str) {
 .result-head { background: rgba(255,255,255,.96); }
 .result-chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
 
-.btn-pdf { background: linear-gradient(90deg, #7c3aed, #14b8a6); color: #0b0b10; font-weight: 900; border-radius: 14px; }
+.btn-pdf { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #0b0b10; font-weight: 900; border-radius: 14px; }
 </style>

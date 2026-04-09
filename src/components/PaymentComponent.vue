@@ -97,6 +97,12 @@
           O link será criado para a conta:
           <strong>{{ user.email }}</strong>
         </q-banner>
+        <q-banner inline-actions rounded class="info-banner q-mb-md">
+          <template #avatar>
+            <q-icon name="refresh" />
+          </template>
+          Caso não atualize seu plano premium automaticamente após o pagamento, encerre a sessão e faça login novamente.
+        </q-banner>
 
         <q-banner
           v-if="payment.status === 'paid'"
@@ -371,7 +377,7 @@ function notifyTop(message, type = 'positive') {
   padding: 22px 22px 18px;
   background:
     radial-gradient(700px 280px at 15% 20%, rgba(124, 58, 237, .30), transparent 60%),
-    radial-gradient(700px 260px at 85% 30%, rgba(0, 168, 112, .18), transparent 60%),
+    radial-gradient(700px 260px at 85% 30%, rgba(148, 0, 168, 0.18), transparent 60%),
     linear-gradient(135deg, rgba(12, 12, 18, .98), rgba(22, 22, 30, .98));
   flex-shrink: 0;
 }
