@@ -202,7 +202,7 @@
                         <div class="icon-badge">
                           <q-icon name="mdi-shield-lock-outline" size="18px" />
                         </div>
-                        <div>
+                        <div class="q-pl-sm">
                           <div class="mini-title">Acesso seguro</div>
                           <div class="mini-sub">seus dados protegidos</div>
                         </div>
@@ -216,7 +216,7 @@
                         <div class="icon-badge">
                           <q-icon name="mdi-lightning-bolt-outline" size="18px" />
                         </div>
-                        <div>
+                        <div class="q-pl-sm">
                           <div class="mini-title">Rápido</div>
                           <div class="mini-sub">entre em instantes</div>
                         </div>

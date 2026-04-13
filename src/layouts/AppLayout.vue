@@ -111,13 +111,16 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
+import { api } from 'boot/axios'
 
 const router = useRouter()
 const $q = useQuasar()
 const rightDrawerOpen = ref(false)
+const roleCheckInterval = ref(null)
+
 const user = ref({
   id: '',
   name: '',
@@ -139,6 +142,11 @@ const firstName = computed(() => {
 
 onMounted(() => {
   loadUser()
+  startRoleWatcherIfNeeded()
+})
+
+onBeforeUnmount(() => {
+  stopRoleWatcher()
 })
 
 function loadUser() {
@@ -168,11 +176,103 @@ function loadUser() {
   }
 }
 
+function isPremiumRole(role) {
+  return String(role || '').trim().toLowerCase() === 'plano premium'
+}
+
+function isFreeRole(role) {
+  return String(role || '').trim().toLowerCase() === 'plano gratuito'
+}
+
+function updateLocalUserRole(newRole) {
+  try {
+    const rawUser = localStorage.getItem('auth_user')
+    if (!rawUser) return
+
+    const parsedUser = JSON.parse(rawUser)
+    parsedUser.role = newRole
+    localStorage.setItem('auth_user', JSON.stringify(parsedUser))
+
+    user.value = {
+      ...user.value,
+      role: newRole
+    }
+  } catch (error) {
+    console.error('[APP LAYOUT] erro ao atualizar role no localStorage:', error)
+  }
+}
+
+async function checkUserRole() {
+  try {
+    const currentRole = String(user.value?.role || '').trim()
+
+    if (isPremiumRole(currentRole)) {
+      stopRoleWatcher()
+      return
+    }
+
+    if (!isFreeRole(currentRole)) {
+      return
+    }
+
+    const email = String(user.value?.email || '').trim().toLowerCase()
+    if (!email) return
+
+    const { data } = await api.post('/auth/get-role', { email })
+
+    const updatedRole = String(data?.role || data?.user?.role || '').trim()
+    if (!updatedRole) return
+
+    if (updatedRole !== currentRole) {
+      updateLocalUserRole(updatedRole)
+    }
+
+    if (isPremiumRole(updatedRole)) {
+      stopRoleWatcher()
+
+      $q.notify({
+        type: 'positive',
+        message: 'Seu plano foi atualizado para Premium.',
+        icon: 'verified',
+        position: 'top',
+        progress: true
+      })
+    }
+  } catch (error) {
+    console.error('[APP LAYOUT] erro ao verificar role do usuário:', error)
+  }
+}
+
+function startRoleWatcherIfNeeded() {
+  stopRoleWatcher()
+
+  const currentRole = String(user.value?.role || '').trim()
+
+  if (!isFreeRole(currentRole)) {
+    return
+  }
+
+  checkUserRole()
+
+  roleCheckInterval.value = setInterval(() => {
+    checkUserRole()
+  }, 60000)
+}
+
+function stopRoleWatcher() {
+  if (roleCheckInterval.value) {
+    clearInterval(roleCheckInterval.value)
+    roleCheckInterval.value = null
+  }
+}
+
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
 
 function clearBrowserSession() {
+  stopRoleWatcher()
+
   try {
     localStorage.removeItem('auth_user')
     localStorage.removeItem('token')

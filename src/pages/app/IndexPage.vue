@@ -220,14 +220,6 @@ function togglePaymentDialog() {
   line-height: 1.6;
 }
 
-.btn-cta {
-  background: linear-gradient(135deg, #d93b2b, #ff6b57);
-  color: #fff;
-  font-weight: 900;
-  border-radius: 14px;
-  padding: 12px 18px;
-}
-
 .btn-ghost {
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(217, 59, 43, 0.10);

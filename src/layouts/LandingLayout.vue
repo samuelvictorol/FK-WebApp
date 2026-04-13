@@ -109,7 +109,7 @@
               </div>
 
               <p
-                class="hero-sub safe-text text-grey-3 animate__animated animate__fadeInUp animate__slow"
+                class="hero-sub safe-text text-dark animate__animated animate__fadeInUp animate__slow"
               >
                 Um diagnóstico prático e personalizado para estudar com mais foco, constância e inteligência,
                 respeitando o seu ritmo.

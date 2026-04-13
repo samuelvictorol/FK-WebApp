@@ -3,22 +3,21 @@
     <q-card-section class="payment-head">
       <div>
         <div class="payment-kicker">Acesso premium</div>
-        <div class="text-h5 text-weight-bold safe-text">
+        <div class="text-h5 text-weight-bold safe-text payment-title">
           Libere o Acesso Completo
         </div>
       </div>
 
-      <q-btn flat round dense icon="close" color="white" @click="emit('close')" />
+      <q-btn flat round dense icon="close" class="btn-close-head" @click="emit('close')" />
     </q-card-section>
 
     <q-separator />
 
     <div class="payment-scroll">
       <q-card-section class="q-pa-md">
-
         <q-card flat bordered class="summary-card q-mb-md">
           <q-card-section>
-            <div class="text-subtitle1 text-weight-bold">
+            <div class="text-subtitle1 text-weight-bold summary-title">
               Resumo da cobrança
             </div>
 
@@ -34,7 +33,7 @@
 
             <div class="summary-row">
               <span>Preço</span>
-              <strong style="font-size: 1rem;" class="text-green-14">R$ 49,90</strong>
+              <strong class="price-highlight">R$ 49,90</strong>
             </div>
           </q-card-section>
         </q-card>
@@ -58,7 +57,7 @@
               <div>
                 <div class="mini-title">Acesso Premium</div>
                 <div class="mini-sub">
-                  Receba todos os resultados do Forms com análises personalizadas pro seu perfil.
+                  Receba todos os resultados do Forms com análises personalizadas para o seu perfil.
                 </div>
               </div>
             </q-card-section>
@@ -79,27 +78,29 @@
 
         <q-input
           v-model.trim="email"
-          filled
+          outlined
+          bg-color="white"
           label="E-mail do pagamento"
           type="email"
-          class="bg-purple-1 q-mb-md rounded-borders"
+          class="input-modern q-mb-md"
           readonly
         >
           <template #prepend>
-            <q-icon name="mail" />
+            <q-icon name="mail" color="red-5" />
           </template>
         </q-input>
 
         <q-banner v-if="user.email" inline-actions rounded class="info-banner q-mb-md">
           <template #avatar>
-            <q-icon name="mail" />
+            <q-icon name="mail" color="red-5" />
           </template>
           O link será criado para a conta:
           <strong>{{ user.email }}</strong>
         </q-banner>
+
         <q-banner inline-actions rounded class="info-banner q-mb-md">
           <template #avatar>
-            <q-icon name="refresh" />
+            <q-icon name="refresh" color="red-5" />
           </template>
           Caso não atualize seu plano premium automaticamente após o pagamento, encerre a sessão e faça login novamente.
         </q-banner>
@@ -111,13 +112,13 @@
           class="success-banner q-mb-md"
         >
           <template #avatar>
-            <q-icon name="verified" />
+            <q-icon name="verified" color="green-7" />
           </template>
           Pagamento identificado com sucesso. Seu acesso premium já foi liberado.
         </q-banner>
 
         <div v-if="payment.payment_url" class="result-box q-mb-md">
-          <div class="text-subtitle2 text-weight-bold q-mb-xs">
+          <div class="text-subtitle2 text-weight-bold q-mb-xs result-title">
             Link gerado com sucesso
           </div>
 
@@ -129,10 +130,9 @@
             <div class="col-12 col-sm-auto">
               <q-btn
                 unelevated
-                color="positive"
+                class="btn-open full-width"
                 icon="open_in_new"
                 label="Abrir link"
-                class="full-width"
                 @click="openPaymentLink"
               />
             </div>
@@ -140,10 +140,9 @@
             <div class="col-12 col-sm-auto">
               <q-btn
                 outline
-                color="white"
+                class="btn-copy full-width"
                 icon="content_copy"
                 label="Copiar link"
-                class="full-width"
                 @click="copyPaymentLink"
               />
             </div>
@@ -155,7 +154,7 @@
     <q-separator />
 
     <q-card-actions align="right" class="q-pa-md payment-actions">
-      <q-btn flat label="Fechar" color="grey-4" @click="emit('close')" />
+      <q-btn flat label="Fechar" class="btn-close" @click="emit('close')" />
       <q-btn
         unelevated
         class="btn-payment"
@@ -230,8 +229,6 @@ async function criarLinkPagamento() {
     }
 
     notifyTop('Link de pagamento criado com sucesso', 'positive')
-
-    // Se quiser abrir direto sem exigir clique:
     window.open(payment.value.payment_url, '_blank', 'noopener,noreferrer')
   } catch (error) {
     console.error('[PAYMENT_COMPONENT] erro ao criar link:', error)
@@ -361,12 +358,16 @@ function notifyTop(message, type = 'positive') {
   max-width: 760px;
   height: min(88vh, 820px);
   max-height: 88vh;
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  background: #111318;
-  color: #fff;
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(255, 107, 87, 0.08), transparent 55%),
+    linear-gradient(180deg, #fffaf9 0%, #fff5f3 100%);
+  color: #2a1d1d;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  box-shadow: 0 24px 60px rgba(125, 66, 58, 0.16);
 }
 
 .payment-head {
@@ -376,10 +377,17 @@ function notifyTop(message, type = 'positive') {
   gap: 16px;
   padding: 22px 22px 18px;
   background:
-    radial-gradient(700px 280px at 15% 20%, rgba(124, 58, 237, .30), transparent 60%),
-    radial-gradient(700px 260px at 85% 30%, rgba(148, 0, 168, 0.18), transparent 60%),
-    linear-gradient(135deg, rgba(12, 12, 18, .98), rgba(22, 22, 30, .98));
+    radial-gradient(700px 280px at 15% 20%, rgba(255, 107, 87, 0.18), transparent 60%),
+    linear-gradient(135deg, #fff8f7, #fff2ef);
   flex-shrink: 0;
+}
+
+.payment-title {
+  color: #241717;
+}
+
+.btn-close-head {
+  color: #b13224;
 }
 
 .payment-scroll {
@@ -392,15 +400,16 @@ function notifyTop(message, type = 'positive') {
 
 .payment-actions {
   flex-shrink: 0;
+  background: rgba(255, 252, 251, 0.92);
 }
 
 .payment-kicker {
   display: inline-block;
-  font-size: .74rem;
+  font-size: 0.74rem;
   font-weight: 900;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .75);
+  color: #c43728;
   margin-bottom: 8px;
 }
 
@@ -409,16 +418,21 @@ function notifyTop(message, type = 'positive') {
   word-break: break-word;
 }
 
+.input-modern :deep(.q-field__control) {
+  border-radius: 16px;
+  min-height: 56px;
+}
+
 .info-banner {
-  background: rgba(124, 58, 237, .12);
-  color: #ece7ff;
-  border: 1px solid rgba(124, 58, 237, .22);
+  background: rgba(255, 107, 87, 0.10);
+  color: #6b4844;
+  border: 1px solid rgba(217, 59, 43, 0.10);
 }
 
 .success-banner {
-  background: rgba(0, 168, 112, .12);
-  color: #d7ffe8;
-  border: 1px solid rgba(0, 168, 112, .22);
+  background: rgba(34, 197, 94, 0.10);
+  color: #245a34;
+  border: 1px solid rgba(34, 197, 94, 0.16);
 }
 
 .cards-grid {
@@ -427,33 +441,40 @@ function notifyTop(message, type = 'positive') {
 }
 
 .mini-card {
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .08);
-  color: #fff;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  color: #2a1d1d;
+  box-shadow: 0 14px 30px rgba(125, 66, 58, 0.05);
 }
 
 .card-icon {
-  color: #a78bfa;
+  color: #7e2319;
   margin-top: 2px;
 }
 
 .mini-title {
   font-weight: 900;
   line-height: 1.2;
+  color: #241717;
 }
 
 .mini-sub {
-  font-size: .87rem;
-  color: rgba(255, 255, 255, .72);
+  font-size: 0.87rem;
+  color: #735956;
   line-height: 1.45;
 }
 
 .summary-card {
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .08);
-  color: #fff;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  color: #2a1d1d;
+  box-shadow: 0 14px 30px rgba(125, 66, 58, 0.05);
+}
+
+.summary-title {
+  color: #241717;
 }
 
 .summary-row {
@@ -462,36 +483,70 @@ function notifyTop(message, type = 'positive') {
   justify-content: space-between;
   gap: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  border-bottom: 1px solid rgba(217, 59, 43, 0.08);
+  color: #6a514e;
+}
+
+.summary-row strong {
+  color: #241717;
 }
 
 .summary-row:last-child {
   border-bottom: 0;
 }
 
+.price-highlight {
+  font-size: 1rem;
+  color: #c43728;
+}
+
 .result-box {
-  border-radius: 18px;
+  border-radius: 20px;
   padding: 16px;
-  background: rgba(0, 168, 112, .10);
-  border: 1px solid rgba(0, 168, 112, .20);
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+}
+
+.result-title {
+  color: #241717;
 }
 
 .link-box {
   word-break: break-word;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, .06);
-  color: #d7ffe8;
-  font-size: .92rem;
+  background: #fff8f7;
+  color: #6b4844;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  font-size: 0.92rem;
   line-height: 1.45;
 }
 
 .btn-payment {
-  background: linear-gradient(90deg, rgba(41, 202, 1, 0.92), rgba(0, 168, 112, 0.92));
+  background: linear-gradient(135deg, #7e2319, #ff1e00);
   color: #ffffff;
   font-weight: 900;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 10px 16px;
+  box-shadow: 0 16px 34px rgba(217, 59, 43, 0.18);
+}
+
+.btn-open {
+  background: linear-gradient(135deg, #7e2319, #ff1e00);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 12px;
+}
+
+.btn-copy {
+  color: #b13224;
+  border-color: rgba(217, 59, 43, 0.18);
+  border-radius: 12px;
+}
+
+.btn-close {
+  color: #8b6a66;
+  font-weight: 700;
 }
 
 @media (min-width: 781px) {
