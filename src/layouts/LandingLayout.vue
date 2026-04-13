@@ -571,7 +571,7 @@
                   label="Enviar mensagem"
                   class="btn-cta q-py-md text-white full-width"
                   icon-right="send"
-                  @click="redirectToWpp"
+                  @click="salvarLead"
                 />
               </q-form>
 
@@ -673,13 +673,18 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useQuasar } from 'quasar'
+import { api } from 'boot/axios'
+
+const $q = useQuasar()
 
 const isMobile = ref(window.innerWidth < 650)
 
 const form = ref({
   name: '',
   email: '',
-  message: ''
+  message: '',
+  origem: 'Direto'
 })
 
 function handleResize() {
@@ -690,14 +695,111 @@ function openNewTab(url) {
   window.open(url, '_blank')
 }
 
-function redirectToWpp() {
+function getLeadOrigem() {
+  try {
+    const params = new URLSearchParams(window.location.search)
+    const utmSource = params.get('utm_source')
+
+    if (utmSource && utmSource.trim()) {
+      return utmSource.trim()
+    }
+
+    const referrer = document.referrer || ''
+    if (!referrer) {
+      return 'Direto'
+    }
+
+    const referrerLower = referrer.toLowerCase()
+
+    if (referrerLower.includes('google')) return 'Google'
+    if (referrerLower.includes('facebook')) return 'Facebook'
+    if (referrerLower.includes('instagram')) return 'Instagram'
+    if (referrerLower.includes('tiktok')) return 'TikTok'
+    if (referrerLower.includes('youtube')) return 'YouTube'
+    if (referrerLower.includes('linkedin')) return 'LinkedIn'
+    if (referrerLower.includes('whatsapp')) return 'WhatsApp'
+
+    try {
+      const hostname = new URL(referrer).hostname
+      return hostname || 'Referência Externa'
+    } catch {
+      return 'Referência Externa'
+    }
+  } catch {
+    return 'Direto'
+  }
+}
+
+async function salvarLead() {
   const name = form.value.name?.trim() || ''
   const email = form.value.email?.trim() || ''
   const message = form.value.message?.trim() || ''
+  const origem = getLeadOrigem()
 
-  const whatsappMessage = `Olá, meu nome é ${name} (${email}). ${message}`
-  const whatsappUrl = `https://wa.me/5561995451717?text=${encodeURIComponent(whatsappMessage)}`
-  window.open(whatsappUrl, '_blank')
+  if (!name) {
+    notifyTop('Informe seu nome', 'warning')
+    return
+  }
+
+  if (!email) {
+    notifyTop('Informe seu e-mail', 'warning')
+    return
+  }
+
+  if (!message) {
+    notifyTop('Informe sua mensagem', 'warning')
+    return
+  }
+
+  try {
+    await api.post('/admin/create-lead', {
+      name,
+      email,
+      message,
+      origem
+    })
+
+    form.value = {
+      name: '',
+      email: '',
+      message: '',
+      origem: origem
+    }
+
+    notifyTop('Mensagem enviada com sucesso', 'positive')
+  } catch (error) {
+    console.error('[LANDING] erro ao salvar lead:', error)
+    notifyTop(
+      error?.response?.data?.message ||
+      'Não foi possível enviar sua mensagem',
+      'negative'
+    )
+  }
+}
+
+function notifyTop(message, type = 'positive') {
+  const iconMap = {
+    positive: 'mdi-check-circle-outline',
+    negative: 'mdi-alert-circle-outline',
+    warning: 'mdi-alert-outline',
+    info: 'mdi-information-outline'
+  }
+
+  $q.notify({
+    type,
+    message,
+    icon: iconMap[type] || 'mdi-information-outline',
+    position: 'top',
+    progress: true,
+    timeout: 3000,
+    actions: [
+      {
+        icon: 'mdi-close',
+        color: 'white',
+        round: true
+      }
+    ]
+  })
 }
 
 function scrollTo(id) {
@@ -707,6 +809,7 @@ function scrollTo(id) {
 }
 
 onMounted(() => {
+  form.value.origem = getLeadOrigem()
   window.addEventListener('resize', handleResize)
 })
 

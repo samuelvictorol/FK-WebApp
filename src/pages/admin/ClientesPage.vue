@@ -2,44 +2,44 @@
   <q-page class="page q-pa-md column q-gutter-y-md full-height">
     <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
       <q-breadcrumbs-el icon="home" label="Início" to="/admin" />
-      <q-breadcrumbs-el icon="group" label="Clientes" exact />
+      <q-breadcrumbs-el icon="group" label="Usuários" exact />
     </q-breadcrumbs>
 
     <div class="row justify-between items-center q-col-gutter-sm">
       <div class="col-12 col-sm-auto">
-        <div class="text-h6 text-weight-bold safe-text">Clientes</div>
+        <div class="text-h6 text-weight-bold safe-text page-title">Usuários</div>
       </div>
 
       <div class="col-12 col-sm-auto row justify-end">
         <q-chip outline class="chip">
-          {{ clientesRows.length }} registros
+          {{ usersPagination.rowsNumber }} registros
         </q-chip>
       </div>
     </div>
 
     <div class="table-container">
       <q-table
-        :rows="clientesRows"
-        :columns="columns"
+        :rows="usuariosRows"
+        :columns="userColumns"
         row-key="_id"
         class="tbl"
-        :pagination="{ rowsPerPage: 10 }"
+        v-model:pagination="usersPagination"
         flat
         bordered
         wrap-cells
-        dark
-        :loading="loading"
-        no-data-label="Nenhum cliente encontrado"
-        loading-label="Carregando clientes..."
+        :loading="loadingUsers"
+        no-data-label="Nenhum usuário encontrado"
+        loading-label="Carregando usuários..."
+        @request="onUsersTableRequest"
       >
         <template #top-right>
           <q-btn
             unelevated
             icon="refresh"
-            label="Atualizar"
+            label="Atualizar usuários"
             class="act act-primary"
-            :loading="loading"
-            @click="buscarClientes"
+            :loading="loadingUsers"
+            @click="buscarUsuarios()"
           />
         </template>
 
@@ -47,7 +47,7 @@
           <q-td :props="props">
             <q-chip
               dense
-              :color="Number(props.row.lucro || 0) > 0 ? 'positive' : 'grey-7'"
+              :color="Number(props.row.lucro || 0) > 0 ? 'green-7' : 'grey-6'"
               text-color="white"
             >
               {{ formatMoney(props.row.lucro) }}
@@ -70,8 +70,8 @@
         <template #body-cell-actions="props">
           <q-td :props="props">
             <div class="row items-center no-wrap">
-              <q-btn dense flat icon="account_circle" class="act act-primary" @click="visualizarCliente(props.row)">
-                <q-tooltip>Visualizar Cliente</q-tooltip>
+              <q-btn dense flat icon="account_circle" class="act act-primary" @click="visualizarUsuario(props.row)">
+                <q-tooltip>Visualizar Usuário</q-tooltip>
               </q-btn>
 
               <q-btn
@@ -92,50 +92,112 @@
       </q-table>
     </div>
 
-    <q-dialog v-model="dialogCliente">
+    <div class="row justify-between items-center q-col-gutter-sm q-pt-md">
+      <div class="col-12 col-sm-auto">
+        <div class="text-h6 text-weight-bold safe-text page-title">Leads</div>
+      </div>
+
+      <div class="col-12 col-sm-auto row justify-end">
+        <q-chip outline class="chip">
+          {{ leadsPagination.rowsNumber }} registros
+        </q-chip>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <q-table
+        :rows="leadsRows"
+        :columns="leadColumns"
+        row-key="_id"
+        class="tbl"
+        v-model:pagination="leadsPagination"
+        flat
+        bordered
+        wrap-cells
+        :loading="loadingLeads"
+        no-data-label="Nenhum lead encontrado"
+        loading-label="Carregando leads..."
+        @request="onLeadsTableRequest"
+      >
+        <template #top-right>
+          <q-btn
+            unelevated
+            icon="refresh"
+            label="Atualizar leads"
+            class="act act-primary"
+            :loading="loadingLeads"
+            @click="buscarLeads()"
+          />
+        </template>
+
+        <template #body-cell-origem="props">
+          <q-td :props="props">
+            <q-chip dense class="chip chip-origin">
+              {{ props.row.origem || '-' }}
+            </q-chip>
+          </q-td>
+        </template>
+
+        <template #body-cell-createdAt="props">
+          <q-td :props="props">
+            {{ formatDate(props.row.createdAt) }}
+          </q-td>
+        </template>
+
+        <template #body-cell-actions="props">
+          <q-td :props="props">
+            <q-btn dense flat icon="visibility" class="act act-primary" @click="visualizarLead(props.row)">
+              <q-tooltip>Visualizar Lead</q-tooltip>
+            </q-btn>
+          </q-td>
+        </template>
+      </q-table>
+    </div>
+
+    <q-dialog v-model="dialogUsuario">
       <q-card class="detail-card">
         <q-card-section class="row items-center justify-between">
-          <div class="text-h6 text-weight-bold">Detalhes do Cliente</div>
+          <div class="text-h6 text-weight-bold">Detalhes do Usuário</div>
           <q-btn flat round dense icon="close" v-close-popup />
         </q-card-section>
 
         <q-separator />
 
-        <q-card-section v-if="clienteSelecionado">
+        <q-card-section v-if="usuarioSelecionado">
           <div class="detail-grid q-mb-md">
             <div class="detail-item">
               <div class="detail-label">Nome</div>
-              <div class="detail-value">{{ clienteSelecionado.name || '-' }}</div>
+              <div class="detail-value">{{ usuarioSelecionado.name || '-' }}</div>
             </div>
 
             <div class="detail-item">
               <div class="detail-label">E-mail</div>
-              <div class="detail-value">{{ clienteSelecionado.email || '-' }}</div>
+              <div class="detail-value">{{ usuarioSelecionado.email || '-' }}</div>
             </div>
 
             <div class="detail-item">
               <div class="detail-label">Telefone</div>
-              <div class="detail-value">{{ clienteSelecionado.phone || '-' }}</div>
+              <div class="detail-value">{{ usuarioSelecionado.phone || '-' }}</div>
             </div>
 
             <div class="detail-item">
               <div class="detail-label">Perfil</div>
-              <div class="detail-value">{{ clienteSelecionado.perfil || '-' }}</div>
+              <div class="detail-value">{{ usuarioSelecionado.perfil || '-' }}</div>
             </div>
 
             <div class="detail-item">
               <div class="detail-label">Plano</div>
-              <div class="detail-value">{{ clienteSelecionado.planoAtual || '-' }}</div>
+              <div class="detail-value">{{ usuarioSelecionado.planoAtual || '-' }}</div>
             </div>
 
             <div class="detail-item">
               <div class="detail-label">Lucro</div>
-              <div class="detail-value">{{ formatMoney(clienteSelecionado.lucro) }}</div>
+              <div class="detail-value">{{ formatMoney(usuarioSelecionado.lucro) }}</div>
             </div>
 
             <div class="detail-item detail-item-full">
               <div class="detail-label">ID</div>
-              <div class="detail-value break-all">{{ clienteSelecionado._id || '-' }}</div>
+              <div class="detail-value break-all">{{ usuarioSelecionado._id || '-' }}</div>
             </div>
           </div>
 
@@ -143,29 +205,11 @@
 
           <div class="text-subtitle1 text-weight-bold q-mb-md">Alterar senha</div>
 
-          <!-- <q-input
-            v-model="passwordForm.currentPassword"
-            filled
-            dark
-            color="primary"
-            label="Senha atual"
-            :type="showCurrentPassword ? 'text' : 'password'"
-            class="q-mb-md"
-          >
-            <template #append>
-              <q-icon
-                :name="showCurrentPassword ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="showCurrentPassword = !showCurrentPassword"
-              />
-            </template>
-          </q-input> -->
-
           <q-input
             v-model="passwordForm.newPassword"
-            filled
-            dark
-            color="primary"
+            outlined
+            bg-color="white"
+            color="red-6"
             label="Nova senha"
             :type="showNewPassword ? 'text' : 'password'"
             class="q-mb-md"
@@ -181,9 +225,9 @@
 
           <q-input
             v-model="passwordForm.confirmPassword"
-            filled
-            dark
-            color="primary"
+            outlined
+            bg-color="white"
+            color="red-6"
             label="Confirmar nova senha"
             :type="showConfirmPassword ? 'text' : 'password'"
             class="q-mb-md"
@@ -205,7 +249,7 @@
                 icon="lock_reset"
                 label="Salvar nova senha"
                 :loading="changingPassword"
-                @click="alterarSenhaCliente"
+                @click="alterarSenhaUsuario"
               />
             </div>
 
@@ -214,10 +258,55 @@
                 unelevated
                 class="full-width act act-danger"
                 icon="delete_forever"
-                label="Remover usuário"
                 :loading="deletingUser"
-                @click="removerCliente"
+                label="Remover usuário"
+                @click="removerUsuario"
               />
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="dialogLead">
+      <q-card class="detail-card">
+        <q-card-section class="row items-center justify-between">
+          <div class="text-h6 text-weight-bold">Detalhes do Lead</div>
+          <q-btn flat round dense icon="close" v-close-popup />
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-section v-if="leadSelecionado">
+          <div class="detail-grid q-mb-md">
+            <div class="detail-item">
+              <div class="detail-label">Nome</div>
+              <div class="detail-value">{{ leadSelecionado.name || '-' }}</div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-label">E-mail</div>
+              <div class="detail-value">{{ leadSelecionado.email || '-' }}</div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-label">Origem</div>
+              <div class="detail-value">{{ leadSelecionado.origem || '-' }}</div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-label">Criado em</div>
+              <div class="detail-value">{{ formatDate(leadSelecionado.createdAt) }}</div>
+            </div>
+
+            <div class="detail-item detail-item-full">
+              <div class="detail-label">Mensagem</div>
+              <div class="detail-value break-all">{{ leadSelecionado.message || '-' }}</div>
+            </div>
+
+            <div class="detail-item detail-item-full">
+              <div class="detail-label">ID</div>
+              <div class="detail-value break-all">{{ leadSelecionado._id || '-' }}</div>
             </div>
           </div>
         </q-card-section>
@@ -233,15 +322,18 @@ import { api } from 'boot/axios'
 
 const $q = useQuasar()
 
-const loading = ref(false)
+const loadingUsers = ref(false)
+const loadingLeads = ref(false)
 const updatingUserId = ref('')
 const changingPassword = ref(false)
 const deletingUser = ref(false)
 
-const dialogCliente = ref(false)
-const clienteSelecionado = ref(null)
+const dialogUsuario = ref(false)
+const usuarioSelecionado = ref(null)
 
-const showCurrentPassword = ref(false)
+const dialogLead = ref(false)
+const leadSelecionado = ref(null)
+
 const showNewPassword = ref(false)
 const showConfirmPassword = ref(false)
 
@@ -251,9 +343,26 @@ const passwordForm = ref({
   confirmPassword: ''
 })
 
-const clientesRows = ref([])
+const usuariosRows = ref([])
+const leadsRows = ref([])
 
-const columns = ref([
+const usersPagination = ref({
+  sortBy: 'name',
+  descending: false,
+  page: 1,
+  rowsPerPage: 10,
+  rowsNumber: 0
+})
+
+const leadsPagination = ref({
+  sortBy: 'createdAt',
+  descending: true,
+  page: 1,
+  rowsPerPage: 10,
+  rowsNumber: 0
+})
+
+const userColumns = ref([
   {
     name: 'name',
     label: 'Nome',
@@ -287,32 +396,114 @@ const columns = ref([
   }
 ])
 
+const leadColumns = ref([
+  {
+    name: 'name',
+    label: 'Nome',
+    field: row => row.name,
+    align: 'left',
+    classes: 'sticky-col',
+    headerClasses: 'sticky-col'
+  },
+  {
+    name: 'email',
+    label: 'E-mail',
+    field: row => row.email,
+    align: 'left'
+  },
+  {
+    name: 'origem',
+    label: 'Origem',
+    field: row => row.origem,
+    align: 'left'
+  },
+  {
+    name: 'createdAt',
+    label: 'Criado em',
+    field: row => row.createdAt,
+    align: 'left'
+  },
+  {
+    name: 'actions',
+    label: 'Ações',
+    align: 'center'
+  }
+])
+
 onMounted(() => {
-  buscarClientes()
+  buscarUsuarios()
+  buscarLeads()
 })
 
-async function buscarClientes() {
-  loading.value = true
+function onUsersTableRequest(props) {
+  usersPagination.value = {
+    ...usersPagination.value,
+    page: props.pagination.page,
+    rowsPerPage: props.pagination.rowsPerPage,
+    sortBy: props.pagination.sortBy,
+    descending: props.pagination.descending
+  }
+
+  buscarUsuarios()
+}
+
+function onLeadsTableRequest(props) {
+  leadsPagination.value = {
+    ...leadsPagination.value,
+    page: props.pagination.page,
+    rowsPerPage: props.pagination.rowsPerPage,
+    sortBy: props.pagination.sortBy,
+    descending: props.pagination.descending
+  }
+
+  buscarLeads()
+}
+
+async function buscarUsuarios() {
+  loadingUsers.value = true
 
   try {
-    const { data } = await api.post('/admin/get-users')
+    const { data } = await api.post('/admin/get-users', {
+      page: usersPagination.value.page,
+      limit: usersPagination.value.rowsPerPage
+    })
 
-    clientesRows.value = Array.isArray(data)
-      ? data.map(mapUserToRow)
+    usuariosRows.value = Array.isArray(data?.data)
+      ? data.data.map(mapUserToRow)
       : []
+
+    usersPagination.value.rowsNumber = Number(data?.pagination?.total || 0)
+    usersPagination.value.page = Number(data?.pagination?.page || 1)
+    usersPagination.value.rowsPerPage = Number(data?.pagination?.limit || 10)
   } catch (error) {
     console.error('[ADMIN_GET_USERS_ERROR]', error)
-
-    $q.notify({
-      type: 'negative',
-      message: error?.response?.data?.message || 'Erro ao buscar usuários',
-      icon: 'mdi-alert-circle-outline',
-      position: 'top',
-      progress: true,
-      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
-    })
+    notifyNegative(error?.response?.data?.message || 'Erro ao buscar usuários')
   } finally {
-    loading.value = false
+    loadingUsers.value = false
+  }
+}
+
+async function buscarLeads() {
+  loadingLeads.value = true
+
+  try {
+    const { data } = await api.post('/admin/get-leads', {
+      page: leadsPagination.value.page,
+      limit: leadsPagination.value.rowsPerPage
+    })
+
+    leadsRows.value = Array.isArray(data?.data)
+      ? data.data.map(mapLeadToRow)
+      : []
+
+    leadsPagination.value.rowsNumber = Number(data?.pagination?.total || 0)
+    leadsPagination.value.page = Number(data?.pagination?.page || 1)
+    leadsPagination.value.rowsPerPage = Number(data?.pagination?.limit || 10)
+  } catch (error) {
+    console.error('[ADMIN_GET_LEADS_ERROR]', error)
+    notifyNegative(error?.response?.data?.message || 'Erro ao buscar leads')
+  } finally {
+    loadingLeads.value = false
   }
 }
 
@@ -327,6 +518,17 @@ function mapUserToRow(user) {
     perfil: extractPerfil(user),
     planoAtual: normalizePlano(role),
     lucro: Number(user?.lucro || 0)
+  }
+}
+
+function mapLeadToRow(lead) {
+  return {
+    _id: lead?._id || '',
+    name: lead?.name || '-',
+    email: lead?.email || '-',
+    message: lead?.message || '-',
+    origem: lead?.origem || 'Direto',
+    createdAt: lead?.createdAt || ''
   }
 }
 
@@ -355,13 +557,23 @@ function formatMoney(value) {
   })
 }
 
+function formatDate(value) {
+  if (!value) return '-'
+
+  try {
+    return new Date(value).toLocaleString('pt-BR')
+  } catch {
+    return value
+  }
+}
+
 function getPlanoColor(plano) {
   const normalized = String(plano || '').toLowerCase()
 
-  if (normalized.includes('premium')) return 'amber-10'
-  if (normalized.includes('free') || normalized.includes('gratuito')) return 'grey-7'
+  if (normalized.includes('premium')) return 'orange-8'
+  if (normalized.includes('free') || normalized.includes('gratuito')) return 'grey-6'
   if (normalized.includes('básico') || normalized.includes('basico')) return 'warning'
-  return 'primary'
+  return 'red-5'
 }
 
 function resetPasswordForm() {
@@ -371,45 +583,49 @@ function resetPasswordForm() {
     confirmPassword: ''
   }
 
-  showCurrentPassword.value = false
   showNewPassword.value = false
   showConfirmPassword.value = false
 }
 
-function visualizarCliente(cliente) {
-  clienteSelecionado.value = { ...cliente }
+function visualizarUsuario(usuario) {
+  usuarioSelecionado.value = { ...usuario }
   resetPasswordForm()
-  dialogCliente.value = true
+  dialogUsuario.value = true
 }
 
-async function alternarPlano(cliente) {
-  const nextRole = isPremium(cliente.planoAtual) ? 'Plano Gratuito' : 'Plano Premium'
-  const acao = isPremium(cliente.planoAtual) ? 'tornar gratuito' : 'tornar premium'
+function visualizarLead(lead) {
+  leadSelecionado.value = { ...lead }
+  dialogLead.value = true
+}
+
+async function alternarPlano(usuario) {
+  const nextRole = isPremium(usuario.planoAtual) ? 'Plano Gratuito' : 'Plano Premium'
+  const acao = isPremium(usuario.planoAtual) ? 'tornar gratuito' : 'tornar premium'
 
   try {
-    const confirmed = await abrirConfirmacao(cliente, nextRole, acao)
+    const confirmed = await abrirConfirmacao(usuario, nextRole, acao)
     if (!confirmed) return
 
-    updatingUserId.value = cliente._id
+    updatingUserId.value = usuario._id
 
-    const { data } = await api.post(`/admin/give-role/${cliente._id}/${encodeURIComponent(nextRole)}`)
+    await api.post(`/admin/give-role/${usuario._id}/${encodeURIComponent(nextRole)}`)
 
     const novoEhPremium = nextRole.toLowerCase().includes('premium')
-    cliente.planoAtual = nextRole
-    cliente.lucro = novoEhPremium ? 49.9 : 0
+    usuario.planoAtual = nextRole
+    usuario.lucro = novoEhPremium ? 49.9 : 0
 
-    const index = clientesRows.value.findIndex(item => item._id === cliente._id)
+    const index = usuariosRows.value.findIndex(item => item._id === usuario._id)
     if (index !== -1) {
-      clientesRows.value[index] = { ...cliente }
+      usuariosRows.value[index] = { ...usuario }
     }
 
-    if (clienteSelecionado.value?._id === cliente._id) {
-      clienteSelecionado.value = { ...cliente }
+    if (usuarioSelecionado.value?._id === usuario._id) {
+      usuarioSelecionado.value = { ...usuario }
     }
 
     $q.notify({
       type: 'positive',
-      message: `Plano do Usuário atualizado com sucesso.`,
+      message: 'Plano do usuário atualizado com sucesso.',
       icon: 'mdi-check-circle-outline',
       position: 'top',
       progress: true,
@@ -417,28 +633,15 @@ async function alternarPlano(cliente) {
     })
   } catch (error) {
     if (error === 'cancelled') return
-
     console.error('[ADMIN_GIVE_ROLE_ERROR]', error)
-
-    $q.notify({
-      type: 'negative',
-      message: error?.response?.data?.message || 'Erro ao atualizar plano do usuário',
-      icon: 'mdi-alert-circle-outline',
-      position: 'top',
-      progress: true,
-      actions: [{ icon: 'mdi-close', color: 'white', round: true }]
-    })
+    notifyNegative(error?.response?.data?.message || 'Erro ao atualizar plano do usuário')
   } finally {
     updatingUserId.value = ''
   }
 }
 
-async function alterarSenhaCliente() {
-  if (!clienteSelecionado.value) return
-
-  // if (!passwordForm.value.currentPassword?.trim()) {
-  //   return notifyNegative('Informe a senha atual')
-  // }
+async function alterarSenhaUsuario() {
+  if (!usuarioSelecionado.value) return
 
   if (!passwordForm.value.newPassword?.trim()) {
     return notifyNegative('Informe a nova senha')
@@ -460,10 +663,10 @@ async function alterarSenhaCliente() {
       newPassword: passwordForm.value.newPassword.trim()
     }
 
-    if (clienteSelecionado.value.email && clienteSelecionado.value.email !== '-') {
-      payload.email = clienteSelecionado.value.email.trim()
-    } else if (clienteSelecionado.value.phone && clienteSelecionado.value.phone !== '-') {
-      payload.phone = clienteSelecionado.value.phone.trim()
+    if (usuarioSelecionado.value.email && usuarioSelecionado.value.email !== '-') {
+      payload.email = usuarioSelecionado.value.email.trim()
+    } else if (usuarioSelecionado.value.phone && usuarioSelecionado.value.phone !== '-') {
+      payload.phone = usuarioSelecionado.value.phone.trim()
     } else {
       return notifyNegative('Usuário sem e-mail ou telefone para localizar a conta')
     }
@@ -488,31 +691,32 @@ async function alterarSenhaCliente() {
   }
 }
 
-async function removerCliente() {
-  if (!clienteSelecionado.value?._id) return
+async function removerUsuario() {
+  if (!usuarioSelecionado.value?._id) return
 
   try {
-    const confirmed = await abrirConfirmacaoExclusao(clienteSelecionado.value)
+    const confirmed = await abrirConfirmacaoExclusao(usuarioSelecionado.value)
     if (!confirmed) return
 
     deletingUser.value = true
 
     const payload = {}
 
-    if (clienteSelecionado.value.email && clienteSelecionado.value.email !== '-') {
-      payload.email = clienteSelecionado.value.email.trim()
-    } else if (clienteSelecionado.value.phone && clienteSelecionado.value.phone !== '-') {
-      payload.phone = clienteSelecionado.value.phone.trim()
+    if (usuarioSelecionado.value.email && usuarioSelecionado.value.email !== '-') {
+      payload.email = usuarioSelecionado.value.email.trim()
+    } else if (usuarioSelecionado.value.phone && usuarioSelecionado.value.phone !== '-') {
+      payload.phone = usuarioSelecionado.value.phone.trim()
     } else {
-      payload.userId = clienteSelecionado.value._id
+      payload.userId = usuarioSelecionado.value._id
     }
 
     const { data } = await api.delete('/auth/delete-acc', { data: payload })
 
-    clientesRows.value = clientesRows.value.filter(item => item._id !== clienteSelecionado.value._id)
+    usuariosRows.value = usuariosRows.value.filter(item => item._id !== usuarioSelecionado.value._id)
+    usersPagination.value.rowsNumber = Math.max(0, usersPagination.value.rowsNumber - 1)
 
-    dialogCliente.value = false
-    clienteSelecionado.value = null
+    dialogUsuario.value = false
+    usuarioSelecionado.value = null
     resetPasswordForm()
 
     $q.notify({
@@ -525,7 +729,6 @@ async function removerCliente() {
     })
   } catch (error) {
     if (error === 'cancelled') return
-
     console.error('[AUTH_DELETE_ACC_ERROR]', error)
     notifyNegative(error?.response?.data?.message || 'Erro ao remover usuário')
   } finally {
@@ -533,11 +736,11 @@ async function removerCliente() {
   }
 }
 
-function abrirConfirmacao(cliente, nextRole, acao) {
+function abrirConfirmacao(usuario, nextRole, acao) {
   return new Promise((resolve, reject) => {
     $q.dialog({
       title: 'Alterar plano',
-      message: `Deseja ${acao} o usuário ${cliente.name || 'selecionado'} para ${nextRole}?`,
+      message: `Deseja ${acao} o usuário ${usuario.name || 'selecionado'} para ${nextRole}?`,
       cancel: true,
       persistent: true,
       ok: {
@@ -555,11 +758,11 @@ function abrirConfirmacao(cliente, nextRole, acao) {
   })
 }
 
-function abrirConfirmacaoExclusao(cliente) {
+function abrirConfirmacaoExclusao(usuario) {
   return new Promise((resolve, reject) => {
     $q.dialog({
       title: 'Remover usuário',
-      message: `Deseja remover permanentemente o usuário ${cliente.name || 'selecionado'}?`,
+      message: `Deseja remover permanentemente o usuário ${usuario.name || 'selecionado'}?`,
       cancel: true,
       persistent: true,
       ok: {
@@ -596,20 +799,28 @@ function notifyNegative(message) {
 
 .page {
   background: transparent;
-  color: rgba(255,255,255,.92);
+  color: #2a1d1d;
+}
+
+.page-title {
+  color: #241717;
 }
 
 .crumbs {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(217,59,43,.08);
   padding: 10px 12px;
   border-radius: 14px;
 }
 
 .chip {
-  color: rgba(255,255,255,.90);
-  border-color: rgba(124,58,237,.35);
-  background: rgba(124,58,237,.10);
+  color: #b13224;
+  border-color: rgba(217,59,43,.20);
+  background: rgba(255,107,87,.08);
+}
+
+.chip-origin {
+  color: #9a3412;
 }
 
 .table-container {
@@ -618,65 +829,69 @@ function notifyNegative(message) {
 }
 
 .tbl {
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(217,59,43,.08);
+  box-shadow: 0 14px 34px rgba(125,66,58,.06);
 }
 
 .tbl :deep(.q-table__top),
 .tbl :deep(.q-table__bottom) {
-  background: rgba(255,255,255,.02);
+  background: rgba(255,255,255,.70);
+  color: #2a1d1d;
 }
 
 .tbl :deep(th) {
-  color: rgba(255,255,255,.86);
-  background: rgba(255,255,255,.02);
+  color: #6f5653;
+  background: rgba(255,248,246,.96);
+  font-weight: 800;
 }
 
 .tbl :deep(td) {
-  color: rgba(255,255,255,.86);
+  color: #2a1d1d;
 }
 
 .tbl :deep(.q-table__grid-item) {
-  background: rgba(255,255,255,.03);
+  background: rgba(255,255,255,.90);
 }
 
 .tbl :deep(.sticky-col) {
   position: sticky;
   left: 0;
   z-index: 2;
-  background: rgba(12,12,18,.96);
+  background: rgba(255,250,249,.98);
 }
 
 .act {
   border-radius: 12px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.86);
+  border: 1px solid rgba(217,59,43,.08);
   margin-right: 6px;
 }
 
-.act-primary { color: #c4b5fd; }
-.act-premium { color: #fcd34d; }
-.act-free { color: #93c5fd; }
+.act-primary { color: #c43728; }
+.act-premium { color: #d97706; }
+.act-free { color: #64748b; }
 
 .act-save {
-  color: #86efac;
-  border-color: rgba(134, 239, 172, .35);
-  background: rgba(134, 239, 172, .08);
+  color: #ffffff;
+  border-color: rgba(217,59,43,.18);
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
 }
 
 .act-danger {
-  color: #fca5a5;
-  border-color: rgba(252, 165, 165, .35);
-  background: rgba(239, 68, 68, .08);
+  color: #ffffff;
+  border-color: rgba(239,68,68,.18);
+  background: linear-gradient(135deg, #dc2626, #ef4444);
 }
 
 .detail-card {
   width: min(94vw, 720px);
-  background: #111318;
-  color: #fff;
-  border-radius: 18px;
+  background: #fffdfc;
+  color: #241717;
+  border-radius: 20px;
+  border: 1px solid rgba(217,59,43,.10);
 }
 
 .detail-grid {
@@ -688,8 +903,8 @@ function notifyNegative(message) {
 .detail-item {
   padding: 12px;
   border-radius: 12px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,248,246,.90);
+  border: 1px solid rgba(217,59,43,.08);
 }
 
 .detail-item-full {
@@ -698,13 +913,13 @@ function notifyNegative(message) {
 
 .detail-label {
   font-size: .75rem;
-  color: rgba(255,255,255,.62);
+  color: #8a6a67;
   margin-bottom: 4px;
 }
 
 .detail-value {
   font-weight: 700;
-  color: rgba(255,255,255,.92);
+  color: #2a1d1d;
 }
 
 .break-all {

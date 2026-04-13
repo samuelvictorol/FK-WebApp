@@ -6,7 +6,7 @@
     </q-breadcrumbs>
 
     <div class="w100 row justify-between items-center q-my-md">
-      <div class="text-h6 text-weight-bold safe-text">Formulários</div>
+      <div class="text-h6 text-weight-bold safe-text page-title">Formulários</div>
       <q-chip outline class="chip">read-only</q-chip>
     </div>
 
@@ -18,7 +18,6 @@
       flat
       bordered
       :rows-per-page-options="[5, 10, 20]"
-      dark
     >
       <template #body-cell-actions="props">
         <q-td align="center">
@@ -39,17 +38,17 @@
     <q-dialog v-model="dialog" full-width>
       <q-card class="dlg" flat bordered>
         <q-card-section class="dlg-head row items-center justify-between">
-          <div class="text-h6 text-weight-bold safe-text">
+          <div class="text-h6 text-weight-bold safe-text dlg-title">
             {{ formHandleName }}
           </div>
           <q-btn flat round icon="close" v-close-popup class="icon-btn" />
         </q-card-section>
 
-        <q-separator dark />
+        <q-separator />
 
         <q-card-section class="dlg-body scroll">
           <div v-for="(q, idx) in perguntasRespostas" :key="idx" class="q-mb-lg">
-            <div class="text-subtitle1 text-weight-bold text-white safe-text">
+            <div class="text-subtitle1 text-weight-bold safe-text question-title">
               {{ idx + 1 }}. {{ q.question }}
             </div>
 
@@ -60,7 +59,7 @@
                 value: o.option
               }))"
               type="radio"
-              color="deep-purple-4"
+              color="red-5"
               readonly
               class="q-mt-sm opt"
             />
@@ -68,12 +67,12 @@
 
           <div class="results q-mt-md">
             <div class="text-h6 text-weight-bold q-mb-sm safe-text">Resultados</div>
-            <q-separator dark />
-            <div class="q-mt-md safe-text" v-html="resultado.replace(/\n/g, '<br>')"></div>
+            <q-separator />
+            <div class="q-mt-md safe-text result-text" v-html="resultado.replace(/\n/g, '<br>')"></div>
           </div>
         </q-card-section>
 
-        <q-separator dark />
+        <q-separator />
 
         <q-card-actions align="right">
           <q-btn flat label="Fechar" class="act act-primary" v-close-popup />
@@ -128,7 +127,7 @@ const columns = ref([
   }
 ])
 
-async function getForm (formUrl) {
+async function getForm(formUrl) {
   try {
     const response = await api.post(formUrl)
     perguntasRespostas.value = response.data
@@ -138,7 +137,7 @@ async function getForm (formUrl) {
   }
 }
 
-async function openForm (title) {
+async function openForm(title) {
   formHandleName.value = title
 
   switch (title) {
@@ -179,82 +178,99 @@ async function openForm (title) {
 :global(.row > [class*="col-"]) { min-width: 0; }
 .safe-text { overflow-wrap: anywhere; word-break: break-word; }
 
-.page{
+.page {
   background: transparent;
-  color: rgba(255,255,255,.92);
+  color: #2a1d1d;
 }
 
-.crumbs{
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+.page-title {
+  color: #241717;
+}
+
+.crumbs {
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(217,59,43,.08);
   padding: 10px 12px;
   border-radius: 14px;
 }
 
-.chip{
-  color: rgba(255,255,255,.90);
-  border-color: rgba(124,58,237,.35);
-  background: rgba(124,58,237,.10);
+.chip {
+  color: #b13224;
+  border-color: rgba(217,59,43,.20);
+  background: rgba(255,107,87,.08);
 }
 
-.tbl{
-  border-radius: 16px;
+.tbl {
+  border-radius: 18px;
   overflow: hidden;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(217,59,43,.08);
+  box-shadow: 0 14px 34px rgba(125,66,58,.06);
 }
 
-.tbl :deep(th){
-  color: rgba(255,255,255,.86);
-  background: rgba(255,255,255,.02);
+.tbl :deep(th) {
+  color: #6f5653;
+  background: rgba(255,248,246,.96);
+  font-weight: 800;
 }
 
-.tbl :deep(td){
-  color: rgba(255,255,255,.86);
+.tbl :deep(td) {
+  color: #2a1d1d;
 }
 
-/* sticky primeira coluna */
-.tbl :deep(.sticky-col){
+.tbl :deep(.sticky-col) {
   position: sticky;
   left: 0;
   z-index: 2;
-  background: rgba(12,12,18,.96);
+  background: rgba(255,250,249,.98);
 }
 
-.act{
+.act {
   border-radius: 12px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.86);
+  border: 1px solid rgba(217,59,43,.08);
 }
 
-.act-primary{ color: #c4b5fd; }
-.icon-btn{ color: rgba(255,255,255,.92); }
+.act-primary { color: #c43728; }
+.icon-btn { color: #c43728; }
 
-.dlg{
+.dlg {
   max-width: 900px;
   margin: 0 auto;
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
-  background: rgba(12,12,18,.98);
-  border: 1px solid rgba(255,255,255,.10);
+  background: #fffdfc;
+  border: 1px solid rgba(217,59,43,.10);
 }
 
-.dlg-head{
-  background: rgba(255,255,255,.03);
+.dlg-head {
+  background: rgba(255,248,246,.96);
 }
 
-.dlg-body{
+.dlg-title {
+  color: #241717;
+}
+
+.dlg-body {
   max-height: 72vh;
 }
 
-.opt :deep(.q-radio__label){
-  color: rgba(255,255,255,.88);
+.question-title {
+  color: #2a1d1d;
 }
 
-.results{
+.opt :deep(.q-radio__label) {
+  color: #5f4947;
+}
+
+.results {
   border-radius: 14px;
   padding: 12px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,248,246,.90);
+  border: 1px solid rgba(217,59,43,.08);
+}
+
+.result-text {
+  color: #5f4947;
 }
 </style>

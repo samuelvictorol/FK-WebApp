@@ -15,15 +15,15 @@
       v-model="rightDrawerOpen"
       side="right"
       elevated
-      class="drawer bg-dark text-white"
+      class="drawer"
       :width="290"
     >
       <div class="drawer-head">
-        <div class="text-subtitle1 text-weight-bold">Menu</div>
-        <div class="text-caption text-grey-5">Painel administrativo</div>
+        <div class="text-subtitle1 text-weight-bold drawer-title">Menu</div>
+        <div class="text-caption drawer-subtitle">Painel administrativo</div>
       </div>
 
-      <q-separator dark />
+      <q-separator />
 
       <q-list class="q-pt-sm">
         <q-item
@@ -37,33 +37,27 @@
           <q-item-section avatar>
             <q-icon :name="option.icon" size="22px" class="menu-icon" />
           </q-item-section>
-          <q-item-section class="text-weight-bold safe-text">
+          <q-item-section class="text-weight-bold safe-text menu-label">
             {{ option.label }}
           </q-item-section>
         </q-item>
       </q-list>
 
-      <q-separator dark class="q-my-sm" />
+      <q-separator class="q-my-sm" />
 
       <q-list>
-        <!-- <q-item clickable class="menu-item">
-          <q-item-section avatar>
-            <q-icon name="help" size="22px" class="menu-icon-alt" />
-          </q-item-section>
-          <q-item-section class="safe-text">Ajuda</q-item-section>
-        </q-item> -->
-
         <q-item clickable class="menu-item" @click="logout()">
           <q-item-section avatar>
             <q-icon name="logout" size="22px" class="menu-icon-alt" />
           </q-item-section>
-          <q-item-section class="safe-text">Sair</q-item-section>
+          <q-item-section class="safe-text menu-label">Sair</q-item-section>
         </q-item>
       </q-list>
 
       <div class="drawer-footer">
-        <div class="text-caption text-grey-6">
-          © 2026 • Desenvolvido por <a href="https://aitosoftwares.com" target="_blank" class="text-primary">AitoSoftwares</a>
+        <div class="text-caption drawer-footer-text">
+          © 2026 • Desenvolvido por
+          <a href="https://aitosoftwares.com" target="_blank" class="footer-link">AitoSoftwares</a>
         </div>
       </div>
     </q-drawer>
@@ -83,7 +77,7 @@ onMounted(() => {
   if (password !== 'flaviakamila-app@123' && password !== 'Flaviakamila-app@123') {
     window.alert('Senha incorreta! Redirecionando para a página inicial.')
     window.location.href = '/'
-  } 
+  }
 })
 
 const router = useRouter()
@@ -93,14 +87,13 @@ const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
   { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
-  // { icon: 'paid', to: '/admin/vendas', label: 'Vendas' }
 ])
 
-function toggleRightDrawer () {
+function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value
 }
 
-function logout () {
+function logout() {
   const ok = window.confirm('Você tem certeza que deseja sair?')
   if (!ok) return
   router.push('/')
@@ -108,76 +101,104 @@ function logout () {
 </script>
 
 <style scoped>
-/* anti overflow global */
 :global(html), :global(body), :global(#q-app) { overflow-x: clip; }
 :global(.row > [class*="col-"]) { min-width: 0; }
 .safe-text { overflow-wrap: anywhere; word-break: break-word; }
 
-.admin{
-  background: radial-gradient(900px 500px at 10% 0%, rgba(124,58,237,.25), transparent 60%),
-              radial-gradient(800px 480px at 90% 20%, rgba(132, 20, 184, 0.18), transparent 60%),
-              #0b0b10;
+.admin {
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(255, 107, 87, 0.10), transparent 60%),
+    radial-gradient(800px 480px at 90% 20%, rgba(217, 59, 43, 0.08), transparent 60%),
+    linear-gradient(180deg, #fff9f8 0%, #fff5f3 100%);
   min-height: 100vh;
 }
 
-.header{
-  background: linear-gradient(90deg, rgba(124,58,237,.65), rgba(105, 20, 184, 0.35));
-  backdrop-filter: blur(10px);
+.header {
+  background: rgba(255, 250, 249, 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(217, 59, 43, 0.10);
+  color: #241717;
 }
 
-.toolbar{
+.toolbar {
   min-height: 60px;
 }
 
-.title{
+.title {
   font-weight: 900;
   letter-spacing: .3px;
+  color: #241717;
 }
 
-.icon-btn{
-  color: rgba(255,255,255,.95);
+.icon-btn {
+  color: #c43728;
 }
 
-.drawer{
-  background: rgba(12, 12, 18, .96);
-  color: rgba(255,255,255,.92);
-  backdrop-filter: blur(10px);
+.drawer {
+  background: rgba(255, 252, 251, 0.98);
+  color: #241717;
+  backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(217, 59, 43, 0.10);
 }
 
-.drawer-head{
+.drawer-head {
   padding: 16px 16px 10px;
 }
 
-.menu-item{
+.drawer-title {
+  color: #b13224;
+}
+
+.drawer-subtitle {
+  color: #7b6360;
+}
+
+.menu-item {
   border-radius: 14px;
   margin: 6px 10px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(217, 59, 43, 0.08);
   transition: transform .16s ease, background .16s ease, border-color .16s ease;
 }
 
-.menu-item:hover{
+.menu-item:hover {
   transform: translateY(-1px);
-  background: rgba(255,255,255,.05);
-  border-color: rgba(124,58,237,.30);
+  background: rgba(255, 248, 246, 0.96);
+  border-color: rgba(217, 59, 43, 0.18);
 }
 
-.menu-active{
-  background: linear-gradient(90deg, rgba(124,58,237,.26), rgba(20,184,166,.14));
-  border-color: rgba(124,58,237,.40);
+.menu-active {
+  background: linear-gradient(90deg, rgba(255, 107, 87, 0.14), rgba(217, 59, 43, 0.08));
+  border-color: rgba(217, 59, 43, 0.25);
 }
 
-.menu-icon{
-  color: #c4b5fd; /* lilás claro */
+.menu-icon {
+  color: #d24d3c;
 }
 
-.menu-icon-alt{
-  color: #99f6e4; /* teal claro */
+.menu-icon-alt {
+  color: #c43728;
 }
 
+.menu-label {
+  color: #2a1d1d;
+}
 
+.drawer-footer {
+  padding: 16px;
+}
 
-.container{
+.drawer-footer-text {
+  color: #7b6360;
+}
+
+.footer-link {
+  color: #c43728;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.container {
   background: transparent;
 }
 </style>

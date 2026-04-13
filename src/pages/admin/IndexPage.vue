@@ -7,11 +7,11 @@
     <div class="hero">
       <div class="row items-start justify-between q-col-gutter-md">
         <div class="col-12 col-md-8">
-          <div class="text-h4 text-weight-bold safe-text">
+          <div class="text-h4 text-weight-bold safe-text hero-title">
             Painel do Admin
           </div>
-          <div class="text-subtitle1 q-mt-xs text-grey-4 safe-text">
-            Olá, <strong class="text-white">{{ userName }}</strong>. Aqui está um resumo rápido do dia.
+          <div class="text-subtitle1 q-mt-xs hero-sub safe-text">
+            Olá, <strong class="hero-user">{{ userName }}</strong>. Aqui está um resumo rápido do dia.
           </div>
         </div>
 
@@ -19,8 +19,8 @@
           <q-card class="mini-card" flat bordered>
             <q-card-section class="row items-center justify-between">
               <div>
-                <div class="text-caption text-grey-5">Status</div>
-                <div class="text-subtitle2 text-weight-bold safe-text">
+                <div class="text-caption mini-label">Status</div>
+                <div class="text-subtitle2 text-weight-bold safe-text mini-value">
                   Sistema online
                 </div>
               </div>
@@ -33,12 +33,12 @@
 
     <div class="row q-col-gutter-md">
       <div class="col-12">
-        <q-card class="kpi-card kpi-teal" flat bordered>
+        <q-card class="kpi-card kpi-main" flat bordered>
           <q-card-section class="row items-center justify-between">
             <div>
-              <div class="text-caption text-grey-4">Lucro Total</div>
+              <div class="text-caption kpi-label">Lucro Total</div>
               <div class="kpi-value safe-text">{{ formatMoney(lucroTotal) }}</div>
-              <div class="text-caption text-grey-5 q-mt-xs">
+              <div class="text-caption kpi-sub q-mt-xs">
                 {{ premiumUsersCount }} usuário(s) premium
               </div>
             </div>
@@ -51,8 +51,8 @@
     <q-card class="actions-card" flat bordered>
       <q-card-section class="row items-center justify-between">
         <div>
-          <div class="text-subtitle1 text-weight-bold safe-text">Ações rápidas</div>
-          <div class="text-caption text-grey-5 safe-text">Acesse as áreas principais em 1 clique.</div>
+          <div class="text-subtitle1 text-weight-bold safe-text section-title">Ações rápidas</div>
+          <div class="text-caption section-sub safe-text">Acesse as áreas principais em 1 clique.</div>
         </div>
         <div class="row items-center q-gutter-sm">
           <q-chip outline class="chip">
@@ -71,13 +71,13 @@
         </div>
       </q-card-section>
 
-      <q-separator dark />
+      <q-separator />
 
       <q-card-section>
         <div class="row q-col-gutter-md">
           <div class="col-12 col-md-6">
             <q-btn
-              class="action-btn btn-purple full-width"
+              class="action-btn btn-main full-width"
               unelevated
               icon-right="list_alt"
               label="Formulários"
@@ -87,23 +87,13 @@
 
           <div class="col-12 col-md-6">
             <q-btn
-              class="action-btn btn-blue full-width"
+              class="action-btn btn-soft full-width"
               unelevated
               icon-right="group"
               label="Clientes"
               to="/admin/clientes"
             />
           </div>
-<!-- 
-          <div class="col-12 col-md-4">
-            <q-btn
-              class="action-btn btn-teal full-width"
-              unelevated
-              icon-right="paid"
-              label="Painel de Vendas"
-              to="/admin/vendas"
-            />
-          </div> -->
         </div>
       </q-card-section>
     </q-card>
@@ -111,8 +101,8 @@
     <q-card class="premium-card" flat bordered>
       <q-card-section class="row items-center justify-between">
         <div>
-          <div class="text-subtitle1 text-weight-bold safe-text">Resumo premium</div>
-          <div class="text-caption text-grey-5 safe-text">
+          <div class="text-subtitle1 text-weight-bold safe-text section-title">Resumo premium</div>
+          <div class="text-caption section-sub safe-text">
             Baseado no endpoint de usuários premium.
           </div>
         </div>
@@ -120,11 +110,11 @@
         <q-icon name="workspace_premium" size="22px" class="premium-ic" />
       </q-card-section>
 
-      <q-separator dark />
+      <q-separator />
 
       <q-card-section>
-        <div v-if="loading" class="row items-center q-gutter-sm text-grey-4">
-          <q-spinner />
+        <div v-if="loading" class="row items-center q-gutter-sm loading-text">
+          <q-spinner color="red-5" />
           <span>Carregando dados premium...</span>
         </div>
 
@@ -156,7 +146,7 @@
     <q-card class="note-card" flat bordered>
       <q-card-section class="row items-center no-wrap">
         <q-icon name="info" size="20px" class="q-mr-sm note-ic" />
-        <div class="text-caption text-grey-4 safe-text">
+        <div class="text-caption note-text safe-text">
           Dica: você pode abrir o menu no canto superior direito para navegar rapidamente.
         </div>
       </q-card-section>
@@ -231,147 +221,186 @@ function formatMoney(value) {
 :global(.row > [class*="col-"]) { min-width: 0; }
 .safe-text { overflow-wrap: anywhere; word-break: break-word; }
 
-.page{
+.page {
   background: transparent;
-  color: rgba(255,255,255,.92);
+  color: #2a1d1d;
 }
 
-.crumbs{
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+.crumbs {
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(217,59,43,.08);
   padding: 10px 12px;
   border-radius: 14px;
 }
 
-.hero{
+.hero {
   padding: 10px 2px 0;
 }
 
-.mini-card{
+.hero-title {
+  color: #241717;
+}
+
+.hero-sub {
+  color: #755c58;
+}
+
+.hero-user {
+  color: #c43728;
+}
+
+.mini-card {
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(217,59,43,.08);
+  box-shadow: 0 14px 30px rgba(125,66,58,.06);
 }
 
-.badge-ok{
-  background: rgba(34,197,94,.18);
-  color: rgba(187,247,208,.98);
-  border: 1px solid rgba(34,197,94,.25);
+.mini-label {
+  color: #8a6a67;
 }
 
-.kpi-card{
+.mini-value {
+  color: #241717;
+}
+
+.badge-ok {
+  background: rgba(34,197,94,.16);
+  color: #166534;
+  border: 1px solid rgba(34,197,94,.18);
+}
+
+.kpi-card {
   border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(217,59,43,.08);
 }
 
-.kpi-teal{
-  background: radial-gradient(900px 500px at 100% 0%, rgba(132, 20, 184, 0.24), transparent 60%),
-              rgba(255,255,255,.03);
+.kpi-main {
+  background:
+    radial-gradient(900px 500px at 100% 0%, rgba(255, 107, 87, 0.14), transparent 60%),
+    rgba(255,255,255,.82);
+  box-shadow: 0 16px 36px rgba(125,66,58,.08);
 }
 
-.kpi-value{
+.kpi-label {
+  color: #8a6a67;
+}
+
+.kpi-value {
   font-size: 1.9rem;
   font-weight: 900;
   letter-spacing: .3px;
-  color: rgba(255,255,255,.96);
+  color: #241717;
   margin-top: 2px;
 }
 
-.kpi-icon{
-  color: rgba(255,255,255,.92);
+.kpi-sub {
+  color: #7b6360;
+}
+
+.kpi-icon {
+  color: #d93b2b;
   opacity: .9;
 }
 
-.actions-card{
+.actions-card {
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(217,59,43,.08);
+  box-shadow: 0 16px 36px rgba(125,66,58,.08);
 }
 
-.actions-ic{
-  color: #c4b5fd;
-  opacity: .95;
+.section-title {
+  color: #241717;
 }
 
-.action-btn{
+.section-sub {
+  color: #7b6360;
+}
+
+.action-btn {
   border-radius: 16px;
   padding: 14px 14px;
   font-weight: 900;
   text-transform: none;
   letter-spacing: .2px;
-  border: 1px solid rgba(255,255,255,.10);
+  border: 1px solid rgba(217,59,43,.10);
 }
 
-.btn-purple{
-  background: linear-gradient(90deg, rgba(124,58,237,.65), rgba(124,58,237,.25));
-  color: rgba(255,255,255,.95);
+.btn-main {
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
+  color: #ffffff;
 }
 
-.btn-blue{
-  background: linear-gradient(90deg, rgba(59,130,246,.55), rgba(59,130,246,.22));
-  color: rgba(255,255,255,.95);
+.btn-soft {
+  background: linear-gradient(135deg, rgba(255,107,87,.16), rgba(217,59,43,.08));
+  color: #b13224;
 }
 
-.btn-teal{
-  background: linear-gradient(90deg, rgba(20,184,166,.55), rgba(20,184,166,.22));
-  color: rgba(255,255,255,.95);
+.chip {
+  color: #b13224;
+  border-color: rgba(217,59,43,.20);
+  background: rgba(255,107,87,.08);
 }
 
-.chip{
-  color: rgba(255,255,255,.90);
-  border-color: rgba(124,58,237,.35);
-  background: rgba(124,58,237,.10);
-}
-
-.refresh-btn{
+.refresh-btn {
   border-radius: 12px;
-  background: rgba(255,255,255,.05);
-  color: rgba(255,255,255,.95);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.84);
+  color: #c43728;
+  border: 1px solid rgba(217,59,43,.10);
 }
 
-.premium-card{
+.premium-card {
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(217,59,43,.08);
+  box-shadow: 0 16px 36px rgba(125,66,58,.08);
 }
 
-.premium-ic{
-  color: #fde68a;
+.premium-ic {
+  color: #d97706;
 }
 
-.stat-box{
+.loading-text {
+  color: #7b6360;
+}
+
+.stat-box {
   border-radius: 16px;
   padding: 16px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,248,246,.92);
+  border: 1px solid rgba(217,59,43,.08);
   height: 100%;
 }
 
-.stat-label{
+.stat-label {
   font-size: .78rem;
-  color: rgba(255,255,255,.62);
+  color: #8a6a67;
   margin-bottom: 6px;
 }
 
-.stat-value{
+.stat-value {
   font-size: 1.4rem;
   font-weight: 900;
-  color: rgba(255,255,255,.96);
+  color: #241717;
 }
 
-.note-card{
+.note-card {
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255,255,255,.02);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.74);
+  border: 1px solid rgba(217,59,43,.08);
 }
 
-.note-ic{
-  color: #99f6e4;
+.note-ic {
+  color: #c43728;
+}
+
+.note-text {
+  color: #7b6360;
 }
 </style>
