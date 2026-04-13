@@ -71,22 +71,25 @@ const Utils = {
               margin: 0;
               padding: 0;
               font-family: Arial, Helvetica, sans-serif;
-              color: #1f2937;
-              background: #ffffff;
+              color: #2a1d1d;
+              background: #fffaf9;
             }
 
             .pdf-root {
               width: 100%;
               padding: 28px 26px 22px 26px;
-              background: #ffffff;
+              background:
+                radial-gradient(900px 420px at 0% 0%, rgba(255, 107, 87, 0.06), transparent 55%),
+                linear-gradient(180deg, #fffaf9 0%, #fff5f3 100%);
             }
 
             .pdf-header {
-              background: linear-gradient(135deg, #6d28d9 0%, #0f766e 100%);
+              background: linear-gradient(135deg, #d93b2b 0%, #ff6b57 100%);
               color: #ffffff;
-              border-radius: 18px;
+              border-radius: 22px;
               padding: 24px;
               margin-bottom: 22px;
+              box-shadow: 0 14px 34px rgba(217, 59, 43, 0.18);
             }
 
             .brand-pill {
@@ -110,7 +113,7 @@ const Utils = {
               margin-top: 14px;
               font-size: 12px;
               line-height: 1.6;
-              color: rgba(255,255,255,0.95);
+              color: rgba(255, 255, 255, 0.96);
             }
 
             .section {
@@ -120,37 +123,39 @@ const Utils = {
             .section-title {
               font-size: 18px;
               font-weight: 700;
-              color: #111827;
+              color: #241717;
               margin-bottom: 8px;
             }
 
             .section-subtitle {
               font-size: 12px;
-              color: #6b7280;
+              color: #7b6360;
               margin-bottom: 14px;
             }
 
             .result-box {
-              border: 1px solid #ddd6fe;
-              background: #f8f5ff;
-              border-radius: 14px;
+              border: 1px solid rgba(217, 59, 43, 0.12);
+              background: linear-gradient(180deg, #fff8f7 0%, #fff3f0 100%);
+              border-radius: 16px;
               padding: 16px;
               line-height: 1.6;
               font-size: 13px;
+              color: #2b1d1d;
             }
 
             .result-box strong {
-              color: #4c1d95;
+              color: #c43728;
             }
 
             .qa-item {
               display: table;
               width: 100%;
-              border: 1px solid #e5e7eb;
-              border-radius: 14px;
+              border: 1px solid rgba(217, 59, 43, 0.10);
+              border-radius: 16px;
               margin-bottom: 12px;
               overflow: hidden;
               page-break-inside: avoid;
+              background: #ffffff;
             }
 
             .qa-index {
@@ -159,9 +164,9 @@ const Utils = {
               text-align: center;
               vertical-align: top;
               padding: 16px 10px;
-              background: linear-gradient(180deg, #ede9fe 0%, #ecfeff 100%);
+              background: linear-gradient(180deg, #ffe7e2 0%, #fff2ef 100%);
               font-weight: 700;
-              color: #4c1d95;
+              color: #c43728;
               font-size: 16px;
             }
 
@@ -175,7 +180,7 @@ const Utils = {
             .qa-question {
               font-size: 14px;
               font-weight: 700;
-              color: #111827;
+              color: #241717;
               margin-bottom: 10px;
               line-height: 1.45;
             }
@@ -183,38 +188,38 @@ const Utils = {
             .qa-answer-label {
               font-size: 11px;
               font-weight: 700;
-              letter-spacing: .5px;
+              letter-spacing: 0.5px;
               text-transform: uppercase;
-              color: #6b7280;
+              color: #8a6a67;
               margin-bottom: 4px;
             }
 
             .qa-answer {
               font-size: 13px;
               line-height: 1.55;
-              color: #1f2937;
-              background: #f9fafb;
-              border: 1px solid #eef2f7;
-              border-radius: 10px;
+              color: #2a1d1d;
+              background: #fff8f7;
+              border: 1px solid rgba(217, 59, 43, 0.08);
+              border-radius: 12px;
               padding: 10px 12px;
             }
 
             .empty-box {
-              border: 1px dashed #cbd5e1;
-              border-radius: 12px;
+              border: 1px dashed rgba(217, 59, 43, 0.22);
+              border-radius: 14px;
               padding: 14px;
               font-size: 13px;
-              color: #6b7280;
-              background: #f8fafc;
+              color: #7b6360;
+              background: #fff8f7;
             }
 
             .pdf-footer {
               margin-top: 26px;
               padding-top: 12px;
-              border-top: 1px solid #e5e7eb;
+              border-top: 1px solid rgba(217, 59, 43, 0.10);
               text-align: center;
               font-size: 11px;
-              color: #6b7280;
+              color: #8a6a67;
             }
 
             p {
@@ -327,6 +332,5 @@ function escapeHtml(str) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-
 
 export { Utils };

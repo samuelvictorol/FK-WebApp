@@ -1,42 +1,44 @@
 <template>
   <q-layout view="hHh lpR fFf" class="auth-page">
     <q-header elevated class="topbar">
-      <q-toolbar class="q-px-md">
-        <q-btn flat round icon="arrow_back" to="/" class="q-mr-sm" />
-        <q-avatar square size="32px" class="q-mr-sm rounded-borders">
+      <q-toolbar class="toolbar container">
+        <q-btn flat round icon="arrow_back" to="/" class="q-mr-sm btn-back" />
+        <q-avatar square size="34px" class="q-mr-sm rounded-borders brand-avatar">
           <img src="/logo.png" alt="Logo" />
         </q-avatar>
+
         <q-toolbar-title class="title">
-          Flávia Kamila
+          <div class="brand-main">Flávia Kamila</div>
           <div class="subtitle">Registre-se ou faça login</div>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <q-page-container>
-      <q-page class="q-pa-md flex flex-center">
+      <q-page class="auth-wrapper">
         <div class="container">
           <div class="row q-col-gutter-xl items-center">
-          
-            <div class="col-12 col-md-6">
-              <q-card class="auth-card" bordered>
+            <div class="col-12 col-md-6 order-2-mobile">
+              <q-card class="auth-card animate__animated animate__fadeInUp" bordered>
                 <q-card-section class="q-pb-sm">
-                  <div class="row items-center justify-between">
-                    <div>
-                      <div class="text-h6 text-weight-bold">
+                  <div class="row items-center justify-between q-col-gutter-md">
+                    <div class="col">
+                      <div class="card-title">
                         {{ isLogin ? 'Login' : 'Criar conta' }}
                       </div>
-                      <div class="text-body2 text-grey-5 q-pb-sm">
-                        {{ isLogin ? 'Área do Usuário' : 'Cadastre-se grátis.' }}
+                      <div class="card-subtitle">
+                        {{ isLogin ? 'Área do usuário' : 'Cadastre-se para acessar a plataforma.' }}
                       </div>
                     </div>
 
-                    <q-btn
-                      flat
-                      class="mode-switch"
-                      :label="isLogin ? 'Registrar' : 'Já tenho conta'"
-                      @click="toggleMode"
-                    />
+                    <div class="col-auto">
+                      <q-btn
+                        flat
+                        class="mode-switch"
+                        :label="isLogin ? 'Registrar' : 'Já tenho conta'"
+                        @click="toggleMode"
+                      />
+                    </div>
                   </div>
                 </q-card-section>
 
@@ -48,12 +50,13 @@
                       v-if="!isLogin"
                       v-model.trim="form.name"
                       label="Nome"
-                      filled
-                      class="bg-grey-3 rounded-borders"
+                      outlined
+                      bg-color="white"
+                      class="input-modern"
                       :rules="[v => !!v || 'Informe seu nome']"
                     >
                       <template #prepend>
-                        <q-icon name="mdi-account-outline" color="deep-purple-4" />
+                        <q-icon name="mdi-account-outline" color="red-5" />
                       </template>
                     </q-input>
 
@@ -61,12 +64,13 @@
                       v-model.trim="form.email"
                       label="E-mail"
                       type="email"
-                      filled
-                      class="bg-grey-3 rounded-borders"
+                      outlined
+                      bg-color="white"
+                      class="input-modern"
                       :rules="[emailRule]"
                     >
                       <template #prepend>
-                        <q-icon name="mdi-email-outline" color="deep-purple-4" />
+                        <q-icon name="mdi-email-outline" color="red-5" />
                       </template>
                     </q-input>
 
@@ -74,14 +78,15 @@
                       v-if="!isLogin"
                       v-model.trim="form.phone"
                       label="Telefone"
-                      filled
-                      class="bg-grey-3 rounded-borders"
+                      outlined
+                      bg-color="white"
+                      class="input-modern"
                       mask="(##) #####-####"
                       unmasked-value
                       :rules="[v => (v?.length >= 10) || 'Informe um telefone válido']"
                     >
                       <template #prepend>
-                        <q-icon name="mdi-phone-outline" color="deep-purple-4" />
+                        <q-icon name="mdi-phone-outline" color="red-5" />
                       </template>
                     </q-input>
 
@@ -89,12 +94,13 @@
                       v-model="form.password"
                       :type="showPassword ? 'text' : 'password'"
                       label="Senha"
-                      filled
-                      class="bg-grey-3 rounded-borders"
+                      outlined
+                      bg-color="white"
+                      class="input-modern"
                       :rules="[v => (v?.length >= 6) || 'Mínimo 6 caracteres']"
                     >
                       <template #prepend>
-                        <q-icon name="mdi-lock-outline" color="deep-purple-4" />
+                        <q-icon name="mdi-lock-outline" color="red-5" />
                       </template>
 
                       <template #append>
@@ -102,6 +108,7 @@
                           flat
                           round
                           dense
+                          color="grey-7"
                           :icon="showPassword ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                           @click="showPassword = !showPassword"
                         />
@@ -113,12 +120,13 @@
                       v-model="form.confirmPassword"
                       :type="showConfirmPassword ? 'text' : 'password'"
                       label="Confirmar senha"
-                      filled
-                      class="bg-grey-3 rounded-borders"
+                      outlined
+                      bg-color="white"
+                      class="input-modern"
                       :rules="[v => v === form.password || 'As senhas não conferem']"
                     >
                       <template #prepend>
-                        <q-icon name="mdi-lock-check-outline" color="deep-purple-4" />
+                        <q-icon name="mdi-lock-check-outline" color="red-5" />
                       </template>
 
                       <template #append>
@@ -126,31 +134,35 @@
                           flat
                           round
                           dense
+                          color="grey-7"
                           :icon="showConfirmPassword ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                           @click="showConfirmPassword = !showConfirmPassword"
                         />
                       </template>
                     </q-input>
 
-                    <q-toggle
-                      v-if="!isLogin"
-                      v-model="form.acceptTerms"
-                      label="Li e aceito os termos de uso"
-                      color="deep-purple-6"
-                    />
-                    <q-btn
-                      v-if="!isLogin"
-                      flat
-                      label="Ver termos"
-                      color="deep-purple-4"
-                      @click="$q.dialog({
-                        title: 'Termos de Uso',
-                        message: termosDeUso,
-                        ok: { label: 'Fechar', color: 'deep-purple-6' }
-                      })"
-                    />
-                    <div class="row items-center justify-between q-gutter-sm">
-                      <q-btn flat label="início" to="/" />
+                    <div v-if="!isLogin" class="terms-wrap">
+                      <q-toggle
+                        v-model="form.acceptTerms"
+                        label="Li e aceito os termos de uso"
+                        color="red-6"
+                      />
+                      <q-btn
+                        flat
+                        label="Ver termos"
+                        color="red-5"
+                        class="q-px-none"
+                        @click="$q.dialog({
+                          title: 'Termos de Uso',
+                          message: termosDeUso,
+                          ok: { label: 'Fechar', color: 'red-6' }
+                        })"
+                      />
+                    </div>
+
+                    <div class="row items-center justify-between q-gutter-sm q-pt-sm">
+                      <q-btn flat label="Início" to="/" class="btn-link-home" />
+
                       <q-btn
                         type="submit"
                         class="btn-primary"
@@ -164,38 +176,71 @@
                 </q-card-section>
               </q-card>
             </div>
-            <div class="col-12 col-md-6">
-              <div class="kicker">Entrar ou criar conta</div>
-              <h1 class="headline safe-text">
-                Tenha seu <span class="grad">acesso liberado</span> em poucos segundos.
-              </h1>
-              <p class="sub safe-text">
-                Faça login ou crie sua conta para entrar na área do aplicativo.
-              </p>
 
-              <div class="row q-col-gutter-sm q-mt-md">
-                <div class="col-12 col-sm-6">
-                  <q-card flat class="mini-card">
-                    <q-card-section class="row items-center no-wrap">
-                      <q-icon name="mdi-shield-lock-outline" size="20px" class="q-mr-sm" />
-                      <div>
-                        <div class="mini-title">Acesso seguro</div>
-                        <div class="mini-sub">seus dados protegidos</div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
+            <div class="col-12 col-md-6 order-1-mobile">
+              <div class="hero-copy animate__animated animate__fadeInLeft">
+                <div class="eyebrow">
+                  <q-icon name="verified_user" size="16px" class="q-mr-xs" />
+                  Acesso rápido e seguro
                 </div>
 
-                <div class="col-12 col-sm-6">
-                  <q-card flat class="mini-card">
-                    <q-card-section class="row items-center no-wrap">
-                      <q-icon name="mdi-lightning-bolt-outline" size="20px" class="q-mr-sm" />
-                      <div>
-                        <div class="mini-title">Rápido</div>
-                        <div class="mini-sub">entre em instantes</div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
+                <div class="kicker">Entrar ou criar conta</div>
+
+                <h1 class="headline safe-text">
+                  Tenha seu <span class="grad">acesso liberado</span> em poucos segundos.
+                </h1>
+
+                <p class="sub safe-text">
+                  Faça login ou crie sua conta para entrar na área do aplicativo, acessar seus recursos
+                  e continuar sua jornada com mais praticidade.
+                </p>
+
+                <div class="row q-col-gutter-md q-mt-lg">
+                  <div class="col-12 col-sm-6">
+                    <q-card flat class="mini-card">
+                      <q-card-section class="row items-center no-wrap">
+                        <div class="icon-badge">
+                          <q-icon name="mdi-shield-lock-outline" size="18px" />
+                        </div>
+                        <div>
+                          <div class="mini-title">Acesso seguro</div>
+                          <div class="mini-sub">seus dados protegidos</div>
+                        </div>
+                      </q-card-section>
+                    </q-card>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <q-card flat class="mini-card">
+                      <q-card-section class="row items-center no-wrap">
+                        <div class="icon-badge">
+                          <q-icon name="mdi-lightning-bolt-outline" size="18px" />
+                        </div>
+                        <div>
+                          <div class="mini-title">Rápido</div>
+                          <div class="mini-sub">entre em instantes</div>
+                        </div>
+                      </q-card-section>
+                    </q-card>
+                  </div>
+                </div>
+
+                <div class="row q-col-gutter-md q-mt-sm">
+                  <div class="col-12">
+                    <q-card flat class="info-highlight">
+                      <q-card-section class="row items-start no-wrap">
+                        <div class="icon-badge soft q-mr-md">
+                          <q-icon name="mdi-account-check-outline" size="18px" />
+                        </div>
+                        <div>
+                          <div class="mini-title">Conta pronta para usar</div>
+                          <div class="mini-sub larger">
+                            Depois de entrar, você já segue direto para a área do app.
+                          </div>
+                        </div>
+                      </q-card-section>
+                    </q-card>
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,6 +257,7 @@ import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { api } from 'boot/axios'
 import { TermosDeUso } from 'src/TermosDeUso'
+
 const termosDeUso = TermosDeUso
 const router = useRouter()
 const $q = useQuasar()
@@ -316,7 +362,7 @@ async function doRegister() {
     throw new Error('Informe seu nome')
   }
 
-  if (!emailRule(form.email) === true) {
+  if (!(emailRule(form.email) === true)) {
     throw new Error('Informe um e-mail válido')
   }
 
@@ -380,6 +426,7 @@ async function handleSubmit() {
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
+  background: #fff8f7;
 }
 
 :global(*),
@@ -391,62 +438,107 @@ async function handleSubmit() {
 .auth-page {
   min-height: 100vh;
   background:
-    radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .26), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(110, 20, 184, 0.16), transparent 55%),
-    #07070a;
-  color: #f4f4f5;
+    radial-gradient(900px 420px at 10% 10%, rgba(255, 107, 87, 0.12), transparent 55%),
+    radial-gradient(800px 420px at 90% 15%, rgba(217, 59, 43, 0.08), transparent 60%),
+    linear-gradient(180deg, #fff9f8 0%, #fff5f3 100%);
+  color: #251818;
 }
 
 .container {
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 clamp(14px, 2vw, 18px);
+  padding: 0 clamp(14px, 2vw, 20px);
+}
+
+.auth-wrapper {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  padding: 32px 0;
 }
 
 .topbar {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .22), rgba(110, 20, 184, 0.14));
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(255, 250, 249, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(217, 59, 43, 0.10);
+}
+
+.toolbar {
+  min-height: 72px;
+}
+
+.btn-back {
+  color: #b33426;
+}
+
+.brand-avatar {
+  border: 1px solid rgba(217, 59, 43, 0.10);
 }
 
 .title {
   line-height: 1.1;
 }
 
+.brand-main {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #2d1c1c;
+}
+
 .subtitle {
-  font-size: .78rem;
-  opacity: .85;
+  font-size: 0.78rem;
+  color: #7c6360;
+  margin-top: 4px;
+}
+
+.hero-copy {
+  padding-right: 12px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #b13224;
+  font-weight: 700;
+  font-size: 0.84rem;
+  box-shadow: 0 10px 24px rgba(130, 69, 61, 0.06);
 }
 
 .kicker {
   display: inline-block;
   font-weight: 900;
-  letter-spacing: .16em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-size: .78rem;
-  opacity: .9;
+  font-size: 0.76rem;
+  color: #c43728;
   margin-bottom: 10px;
 }
 
 .headline {
-  font-size: clamp(2rem, 2.6vw, 3rem);
+  font-size: clamp(2rem, 2.7vw, 3.2rem);
   line-height: 1.06;
   margin: 0;
+  color: #241717;
 }
 
 .grad {
-  background: linear-gradient(90deg, #a78bfa, #6d37ec);
+  background: linear-gradient(135deg, #d93b2b, #ff6b57 75%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .sub {
-  margin-top: 10px;
-  color: rgba(255, 255, 255, .86);
-  line-height: 1.45;
-  max-width: 60ch;
+  margin-top: 12px;
+  color: #6f5653;
+  line-height: 1.6;
+  max-width: 58ch;
 }
 
 .safe-text {
@@ -456,46 +548,139 @@ async function handleSubmit() {
   hyphens: auto;
 }
 
-.mini-card {
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 16px;
-  color: #fff;
+.mini-card,
+.info-highlight {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  border-radius: 20px;
+  color: #2a1e1e;
+  box-shadow: 0 16px 40px rgba(125, 66, 58, 0.06);
+}
+
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c63729;
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.10));
+  border: 1px solid rgba(217, 59, 43, 0.10);
+}
+
+.icon-badge.soft {
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.12), rgba(217, 59, 43, 0.08));
 }
 
 .mini-title {
   font-weight: 800;
+  color: #2b1d1d;
 }
 
 .mini-sub {
-  font-size: .83rem;
-  opacity: .9;
+  font-size: 0.84rem;
+  color: #6f5653;
+}
+
+.mini-sub.larger {
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .auth-card {
-  background: rgba(16, 16, 22, .78);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 26px 70px rgba(121, 67, 60, 0.12);
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #7c3aed, #7614b8);
-  color: #f5f5f5;
-  font-weight: 900;
-  border-radius: 14px;
-  padding: 12px 18px;
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #241717;
 }
+
+.card-subtitle {
+  font-size: 0.94rem;
+  color: #7b6360;
+  margin-top: 4px;
+}
+
+.input-modern :deep(.q-field__control) {
+  border-radius: 16px;
+  min-height: 56px;
+  box-shadow: none;
+}
+
+.input-modern :deep(.q-field__native),
+.input-modern :deep(.q-field__input) {
+  color: #2b1d1d;
+}
+
+.input-modern :deep(.q-field__label) {
+  color: #816765;
+}
+
+
 
 .mode-switch {
-  color: rgba(255, 255, 255, .9);
-  border: 1px solid rgba(255, 255, 255, .16);
+  color: #b13224;
+  border: 1px solid rgba(217, 59, 43, 0.12);
   border-radius: 14px;
+  background: rgba(255, 255, 255, 0.68);
+  font-weight: 700;
+}
+
+.terms-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.btn-link-home {
+  color: #8b6a66;
+  font-weight: 700;
+}
+
+.order-1-mobile {
+  order: 1;
+}
+
+.order-2-mobile {
+  order: 2;
 }
 
 @media (max-width: 1023px) {
   .container {
-    padding-top: 12px;
+    padding-top: 10px;
+  }
+
+  .auth-wrapper {
+    align-items: flex-start;
+    padding: 20px 0 28px;
+  }
+
+  .hero-copy {
+    padding-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .headline {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .order-1-mobile {
+    order: 1;
+  }
+
+  .order-2-mobile {
+    order: 2;
   }
 }
 </style>

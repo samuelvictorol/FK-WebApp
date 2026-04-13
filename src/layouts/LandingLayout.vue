@@ -1,65 +1,80 @@
 <template>
   <q-layout view="hHh lpR fFf" class="page">
-    <q-header elevated class="topbar " style="overflow: hidden!important;">
-      <q-toolbar class="q-px-md">
-        <!-- <q-avatar square size="32px" class="q-mr-sm rounded-borders">
-          <img src="/logo.png" alt="Logo" />
-        </q-avatar> -->
+    <q-header elevated class="topbar">
+      <q-toolbar class="toolbar container">
         <q-toolbar-title class="brand-title">
-          <div style="overflow: hidden!important;" class="">
+          <div class="brand-main animate__animated animate__fadeInLeft animate__slow">
             <strong>Flávia</strong><strong>Kamila</strong>
           </div>
-          <div style="overflow: hidden!important;" v-if="!isMobile" class="brand-sub">Aprendizagem • Concursos •
-            Estratégia de estudos</div>
+          <div v-if="!isMobile" class="brand-sub">
+            Aprendizagem • Concursos • Estratégia
+          </div>
         </q-toolbar-title>
 
         <div class="row items-center q-gutter-sm">
-          <q-btn flat class="btn-ghost desktop-only" label="Início" @click="scrollTo('inicio')" />
-          <q-btn flat class="btn-ghost desktop-only" label="Como funciona" @click="scrollTo('como')" />
-          <q-btn flat class="btn-ghost desktop-only" label="Sobre" @click="scrollTo('sobre')" />
-          <q-btn flat class="btn-ghost desktop-only" label="Planos" @click="scrollTo('planos')" />
-          <q-btn flat class="btn-ghost desktop-only" label="Contato" @click="scrollTo('contato')" />
+          <q-btn flat class="btn-nav desktop-only" label="Início" @click="scrollTo('inicio')" />
+          <q-btn flat class="btn-nav desktop-only" label="Como funciona" @click="scrollTo('como')" />
+          <q-btn flat class="btn-nav desktop-only" label="Sobre" @click="scrollTo('sobre')" />
+          <q-btn flat class="btn-nav desktop-only" label="Planos" @click="scrollTo('planos')" />
+          <q-btn flat class="btn-nav desktop-only" label="Contato" @click="scrollTo('contato')" />
 
-          <q-btn dense unelevated class="btn-outline " icon="login" label="Entrar" to="/login" />
-          <q-btn dense unelevated class="btn-primary desktop-only text-grey-3" icon="person_add" label="Registrar"
-            to="/login" />
+          <q-btn
+            dense
+            unelevated
+            class="btn-login q-px-md"
+            icon="login"
+            label="Entrar"
+            to="/login"
+          />
 
-          <q-btn dense flat round icon="menu" class="mobile-only">
+          <q-btn
+            dense
+            unelevated
+            class="btn-primary q-px-md desktop-only"
+            icon="person_add"
+            label="Registrar"
+            to="/login"
+          />
+
+          <q-btn dense flat round icon="menu" class="mobile-only btn-menu animate__animated animate__flipInY animate__slower animate__delay-1s">
             <q-menu class="menu-mobile" anchor="bottom right" self="top right">
               <q-list style="min-width: 220px">
                 <q-item clickable v-close-popup @click="scrollTo('inicio')">
                   <q-item-section avatar><q-icon name="home" /></q-item-section>
                   <q-item-section>Início</q-item-section>
                 </q-item>
+
                 <q-item clickable v-close-popup @click="scrollTo('como')">
                   <q-item-section avatar><q-icon name="auto_awesome" /></q-item-section>
                   <q-item-section>Como funciona</q-item-section>
                 </q-item>
+
                 <q-item clickable v-close-popup @click="scrollTo('sobre')">
                   <q-item-section avatar><q-icon name="person" /></q-item-section>
                   <q-item-section>Sobre</q-item-section>
                 </q-item>
+
                 <q-item clickable v-close-popup @click="scrollTo('planos')">
                   <q-item-section avatar><q-icon name="sell" /></q-item-section>
                   <q-item-section>Planos</q-item-section>
                 </q-item>
+
                 <q-item clickable v-close-popup @click="scrollTo('contato')">
                   <q-item-section avatar><q-icon name="mail" /></q-item-section>
                   <q-item-section>Contato</q-item-section>
                 </q-item>
+
                 <q-separator />
+
                 <q-item clickable v-close-popup to="/login">
                   <q-item-section avatar><q-icon name="login" /></q-item-section>
                   <q-item-section>Login</q-item-section>
                 </q-item>
+
                 <q-item clickable v-close-popup to="/registrar">
                   <q-item-section avatar><q-icon name="person_add" /></q-item-section>
                   <q-item-section>Registrar</q-item-section>
                 </q-item>
-                <!-- <q-item clickable v-close-popup to="/admin">
-                  <q-item-section avatar><q-icon name="admin_panel_settings" /></q-item-section>
-                  <q-item-section>Admin</q-item-section>
-                </q-item> -->
               </q-list>
             </q-menu>
           </q-btn>
@@ -73,52 +88,72 @@
         <div class="hero-bg" />
         <div class="hero-overlay" />
 
-        <div class="container hero-content">
+        <div class="container hero-content relative">
           <div class="row items-center q-col-gutter-xl">
             <div class="col-12 col-md-7">
-              <!-- <div class="badge fade-in" style="font-size: .7rem;">
-                <q-icon name="verified" size="18px" class="q-mr-xs" />
-                Métodos de aprendizagem com base em evidências
-              </div> -->
+              <q-avatar v-if="isMobile" size="100px" class="q-mb-md absolute-top animate__animated animate__fadeInDown animate__slow" style="top:-92px;left: 35%;">
+                <img src="/home.png" alt="Logo" />
+              </q-avatar>
+              <div
+                class="eyebrow q-mt-md animate__animated animate__fadeInDown animate__faster"
+              >
+                <q-icon name="favorite" size="16px" class="q-mr-sm" />
+                Aprenda com estratégia, leveza e clareza
+              </div>
 
-              <h1
-                class="hero-title q-pa-md  safe-text animate__animated animate__fadeInLeft animate__slower animate__delay-2s"
-                style="overflow: hidden!important; border-radius: 14px;">
-                Descubra o <span class="grad">Cronotipo</span>, <span class="grad">Estilo </span> e <span
-                  class="grad">Forma de Aprendizado</span> ideal para <span class="grad">você</span>.
-                <!-- e receba um
-                <span class="grad">relatório personalizado</span> para estudar melhor. -->
-              </h1>
-              <!-- 
-              <p class="hero-sub safe-text fade-in delay-2">
-                Um complemento contendo material didático utilizando formulários inteligentes que analisam suas respostas e geram
-                um plano prático: como estudar, quando estudar e como manter constância — do seu jeito.
-              </p> -->
+              <div
+                class="hero-title text-h4 q-pa-sm rounded-borders safe-text animate__animated animate__fadeInLeft animate__slow"
+              >
+                Descubra o <span class="grad">Cronotipo</span>, o seu <span class="grad">Estilo</span> e a melhor
+                <span class="grad">Forma de Aprendizado</span> para <span class="grad">você</span>.
+              </div>
 
-              <div class="row q-col-gutter-sm q-mt-md fade-in delay-3">
+              <p
+                class="hero-sub safe-text text-grey-3 animate__animated animate__fadeInUp animate__slow"
+              >
+                Um diagnóstico prático e personalizado para estudar com mais foco, constância e inteligência,
+                respeitando o seu ritmo.
+              </p>
+
+              <div class="row q-col-gutter-sm q-mt-lg">
                 <div class="col-12 col-sm-auto">
                   <q-btn
-                    class="btn-cta full-width text-grey-3 animate__animated animate__fadeInUp animate__slower animate__delay-2s"
-                    unelevated icon-right="arrow_forward" label="Começar agora" to="/app" />
+                    class="btn-cta full-width text-white animate__animated animate__fadeInUp animate__delay-1s"
+                    unelevated
+                    icon-right="arrow_forward"
+                    label="Começar agora"
+                    to="/app"
+                  />
                 </div>
+
                 <div class="col-12 col-sm-auto">
                   <q-btn
-                    class="btn-cta-2 full-width text-grey-3  animate__animated animate__fadeInUp animate__slower animate__delay-4s"
-                    unelevated icon-right="apps" label="PDF GRÁTIS"
-                    @click="openNewTab('https://flaviakamila.com.br')" />
+                    class="btn-soft full-width animate__animated animate__fadeInUp animate__delay-1s"
+                    unelevated
+                    icon-right="apps"
+                    label="PDF grátis"
+                    @click="openNewTab('https://flaviakamila.com.br')"
+                  />
                 </div>
+
                 <div class="col-12 col-sm-auto">
                   <q-btn
-                    class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__slower animate__delay-5s"
-                    unelevated icon="play_circle" label="Ver como funciona" @click="scrollTo('como')" />
+                    class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__delay-2s"
+                    unelevated
+                    icon="play_circle"
+                    label="Ver como funciona"
+                    @click="scrollTo('como')"
+                  />
                 </div>
               </div>
 
-              <div class="row q-col-gutter-sm q-mt-lg fade-in delay-4 ">
+              <div class="row q-col-gutter-md q-mt-xl">
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-2s">
+                  <q-card flat class="mini-card animate__animated animate__fadeInUp animate__delay-1s">
                     <q-card-section class="row items-center no-wrap">
-                      <q-icon name="schedule" size="20px" class="q-mr-sm" />
+                      <div class="icon-badge">
+                        <q-icon name="schedule" size="18px" />
+                      </div>
                       <div>
                         <div class="mini-title">Rápido</div>
                         <div class="mini-sub">Relatório em minutos</div>
@@ -126,24 +161,30 @@
                     </q-card-section>
                   </q-card>
                 </div>
+
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-3s">
+                  <q-card flat class="mini-card animate__animated animate__fadeInUp animate__delay-1s">
                     <q-card-section class="row items-center no-wrap">
-                      <q-icon name="psychology" size="20px" class="q-mr-sm" />
+                      <div class="icon-badge">
+                        <q-icon name="psychology" size="18px" />
+                      </div>
                       <div>
                         <div class="mini-title">Personalizado</div>
-                        <div class="mini-sub">Baseado em você</div>
+                        <div class="mini-sub">Feito com base em você</div>
                       </div>
                     </q-card-section>
                   </q-card>
                 </div>
+
                 <div class="col-12 col-sm-4">
-                  <q-card flat class="mini-card  animate__animated animate__zoomIn animate__slower animate__delay-4s">
+                  <q-card flat class="mini-card animate__animated animate__fadeInUp animate__delay-2s">
                     <q-card-section class="row items-center no-wrap">
-                      <q-icon name="done_all" size="20px" class="q-mr-sm" />
+                      <div class="icon-badge">
+                        <q-icon name="done_all" size="18px" />
+                      </div>
                       <div>
                         <div class="mini-title">Aplicável</div>
-                        <div class="mini-sub">Plano prático</div>
+                        <div class="mini-sub">Plano prático real</div>
                       </div>
                     </q-card-section>
                   </q-card>
@@ -152,11 +193,16 @@
             </div>
 
             <div class="col-12 col-md-5">
-              <q-card class="hero-card fade-in delay-2" bordered>
+              <q-card
+                class="hero-card animate__animated animate__fadeInRight animate__slow"
+                bordered
+              >
                 <q-card-section>
-                  <div class="text-h6 text-weight-bold q-mb-xs">Diagnóstico + Relatório</div>
-                  <div class="text-subtitle2 text-green-1 q-mb-md">
-                    Descubra seu perfil e leve um plano para aplicar ainda hoje.
+                  <div class="text-h6 text-weight-bold q-mb-xs">
+                    Diagnóstico + Relatório
+                  </div>
+                  <div class="hero-card-sub q-mb-md">
+                    Descubra seu perfil e saia com recomendações prontas para aplicar.
                   </div>
 
                   <div class="row items-end q-col-gutter-sm q-mb-md">
@@ -164,67 +210,92 @@
                       <div class="price">
                         R$ <span class="price-big">49</span><span class="price-dec">,90</span>
                       </div>
-                      <div class="price-note">Acesso Vitalício</div>
+                      <div class="price-note">Pagamento único • Acesso vitalício</div>
                     </div>
+
                     <div class="col-auto">
-                      <q-badge class="badge-highlight" rounded>Mais vendido</q-badge>
+                      <q-badge class="badge-highlight" rounded>
+                        Mais escolhido
+                      </q-badge>
                     </div>
                   </div>
+
+                  <div class="pack-title">Pacote incluído</div>
+
                   <div class="q-mt-md">
-                    <div class="pack-title">Pacote incluído</div>
-
-                    <div class="q-mt-sm">
-                      <div class="row items-start q-mb-sm">
-                        <q-icon name="check_circle" class="check" />
-                        <div class="pack-item safe-text">Formulário de estilo de aprendizagem</div>
-                      </div>
-                      <div class="row items-start q-mb-sm">
-                        <q-icon name="check_circle" class="check" />
-                        <div class="pack-item safe-text">Formulário de cronotipo (melhor horário do dia)</div>
-                      </div>
-                      <div class="row items-start q-mb-sm">
-                        <q-icon name="check_circle" class="check" />
-                        <div class="pack-item safe-text">Relatório personalizado + recomendações práticas</div>
-                      </div>
-                      <div class="row items-start q-mb-sm">
-                        <q-icon name="check_circle" class="check" />
-                        <div class="pack-item safe-text">Sugestão de rotina e método de estudo</div>
-                      </div>
+                    <div class="pack-row">
+                      <q-icon name="check_circle" class="check" />
+                      <div class="pack-item safe-text">Formulário de estilo de aprendizagem</div>
                     </div>
 
-                    <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Quero meu relatório"
-                      icon-right="auto_awesome" to="/app" />
-                    <q-btn class="btn-outline-soft q-mt-sm full-width" unelevated label="Já tenho conta" icon="login"
-                      to="/login" />
+                    <div class="pack-row">
+                      <q-icon name="check_circle" class="check" />
+                      <div class="pack-item safe-text">Formulário de cronotipo</div>
+                    </div>
+
+                    <div class="pack-row">
+                      <q-icon name="check_circle" class="check" />
+                      <div class="pack-item safe-text">Relatório personalizado com recomendações práticas</div>
+                    </div>
+
+                    <div class="pack-row">
+                      <q-icon name="check_circle" class="check" />
+                      <div class="pack-item safe-text">Sugestão de rotina e método de estudo</div>
+                    </div>
                   </div>
+
+                  <q-btn
+                    class="btn-cta q-mt-lg full-width text-white"
+                    unelevated
+                    label="Quero meu relatório"
+                    icon-right="auto_awesome"
+                    to="/app"
+                  />
+
+                  <q-btn
+                    class="btn-outline-soft q-mt-sm full-width"
+                    unelevated
+                    label="Já tenho conta"
+                    icon="login"
+                    to="/login"
+                  />
                 </q-card-section>
               </q-card>
             </div>
           </div>
         </div>
 
-        <q-btn class="scroll-down desktop-only" round flat icon="keyboard_arrow_down" @click="scrollTo('como')" />
+        <q-btn
+          class="scroll-down desktop-only"
+          round
+          flat
+          icon="keyboard_arrow_down"
+          @click="scrollTo('como')"
+        />
       </section>
 
       <!-- COMO FUNCIONA -->
-      <section id="como" class="section section-dark">
+      <section id="como" class="section section-soft">
         <div class="container">
           <div class="section-head">
             <div class="kicker">Como funciona</div>
-            <h2 class="section-title safe-text" style="overflow: hidden!important;">Você responde. O sistema calcula.
-              Você aplica.</h2>
+            <h2 class="section-title safe-text">
+              Você responde. O sistema interpreta. Você aplica.
+            </h2>
             <p class="section-sub safe-text">
-              Simples e direto: o objetivo é te dar clareza e um caminho prático, sem enrolação.
+              Tudo foi pensado para ser simples, intuitivo e realmente útil no seu dia a dia.
             </p>
           </div>
 
-          <div class="row q-col-gutter-lg q-mt-md">
+          <div class="row q-col-gutter-lg q-mt-lg">
             <div class="col-12 col-md-4">
-              <q-card class="feature-card" bordered>
+              <q-card class="feature-card animate__animated animate__fadeInUp" bordered>
                 <q-card-section>
-                  <div class="feature-icon"><q-icon name="assignment" size="24px" /></div>
-                  <div class="text-h6 text-weight-bold q-mt-sm">1) Formulários</div>
-                  <div class="text-body2 text-grey-4 q-mt-xs safe-text">
+                  <div class="feature-icon">
+                    <q-icon name="assignment" size="22px" />
+                  </div>
+                  <div class="text-h6 text-weight-bold q-mt-md">1) Formulários</div>
+                  <div class="feature-text q-mt-sm safe-text">
                     Você responde perguntas objetivas sobre rotina, preferências e comportamento de estudo.
                   </div>
                 </q-card-section>
@@ -232,24 +303,28 @@
             </div>
 
             <div class="col-12 col-md-4">
-              <q-card class="feature-card" bordered>
+              <q-card class="feature-card animate__animated animate__fadeInUp animate__delay-1s" bordered>
                 <q-card-section>
-                  <div class="feature-icon"><q-icon name="psychology_alt" size="24px" /></div>
-                  <div class="text-h6 text-weight-bold q-mt-sm">2) Diagnóstico</div>
-                  <div class="text-body2 text-grey-4 q-mt-xs safe-text">
-                    O sistema identifica seu estilo de aprendizagem e seu cronotipo com base nas respostas.
+                  <div class="feature-icon">
+                    <q-icon name="psychology_alt" size="22px" />
+                  </div>
+                  <div class="text-h6 text-weight-bold q-mt-md">2) Diagnóstico</div>
+                  <div class="feature-text q-mt-sm safe-text">
+                    O sistema identifica seu estilo de aprendizagem e o horário em que você tende a render melhor.
                   </div>
                 </q-card-section>
               </q-card>
             </div>
 
             <div class="col-12 col-md-4">
-              <q-card class="feature-card" bordered>
+              <q-card class="feature-card animate__animated animate__fadeInUp animate__delay-2s" bordered>
                 <q-card-section>
-                  <div class="feature-icon"><q-icon name="description" size="24px" /></div>
-                  <div class="text-h6 text-weight-bold q-mt-sm">3) Relatório</div>
-                  <div class="text-body2 text-grey-4 q-mt-xs safe-text">
-                    Você recebe um relatório com recomendações práticas e um plano claro para executar.
+                  <div class="feature-icon">
+                    <q-icon name="description" size="22px" />
+                  </div>
+                  <div class="text-h6 text-weight-bold q-mt-md">3) Relatório</div>
+                  <div class="feature-text q-mt-sm safe-text">
+                    Você recebe um plano mais claro, prático e organizado para começar a aplicar imediatamente.
                   </div>
                 </q-card-section>
               </q-card>
@@ -258,16 +333,29 @@
 
           <div class="cta-strip q-mt-xl">
             <div>
-              <div class="text-weight-bold">Quer parar de estudar no escuro?</div>
-              <div class="text-grey-4">Comece com um diagnóstico simples e um plano que faz sentido pra você.</div>
+              <div class="cta-strip-title">Quer parar de estudar sem direção?</div>
+              <div class="cta-strip-sub">
+                Descubra o seu melhor jeito de aprender e construa uma rotina mais inteligente.
+              </div>
             </div>
-            <q-btn class="btn-cta text-grey-3" unelevated label="Começar agora" icon-right="arrow_forward" to="/app" />
+
+            <q-btn
+              class="btn-cta text-white"
+              unelevated
+              label="Começar agora"
+              icon-right="arrow_forward"
+              to="/app"
+            />
           </div>
         </div>
       </section>
 
       <!-- SOBRE -->
-      <section id="sobre" class="section section-light" :style="isMobile ? 'padding-top: 60px;' : 'padding-top: 0px;'">
+      <section
+        id="sobre"
+        class="section section-light"
+        :style="isMobile ? 'padding-top: 60px;' : 'padding-top: 20px;'"
+      >
         <div class="parallax-wrap desktop-only">
           <div class="parallax-img" />
           <div class="parallax-overlay" />
@@ -276,28 +364,29 @@
         <div class="container">
           <div class="section-head">
             <div class="kicker">Sobre</div>
-            <h2 class="section-title safe-text" style="overflow: hidden!important;">Humanizado, realista e aplicável.
-            </h2>
+            <h2 class="section-title safe-text">Humanizado, realista e aplicável.</h2>
             <p class="section-sub safe-text">
-              Estratégias de estudo não funcionam iguais pra todo mundo — por isso aqui a regra é personalizar.
+              Estratégias de estudo não funcionam iguais para todo mundo. Aqui, o foco é personalizar.
             </p>
           </div>
 
           <div class="row q-col-gutter-xl items-center q-mt-lg">
             <div class="col-12 col-md-6">
-              <q-card class="about-card" bordered>
+              <q-card class="about-card animate__animated animate__fadeInLeft" bordered>
                 <q-card-section class="row items-center q-col-gutter-md">
                   <div class="col-auto">
-                    <q-avatar style="overflow: hidden!important;" size="72px" class="about-avatar">
+                    <q-avatar size="72px" class="about-avatar">
                       <img src="/kamila.png" alt="Flávia Kamila" />
                     </q-avatar>
                   </div>
+
                   <div class="col">
                     <div class="text-h6 text-weight-bold">Flávia Kamila</div>
                     <div class="text-body2 text-grey-7 safe-text">
                       Advogada, mãe e aprovada em diversos concursos públicos.
                       Mentora de aprendizagem com foco em autonomia e constância.
                     </div>
+
                     <div class="row q-gutter-xs q-mt-sm">
                       <q-chip dense class="chip">Aprendizagem</q-chip>
                       <q-chip dense class="chip">Cronotipo</q-chip>
@@ -305,7 +394,9 @@
                     </div>
                   </div>
                 </q-card-section>
+
                 <q-separator />
+
                 <q-card-section>
                   <p class="text-body1 q-mb-none safe-text">
                     “Meu objetivo é te ajudar a estudar com estratégia — respeitando seu tempo, sua rotina e seu ritmo.
@@ -316,13 +407,17 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <img src="/missao.png" alt="Sobre" class="img-soft full-width" />
+              <img
+                src="/missao.png"
+                alt="Sobre"
+                class="img-soft full-width animate__animated animate__fadeInRight"
+              />
             </div>
           </div>
 
           <div class="row q-col-gutter-lg q-mt-xl">
             <div class="col-12 col-md-6">
-              <q-card class="info-card" bordered>
+              <q-card class="info-card animate__animated animate__fadeInUp" bordered>
                 <q-card-section>
                   <div class="text-h6 text-weight-bold">Missão</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
@@ -336,12 +431,11 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <q-card class="info-card" bordered>
+              <q-card class="info-card animate__animated animate__fadeInUp animate__delay-1s" bordered>
                 <q-card-section>
                   <div class="text-h6 text-weight-bold">Visão</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
-                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com
-                    propósito.
+                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com propósito.
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pt-none">
@@ -354,11 +448,11 @@
       </section>
 
       <!-- PLANOS -->
-      <section id="planos" class="section section-dark">
+      <section id="planos" class="section section-pricing">
         <div class="container">
           <div class="section-head">
             <div class="kicker">Planos</div>
-            <div class="section-title safe-text" style="overflow: hidden!important;">Um pacote direto ao ponto</div>
+            <div class="section-title safe-text">Um pacote direto ao ponto</div>
             <p class="section-sub safe-text">
               Você compra, responde e recebe seu relatório personalizado. Sem mensalidade.
             </p>
@@ -366,48 +460,59 @@
 
           <div class="row justify-center q-mt-lg">
             <div class="col-12 col-md-6">
-              <q-card class="pricing-card" bordered>
+              <q-card class="pricing-card animate__animated animate__zoomIn" bordered>
                 <q-card-section>
-                  <div class="row items-center justify-between">
-                    <div>
+                  <div class="row items-center justify-between q-col-gutter-md">
+                    <div class="col">
                       <div class="text-h6 text-weight-bold">Diagnóstico + Relatório</div>
-                      <div class="text-body2 text-grey-4">Ideal para iniciar com clareza e método</div>
+                      <div class="text-body2 pricing-sub">
+                        Ideal para iniciar com mais clareza e método
+                      </div>
                     </div>
-                    <q-badge class="badge-highlight" rounded>Acesso Ilimitado</q-badge>
+                    <div class="col-auto">
+                      <q-badge class="badge-highlight" rounded>Acesso Ilimitado</q-badge>
+                    </div>
                   </div>
 
                   <div class="price-line q-mt-md">
                     <div class="price">
                       R$ <span class="price-big">49</span><span class="price-dec">,90</span>
                     </div>
-                    <div class="text-caption text-grey-4">Pagamento único</div>
+                    <div class="text-caption pricing-caption">Pagamento único</div>
                   </div>
 
                   <q-separator class="q-my-md" />
 
                   <div class="pack-title">Inclui</div>
+
                   <div class="q-mt-sm">
-                    <div class="row items-start q-mb-sm">
+                    <div class="pack-row">
                       <q-icon name="check" class="check2" />
                       <div class="pack-item2 safe-text">Estilo de aprendizagem + recomendações</div>
                     </div>
-                    <div class="row items-start q-mb-sm">
+                    <div class="pack-row">
                       <q-icon name="check" class="check2" />
                       <div class="pack-item2 safe-text">Cronotipo + melhor janela de estudos</div>
                     </div>
-                    <div class="row items-start q-mb-sm">
+                    <div class="pack-row">
                       <q-icon name="check" class="check2" />
-                      <div class="pack-item2 safe-text">Plano prático (rotina, técnicas e prioridades)</div>
+                      <div class="pack-item2 safe-text">Plano prático de rotina, técnicas e prioridades</div>
                     </div>
-                    <div class="row items-start q-mb-sm">
+                    <div class="pack-row">
                       <q-icon name="check" class="check2" />
-                      <div class="pack-item2 safe-text">Relatório final organizado e pronto pra aplicar</div>
+                      <div class="pack-item2 safe-text">Relatório final organizado e pronto para aplicar</div>
                     </div>
                   </div>
 
-                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Garantir meu relatório"
-                    icon-right="arrow_forward" to="/app" />
-                  <div class="text-caption text-grey-5 q-mt-sm">
+                  <q-btn
+                    class="btn-cta q-mt-md full-width text-white"
+                    unelevated
+                    label="Garantir meu relatório"
+                    icon-right="arrow_forward"
+                    to="/app"
+                  />
+
+                  <div class="text-caption pricing-caption q-mt-sm">
                     Ao continuar, você será direcionado para os formulários do diagnóstico.
                   </div>
                 </q-card-section>
@@ -424,24 +529,60 @@
             <div class="col-12 col-md-6">
               <div class="section-head left">
                 <div class="kicker">Contato</div>
-                <h2 class="section-title safe-text" style="overflow: hidden!important;">Fale comigo</h2>
+                <h2 class="section-title safe-text">Fale comigo</h2>
                 <p class="section-sub safe-text">
-                  Tem dúvida, sugestão ou quer entender qual caminho faz mais sentido pra você?
-                  Envie sua mensagem — vou te responder com atenção.
+                  Tem dúvida, sugestão ou quer entender qual caminho faz mais sentido para você?
+                  Envie sua mensagem.
                 </p>
               </div>
 
               <q-form class="contact-form">
-                <q-input color="deep-purple-8" filled label="Nome" class="q-mb-md" />
-                <q-input color="deep-purple-8" filled label="E-mail" type="email" class="q-mb-md" />
-                <q-input color="deep-purple-8" filled label="Mensagem" type="textarea" class="q-mb-md" />
-                <q-btn label="Enviar mensagem" class="btn-cta q-py-md text-white full-width" icon-right="send"
-                  @click="redirectToWpp()" />
+                <q-input
+                  v-model="form.name"
+                  color="red-6"
+                  outlined
+                  bg-color="white"
+                  label="Nome"
+                  class="q-mb-md"
+                />
+
+                <q-input
+                  v-model="form.email"
+                  color="red-6"
+                  outlined
+                  bg-color="white"
+                  label="E-mail"
+                  type="email"
+                  class="q-mb-md"
+                />
+
+                <q-input
+                  v-model="form.message"
+                  color="red-6"
+                  outlined
+                  bg-color="white"
+                  label="Mensagem"
+                  type="textarea"
+                  autogrow
+                  class="q-mb-md"
+                />
+
+                <q-btn
+                  label="Enviar mensagem"
+                  class="btn-cta q-py-md text-white full-width"
+                  icon-right="send"
+                  @click="redirectToWpp"
+                />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a class="text-bold grad" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer">
+                <a
+                  class="insta-link"
+                  href="https://instagram.com/flaviakamilaf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   @flaviakamilaf
                 </a>
               </div>
@@ -453,9 +594,9 @@
                   <div class="text-h6 text-weight-bold">Dica rápida</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
                     Se você sente que estuda muito e rende pouco, quase sempre o problema é:
-                    <span class="text-weight-bold">método errado</span> ou <span class="text-weight-bold">horário
-                      errado</span>.
-                    O diagnóstico resolve os dois.
+                    <span class="text-weight-bold">método errado</span> ou
+                    <span class="text-weight-bold">horário errado</span>.
+                    O diagnóstico ajuda justamente nesses dois pontos.
                   </div>
 
                   <q-separator class="q-my-md" />
@@ -464,7 +605,9 @@
                     <div class="col-12 col-sm-6">
                       <q-card flat class="tip">
                         <q-card-section class="row items-center no-wrap">
-                          <q-icon name="bolt" size="20px" class="q-mr-sm" />
+                          <div class="icon-badge small">
+                            <q-icon name="bolt" size="18px" />
+                          </div>
                           <div>
                             <div class="mini-title">Clareza</div>
                             <div class="mini-sub">o que fazer primeiro</div>
@@ -472,10 +615,13 @@
                         </q-card-section>
                       </q-card>
                     </div>
+
                     <div class="col-12 col-sm-6">
                       <q-card flat class="tip">
                         <q-card-section class="row items-center no-wrap">
-                          <q-icon name="event" size="20px" class="q-mr-sm" />
+                          <div class="icon-badge small">
+                            <q-icon name="event" size="18px" />
+                          </div>
                           <div>
                             <div class="mini-title">Ritmo</div>
                             <div class="mini-sub">quando você rende mais</div>
@@ -485,8 +631,13 @@
                     </div>
                   </div>
 
-                  <q-btn class="btn-cta q-mt-md full-width text-grey-3" unelevated label="Fazer o diagnóstico agora"
-                    icon-right="auto_awesome" to="/app" />
+                  <q-btn
+                    class="btn-cta q-mt-md full-width text-white"
+                    unelevated
+                    label="Fazer o diagnóstico agora"
+                    icon-right="auto_awesome"
+                    to="/app"
+                  />
                 </q-card-section>
               </q-card>
             </div>
@@ -498,13 +649,15 @@
             <div class="text-body2">
               © 2026 <strong>Flávia Kamila</strong>. Todos os direitos reservados.
             </div>
+
             <div class="text-body2 q-mt-xs">
               Desenvolvido por
               <a class="devlink" href="https://aitosoftwares.com/" target="_blank" rel="noreferrer">
                 AitoSoftwares
               </a>
             </div>
-            <div class="w100 row justify-center ">
+
+            <div class="w100 row justify-center">
               <q-btn flat round class="q-mt-md" to="/admin">
                 <q-avatar square size="32px" class="rounded-borders">
                   <img src="/logo.png" alt="Logo" />
@@ -519,43 +672,58 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-const isMobile = window.innerWidth < 650;
+const isMobile = ref(window.innerWidth < 650)
+
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+})
+
+function handleResize() {
+  isMobile.value = window.innerWidth < 650
+}
 
 function openNewTab(url) {
-  window.open(url, '_blank');
+  window.open(url, '_blank')
 }
 
 function redirectToWpp() {
-  // cria uma mensagem captando pelo email do formulário e redireciona para o whatsapp com a mensagem pronta para enviar, usando a API do whatsapp. O número de telefone do destinatário é +5511999999999.
-  const name = document.querySelector('input[label="Nome"]').value;
-  const email = document.querySelector('input[label="E-mail"]').value;
-  const message = document.querySelector('textarea[label="Mensagem"]').value;
-  const whatsappMessage = `Olá, meu nome é ${name} (${email}). ${message}`;
-  const whatsappUrl = `https://wa.me/5561995451717?text=${encodeURIComponent(whatsappMessage)}`;
-  window.open(whatsappUrl, '_blank');
-}
+  const name = form.value.name?.trim() || ''
+  const email = form.value.email?.trim() || ''
+  const message = form.value.message?.trim() || ''
 
+  const whatsappMessage = `Olá, meu nome é ${name} (${email}). ${message}`
+  const whatsappUrl = `https://wa.me/5561995451717?text=${encodeURIComponent(whatsappMessage)}`
+  window.open(whatsappUrl, '_blank')
+}
 
 function scrollTo(id) {
   const el = document.getElementById(id)
   if (!el) return
   el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style scoped>
-/* ===============================
-   FIX DEFINITIVO: SEM "FLASH" NO LOAD
-   =============================== */
 :global(html),
 :global(body),
 :global(#q-app) {
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
-  /* evita scrollbar aparecer/sumir */
+  scroll-behavior: smooth;
+  background: #fff8f7;
 }
 
 :global(*),
@@ -564,17 +732,16 @@ function scrollTo(id) {
   box-sizing: border-box;
 }
 
-/* Flex/grid: impede coluna estourar por texto */
 :global(.row > [class*="col-"]) {
   min-width: 0;
 }
 
-/* ===============================
-   PALETA / BASE
-   =============================== */
 .page {
-  background: #07070a;
-  color: #f4f4f5;
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(255, 95, 86, 0.10), transparent 55%),
+    radial-gradient(800px 380px at 100% 10%, rgba(255, 142, 124, 0.10), transparent 60%),
+    linear-gradient(180deg, #fff9f8 0%, #fff5f3 100%);
+  color: #2a1e1e;
 }
 
 .page-container {
@@ -583,12 +750,11 @@ function scrollTo(id) {
 
 .container {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(14px, 2vw, 18px);
+  padding: 0 clamp(16px, 2.2vw, 24px);
 }
 
-/* Responsivo helpers */
 .desktop-only {
   display: block;
 }
@@ -607,61 +773,80 @@ function scrollTo(id) {
   }
 }
 
-/* ===============================
-   HEADER
-   =============================== */
+/* HEADER */
 .topbar {
-  background: linear-gradient(90deg, rgba(112, 58, 237, 0.22), rgba(198, 148, 255, 0.603));
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(255, 250, 249, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(204, 71, 56, 0.10);
+  color: #2a1e1e;
 }
 
-.brand-avatar {
-  border: 1px solid rgba(255, 255, 255, .2);
+.toolbar {
+  min-height: 72px;
 }
 
 .brand-title {
   line-height: 1.1;
 }
 
+.brand-main {
+  display: flex;
+  gap: 4px;
+  font-size: 1.1rem;
+  color: #2f1d1d;
+}
+
+.brand-main strong:last-child {
+  background: linear-gradient(90deg, #d93b2b, #ff6b57);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .brand-sub {
-  font-size: .78rem;
-  opacity: .85;
+  font-size: 0.78rem;
+  color: #7a5b59;
+  margin-top: 4px;
 }
 
-.btn-ghost {
-  color: rgba(255, 255, 255, .92);
-  letter-spacing: .4px;
+.btn-nav {
+  color: #6b4744;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
-.btn-outline {
-  border: 1px solid rgba(255, 255, 255, .35);
-  color: #fff;
+.btn-nav:hover {
+  color: #d93b2b;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #963aed, #6114b8);
-  color: #0b0b10;
-  font-weight: 800;
+.btn-login {
+  border: 1px solid rgba(217, 59, 43, 0.18);
+  background: #fff;
+  color: #b13224;
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+
+.btn-menu {
+  color: #b13224;
 }
 
 .menu-mobile {
-  background: rgba(10, 10, 14, .98);
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 14px;
+  background: rgba(255, 252, 251, 0.98);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(115, 57, 48, 0.12);
 }
 
-/* ===============================
-   HERO (sem transform que cause overflow)
-   =============================== */
+/* HERO */
 .hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 94vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  /* garante clip do bg */
-  padding: 86px 0 40px;
+  padding: 98px 0 48px;
 }
 
 .hero-bg {
@@ -671,17 +856,16 @@ function scrollTo(id) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: grayscale(100%) brightness(0.75);
-
+  transform: scale(1.02);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 420px at 20% 25%, #9424fd13, transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, #7c3aed38, transparent 55%),
-    linear-gradient(180deg, rgba(5, 5, 8, 0.171), rgba(5, 5, 8, 0.034));
+    linear-gradient(90deg, rgba(212, 172, 165, 0.452) 0%, rgba(255, 246, 246, 0.603) 38%, rgba(255, 147, 147, 0.425) 65%, rgba(255, 156, 156, 0.24) 100%),
+    radial-gradient(900px 420px at 18% 22%, rgba(255, 104, 83, 0.16), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.10));
 }
 
 .hero-content {
@@ -689,39 +873,44 @@ function scrollTo(id) {
   z-index: 2;
 }
 
-.badge {
+.eyebrow {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, .09);
-  border: 1px solid rgba(255, 255, 255, .14);
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: .9rem;
-  width: fit-content;
   margin-bottom: 16px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #b13224;
+  font-weight: 700;
+  font-size: 0.86rem;
+  box-shadow: 0 10px 24px rgba(130, 69, 61, 0.08);
 }
 
 .hero-title {
-  font-size: clamp(2rem, 2.6vw, 3.1rem);
-  line-height: 1.05;
+  font-size: clamp(2.0rem, 3vw, 3.8rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
   margin: 0;
-  background-color: #00000094;
+  color: #241717;
+  max-width: 11.5ch;
+  text-wrap: balance;
   backdrop-filter: blur(12px);
 }
 
 .grad {
-  background: linear-gradient(90deg, #a78bfa, #a02cff);
+  background: linear-gradient(135deg, #7e2319, #ff1e00 75%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .hero-sub {
-  margin-top: 12px;
-  font-size: 1.05rem;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, .86);
-  max-width: 58ch;
+  margin-top: 18px;
+  font-size: 1.06rem;
+  line-height: 1.65;
+  color: #6f5653;
+  max-width: 56ch;
 }
 
 .safe-text {
@@ -732,139 +921,198 @@ function scrollTo(id) {
 }
 
 .btn-cta {
-  background: linear-gradient(90deg, #6f27a0, #6114b8);
-  color: #0b0b10;
-  font-weight: 900;
-  border-radius: 14px;
-  padding: 12px 18px;
+  background: linear-gradient(135deg, #7e2319, #ff1e00);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-shadow: 0 18px 40px rgba(217, 59, 43, 0.22);
 }
 
-.btn-cta-2 {
-  background: linear-gradient(-90deg, #6f27a0, #6114b8);
-  color: #0b0b10;
-  font-weight: 900;
-  border-radius: 14px;
-  padding: 12px 18px;
+.btn-soft {
+  background: rgba(255, 255, 255, 0.76);
+  color: #be2716;
+  border: 1px solid rgba(217, 59, 43, 0.12);
+  border-radius: 16px;
+  padding: 12px 20px;
+  font-weight: 800;
+  backdrop-filter: blur(10px);
 }
 
 .btn-ghost-strong {
-  background: rgba(255, 255, 255, .10);
-  border: 1px solid rgba(255, 255, 255, .16);
-  color: #fff;
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #6c4b47;
+  border-radius: 16px;
   padding: 12px 18px;
+  backdrop-filter: blur(12px);
+  font-weight: 700;
 }
 
 .btn-outline-soft {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, .18);
-  color: rgba(255, 255, 255, .92);
+  background: #fff;
+  border: 1px solid rgba(217, 59, 43, 0.12);
+  color: #b13224;
   border-radius: 14px;
 }
 
 .mini-card {
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 16px;
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(125, 66, 58, 0.08);
+}
+
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #c63729;
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.10));
+  border: 1px solid rgba(217, 59, 43, 0.10);
+}
+
+.icon-badge.small {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
 }
 
 .mini-title {
   font-weight: 800;
+  color: #2b1d1d;
 }
 
 .mini-sub {
-  font-size: .83rem;
-  opacity: .9;
+  font-size: 0.84rem;
+  color: #6f5653;
 }
 
 .hero-card {
-  background: #9E97F5;
-  background: linear-gradient(-90deg, #2b034b77, #914cec7e);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 18px;
-  backdrop-filter: blur(2px);
-  max-width: 100%;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(217, 59, 43, 0.12);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 26px 70px rgba(121, 67, 60, 0.14);
+  color: #2a1e1e;
 }
 
-.price-label {
-  font-size: .85rem;
-  opacity: .85;
+.hero-card-sub {
+  color: #7c6160;
 }
 
 .price {
   font-weight: 900;
-  letter-spacing: .4px;
+  letter-spacing: 0.2px;
+  color: #2a1e1e;
 }
 
 .price-big {
   font-size: 4rem;
+  line-height: 1;
 }
 
 .price-dec {
-  font-size: 1.25rem;
-  opacity: .9;
+  font-size: 1.3rem;
+  opacity: 0.9;
 }
 
 .price-note {
-  font-size: .78rem;
-  opacity: .82;
+  font-size: 0.8rem;
+  color: #8b6f6b;
   margin-top: 4px;
 }
 
 .badge-highlight {
-  background: linear-gradient(90deg, rgba(167, 139, 250, .22), rgba(94, 234, 212, .18));
-  border: 1px solid rgba(255, 255, 255, .12);
-  color: #fff;
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.12));
+  border: 1px solid rgba(217, 59, 43, 0.12);
+  color: #a42f22;
+  font-weight: 700;
 }
 
 .pack-title {
   font-weight: 800;
-  letter-spacing: .2px;
+  color: #2a1e1e;
+}
+
+.pack-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.pack-item {
+  color: #5f4947;
+  line-height: 1.35;
 }
 
 .check {
-  color: #5eead4;
-  margin-right: 10px;
+  color: #d93b2b;
   margin-top: 2px;
 }
 
 .scroll-down {
   position: absolute;
   left: 50%;
-  bottom: 14px;
+  bottom: 16px;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, .85);
+  color: #9d4a40;
   z-index: 3;
 }
 
 @media (max-width: 1023px) {
+  .hero {
+    padding-top: 84px;
+    min-height: auto;
+    padding-bottom: 52px;
+  }
+
   .hero-bg {
     background-image: url('/ceo2.jpeg');
+    background-position: center top;
   }
 
-  .hero {
-    padding-top: 74px;
-    min-height: 95vh;
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 248, 0.96) 0%, rgba(255, 248, 246, 0.88) 36%, rgba(255, 246, 244, 0.90) 100%);
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .price-big {
+    font-size: 3.2rem;
   }
 }
 
-/* ===============================
-   SECTIONS
-   =============================== */
+/* SECTIONS */
 .section {
-  padding: 74px 0;
+  padding: 82px 0;
 }
 
-.section-dark {
-  background: radial-gradient(900px 420px at 30% 20%, rgba(124, 58, 237, .16), transparent 60%),
-    radial-gradient(800px 400px at 80% 60%, rgba(138, 20, 184, 0.1), transparent 60%),
-    #07070a;
+.section-soft {
+  background:
+    radial-gradient(900px 380px at 10% 0%, rgba(255, 107, 87, 0.10), transparent 55%),
+    linear-gradient(180deg, #fff7f6 0%, #fffdfc 100%);
 }
 
 .section-light {
-  background: #f6f7fb;
-  color: #0f172a;
+  background: #fffdfc;
+  color: #201616;
+}
+
+.section-pricing {
+  background:
+    radial-gradient(900px 380px at 90% 10%, rgba(255, 107, 87, 0.10), transparent 56%),
+    linear-gradient(180deg, #fff7f5 0%, #fff4f2 100%);
 }
 
 .section-head {
@@ -880,60 +1128,80 @@ function scrollTo(id) {
 
 .kicker {
   display: inline-block;
-  font-weight: 900;
-  letter-spacing: .16em;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: .78rem;
-  opacity: .85;
+  font-size: 0.78rem;
+  color: #ca1f0c;
   margin-bottom: 10px;
 }
 
 .section-title {
-  font-size: clamp(1.6rem, 2.1vw, 2.2rem);
-  line-height: 1.12;
+  font-size: clamp(1.75rem, 2.4vw, 2.7rem);
+  line-height: 1.15;
   margin: 0;
+  color: #231717;
 }
 
 .section-sub {
-  margin-top: 10px;
-  opacity: .9;
-  line-height: 1.5;
+  margin-top: 12px;
+  color: #715856;
+  line-height: 1.6;
 }
 
-/* Feature cards */
+/* FEATURE CARDS */
 .feature-card {
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .10);
-  border-radius: 18px;
-  transition: transform .2s ease, border-color .2s ease;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  border-radius: 22px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  box-shadow: 0 16px 44px rgba(126, 73, 65, 0.08);
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, .20);
+  border-color: rgba(217, 59, 43, 0.14);
+  box-shadow: 0 22px 54px rgba(126, 73, 65, 0.12);
 }
 
 .feature-icon {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(135, 47, 236, 0.568), rgba(64, 20, 184, 0.18));
-  border: 1px solid rgba(255, 255, 255, .14);
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.20), rgba(217, 59, 43, 0.10));
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #c8382a;
 }
 
-/* CTA strip */
+.feature-text {
+  color: #6f5653;
+  line-height: 1.6;
+}
+
+/* CTA STRIP */
 .cta-strip {
   display: flex;
   gap: 18px;
   justify-content: space-between;
   align-items: center;
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .10);
+  padding: 22px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 247, 244, 0.88));
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 18px 44px rgba(126, 73, 65, 0.08);
+}
+
+.cta-strip-title {
+  font-weight: 800;
+  color: #251818;
+}
+
+.cta-strip-sub {
+  color: #735b58;
+  margin-top: 4px;
 }
 
 @media (max-width: 600px) {
@@ -943,60 +1211,69 @@ function scrollTo(id) {
   }
 }
 
-/* Parallax desktop */
+/* PARALLAX */
 .parallax-wrap {
   position: relative;
-  height: 44vh;
+  height: 42vh;
   overflow: hidden;
+  border-bottom: 1px solid rgba(217, 59, 43, 0.06);
 }
 
 .parallax-img {
   position: absolute;
   inset: 0;
-  background-image: url('/desc.png');
-  background-size: cover;
+  background-image: url('/kamila.png');
+  background-size: contain;
   background-position: center;
   background-attachment: fixed;
-  filter: grayscale(100%) brightness(0.75);
+  filter: saturate(0.94) brightness(1.03);
 }
 
 .parallax-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(246, 247, 251, .0), rgba(246, 247, 251, 1));
+  background: linear-gradient(180deg, rgba(255, 253, 252, 0.10), rgba(255, 253, 252, 1));
 }
 
-/* About / info */
+/* ABOUT / INFO */
 .about-card,
 .info-card,
 .contact-card {
-  border-radius: 18px;
+  border-radius: 22px;
   background: #ffffff;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 18px 46px rgba(123, 71, 65, 0.08);
 }
 
 .about-avatar {
-  border: 1px solid rgba(15, 23, 42, .12);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  overflow: hidden;
 }
 
 .chip {
-  background: rgba(124, 58, 237, .10);
-  border: 1px solid rgba(124, 58, 237, .18);
-  overflow: hidden !important;
+  background: rgba(255, 107, 87, 0.10);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #a63225;
 }
 
 .img-soft {
-  border-radius: 18px;
-  border: 1px solid rgba(15, 23, 42, .10);
+  border-radius: 20px;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 16px 40px rgba(129, 74, 68, 0.08);
 }
 
-/* Pricing */
+/* PRICING */
 .pricing-card {
-  border-radius: 18px;
-  background: rgba(16, 16, 22, .78);
-  border: 1px solid rgba(255, 255, 255, .12);
-  color: #fff;
-  backdrop-filter: blur(10px);
-  max-width: 100%;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fffefe 0%, #fff7f5 100%);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #251919;
+  box-shadow: 0 24px 60px rgba(126, 73, 65, 0.12);
+}
+
+.pricing-sub,
+.pricing-caption {
+  color: #7c6360;
 }
 
 .price-line {
@@ -1005,78 +1282,53 @@ function scrollTo(id) {
 }
 
 .check2 {
-  color: #5eead4;
-  margin-right: 10px;
+  color: #d93b2b;
   margin-top: 2px;
 }
 
 .pack-item2 {
-  color: rgba(255, 255, 255, .92);
-  line-height: 1.25;
+  color: #604947;
+  line-height: 1.35;
 }
 
-/* Contact (SEM 100vw => sem flash) */
-.contact-hero {
-  width: 100% !important;
-  max-width: 100% !important;
-  display: block;
-}
-
+/* CONTACT */
 .contact-form {
   background: #ffffff;
-  padding: 16px;
-  border-radius: 18px;
-  border: 1px solid rgba(15, 23, 42, .08);
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 16px 44px rgba(126, 73, 65, 0.08);
 }
 
-.insta {
-  color: #0f172a;
-  font-weight: 900;
+.insta-link {
+  color: #ca1f0c;
+  font-weight: 800;
   text-decoration: none;
 }
 
 .tip {
-  border-radius: 16px;
-  background: rgba(124, 58, 237, .08);
-  border: 1px solid rgba(124, 58, 237, .12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff8f7 0%, #fff5f3 100%);
+  border: 1px solid rgba(217, 59, 43, 0.08);
 }
 
-/* Footer */
+/* FOOTER */
 .footer {
   text-align: center;
-  opacity: .9;
+  color: #6e5754;
 }
 
 .devlink {
-  font-weight: 900;
-  color: #0f172a;
+  font-weight: 800;
+  color: #ca1f0c;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(15, 23, 42, .35);
+  border-bottom: 1px dashed rgba(196, 55, 40, 0.35);
 }
 
-/* ===============================
-   ANIMAÇÃO SEM "PULO" VISUAL
-   (nada de transform que estoura largura)
-   =============================== */
+/* ANIMAÇÃO AUXILIAR */
 .fade-in {
   opacity: 0;
-  animation: fade .55s ease forwards;
-}
-
-.delay-1 {
-  animation-delay: .08s;
-}
-
-.delay-2 {
-  animation-delay: .16s;
-}
-
-.delay-3 {
-  animation-delay: .24s;
-}
-
-.delay-4 {
-  animation-delay: .32s;
+  animation: fade 0.55s ease forwards;
 }
 
 @keyframes fade {

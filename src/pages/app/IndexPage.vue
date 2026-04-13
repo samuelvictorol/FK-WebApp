@@ -1,30 +1,26 @@
 <template>
   <q-page class="q-pa-md page">
-    <!-- Breadcrumb -->
     <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
       <q-breadcrumbs-el icon="home" label="Início" exact />
     </q-breadcrumbs>
 
-    <!-- Header -->
     <div class="top row items-start justify-between q-mt-sm">
       <div>
-        <div class="text-h4 text-weight-bold safe-text text-grey-3 q-py-md">Início</div>
+        <div class="text-h4 text-weight-bold safe-text page-title q-py-md">Início</div>
       </div>
     </div>
 
-    <!-- Hero: Curso -->
     <q-card class="hero" bordered>
       <div class="hero-bg"></div>
       <div class="hero-overlay"></div>
 
       <q-card-section class="hero-content">
-        <!-- Ações principais -->
         <div class="grid text-dark">
           <q-card class="action-card" bordered clickable v-ripple @click="router.push('/app/forms')">
             <q-card-section class="row items-start justify-between">
               <div>
                 <div class="text-h6 text-weight-bold safe-text">Formulários</div>
-                <div class="text-body2 text-purple-14 text-bold safe-text">
+                <div class="text-body2 card-subtext safe-text">
                   Cronotipo, Forma e Estilo — Descubra a forma ideal para você.
                 </div>
               </div>
@@ -42,7 +38,7 @@
             <q-card-section class="row items-start justify-between">
               <div>
                 <div class="text-h6 text-weight-bold safe-text">Meu perfil</div>
-                <div class="text-body2 text-purple-14 text-bold safe-text q-pb-xl">
+                <div class="text-body2 card-subtext safe-text q-pb-xl">
                   Veja os dados do seu perfil.
                 </div>
               </div>
@@ -56,26 +52,38 @@
             </q-card-section>
           </q-card>
         </div>
-        <!-- <div class="text-h5 text-weight-bold safe-text hero-title">
-          🎯 Conheça o curso que transforma sua preparação para concursos!
-        </div> -->
 
-        <div class="text-body2 text-grey-2 q-mt-lg safe-text hero-sub">
+        <div class="text-body2 hero-sub q-mt-lg safe-text">
           Um caminho mais claro, com método e constância. Se você quer estudar com estratégia, esse é o próximo passo.
         </div>
 
         <div class="row q-col-gutter-sm q-mt-md">
           <div class="col-12 col-sm-auto">
-            <q-btn label="PDF Grátis" icon-right="arrow_forward" class="btn-cta full-width text-grey-3" unelevated
-              @click="irParaCurso" />
+            <q-btn
+              label="PDF Grátis"
+              icon-right="arrow_forward"
+              class="btn-cta full-width text-white"
+              unelevated
+              @click="irParaCurso"
+            />
           </div>
           <div class="col-12 col-sm-auto">
-            <q-btn label="Acesso Premium" icon-right="verified" class="btn-cta-green full-width text-grey-3" unelevated
-              @click="togglePaymentDialog" />
+            <q-btn
+              label="Acesso Premium"
+              icon-right="verified"
+              class="btn-cta-green full-width text-white"
+              unelevated
+              @click="togglePaymentDialog"
+            />
           </div>
           <div class="col-12 col-sm-auto">
-            <q-btn label="Descubra seu estilo" icon="list_alt" class="btn-ghost full-width" unelevated
-              to="/app/forms" />
+            <q-btn
+              label="Descubra seu estilo"
+              icon="list_alt"
+              class="btn-ghost full-width"
+              unelevated
+              to="/app/forms"
+            />
           </div>
         </div>
 
@@ -83,7 +91,7 @@
           <div class="col-12 col-sm-4">
             <q-card flat class="mini">
               <q-card-section class="row items-center no-wrap">
-                <q-icon name="chat_bubble" size="20px" class="q-mr-sm" />
+                <q-icon name="chat_bubble" size="20px" class="q-mr-sm mini-icon" />
                 <div>
                   <div class="mini-title">Modo chat</div>
                   <div class="mini-sub">rápido e leve</div>
@@ -94,7 +102,7 @@
           <div class="col-12 col-sm-4">
             <q-card flat class="mini">
               <q-card-section class="row items-center no-wrap">
-                <q-icon name="description" size="20px" class="q-mr-sm" />
+                <q-icon name="description" size="20px" class="q-mr-sm mini-icon" />
                 <div>
                   <div class="mini-title">Relatório</div>
                   <div class="mini-sub">personalizado</div>
@@ -105,7 +113,7 @@
           <div class="col-12 col-sm-4">
             <q-card flat class="mini">
               <q-card-section class="row items-center no-wrap">
-                <q-icon name="schedule" size="20px" class="q-mr-sm" />
+                <q-icon name="schedule" size="20px" class="q-mr-sm mini-icon" />
                 <div>
                   <div class="mini-title">Aplicável</div>
                   <div class="mini-sub">na sua rotina</div>
@@ -116,6 +124,7 @@
         </div>
       </q-card-section>
     </q-card>
+
     <q-dialog v-model="dialog" maximized persistent>
       <payment-component @close="dialog = false" />
     </q-dialog>
@@ -123,7 +132,7 @@
 </template>
 
 <script setup>
-import PaymentComponent from 'src/components/PaymentComponent.vue';
+import PaymentComponent from 'src/components/PaymentComponent.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -131,14 +140,12 @@ const dialog = ref(false)
 const router = useRouter()
 
 function irParaCurso() {
-  // coloque aqui sua URL (quando tiver)
   window.open('https://flaviakamila.com.br', '_blank')
 }
 
 function togglePaymentDialog() {
   dialog.value = !dialog.value
 }
-
 </script>
 
 <style scoped>
@@ -162,45 +169,44 @@ function togglePaymentDialog() {
   word-break: break-word;
 }
 
+.page-title {
+  color: #2b1d1d;
+}
+
 .crumbs {
-  background: rgba(255, 255, 255, .92);
-  border: 1px solid rgba(15, 23, 42, .08);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(217, 59, 43, 0.08);
   padding: 10px 12px;
   border-radius: 14px;
+  color: #7a5e5a;
 }
 
 .top {
   gap: 12px;
 }
 
-.plan-chip {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .14), rgba(20, 184, 166, .10));
-  border: 1px solid rgba(15, 23, 42, .10);
-  font-weight: 900;
-}
-
-/* HERO */
 .hero {
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
-  border: 1px solid rgba(15, 23, 42, .08);
-  background: rgba(16, 16, 22, .86);
-  color: #fff;
+  border-radius: 22px;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  background: linear-gradient(180deg, #fffefe 0%, #fff7f5 100%);
+  color: #2a1e1e;
+  box-shadow: 0 24px 54px rgba(126, 73, 65, 0.10);
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 420px at 20% 25%, rgba(124, 58, 237, .32), transparent 60%),
-    radial-gradient(800px 400px at 80% 40%, rgba(110, 20, 184, 0.2), transparent 55%);
+    radial-gradient(900px 420px at 20% 25%, rgba(255, 107, 87, 0.14), transparent 60%),
+    radial-gradient(800px 400px at 80% 40%, rgba(217, 59, 43, 0.10), transparent 55%);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 8, 12, .35), rgba(8, 8, 12, .75));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.35));
 }
 
 .hero-content {
@@ -208,58 +214,49 @@ function togglePaymentDialog() {
   z-index: 2;
 }
 
-.kicker {
-  display: inline-block;
-  font-weight: 900;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  font-size: .78rem;
-  opacity: .9;
-  margin-bottom: 10px;
-}
-
-.hero-title {
-  line-height: 1.12;
-}
-
 .hero-sub {
   max-width: 70ch;
-  opacity: .92;
+  color: #6f5653;
+  line-height: 1.6;
 }
 
 .btn-cta {
-  background: linear-gradient(90deg, #7c3aed, #9c68f7);
-  color: #0b0b10;
-  font-weight: 900;
-  border-radius: 14px;
-  padding: 12px 18px;
-}
-
-.btn-ghost {
-  background: rgba(255, 255, 255, .10);
-  border: 1px solid rgba(255, 255, 255, .16);
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
   color: #fff;
   font-weight: 900;
   border-radius: 14px;
   padding: 12px 18px;
 }
 
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #b13224;
+  font-weight: 900;
+  border-radius: 14px;
+  padding: 12px 18px;
+}
+
 .mini {
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(217, 59, 43, 0.08);
   border-radius: 16px;
+}
+
+.mini-icon {
+  color: #d24d3c;
 }
 
 .mini-title {
   font-weight: 900;
+  color: #2b1d1d;
 }
 
 .mini-sub {
-  font-size: .83rem;
-  opacity: .9;
+  font-size: 0.83rem;
+  color: #7a5e5a;
 }
 
-/* Actions grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -268,10 +265,11 @@ function togglePaymentDialog() {
 
 .action-card {
   border-radius: 18px;
-  background: rgba(255, 255, 255, .92);
-  border: 1px solid rgba(15, 23, 42, .08);
-  transition: transform .18s ease, box-shadow .18s ease;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   cursor: pointer;
+  box-shadow: 0 14px 34px rgba(126, 73, 65, 0.08);
 }
 
 .action-card:hover {
@@ -279,7 +277,12 @@ function togglePaymentDialog() {
 }
 
 .action-card.muted {
-  background: rgba(255, 255, 255, .88);
+  background: rgba(255, 255, 255, 0.90);
+}
+
+.card-subtext {
+  color: #b13224;
+  font-weight: 700;
 }
 
 .icon-pill {
@@ -289,17 +292,19 @@ function togglePaymentDialog() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, rgba(124, 58, 237, .14), rgba(151, 20, 184, 0.1));
-  border: 1px solid rgba(15, 23, 42, .08);
+  background: linear-gradient(90deg, rgba(255, 107, 87, 0.14), rgba(217, 59, 43, 0.08));
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  color: #d24d3c;
 }
 
 .go {
   font-weight: 900;
+  color: #b13224;
 }
 
 .btn-cta-green {
-  background: linear-gradient(90deg, rgba(41, 202, 1, 0.856), rgba(0, 168, 112, 0.836));
-  color: #0b0b10;
+  background: linear-gradient(90deg, rgba(41, 202, 1, 0.90), rgba(0, 168, 112, 0.90));
+  color: #fff;
   font-weight: 900;
   border-radius: 14px;
   padding: 12px 18px;

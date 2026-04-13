@@ -1,17 +1,17 @@
 <template>
   <q-page class="q-pa-md page">
     <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
-      <q-breadcrumbs-el class="text-deep-purple-10" icon="home" label="Início" to="/app" />
-      <q-breadcrumbs-el class="text-deep-purple-10" icon="list_alt" label="Formulários" to="/app/forms" />
+      <q-breadcrumbs-el class="crumb-link" icon="home" label="Início" to="/app" />
+      <q-breadcrumbs-el class="crumb-link" icon="list_alt" label="Formulários" to="/app/forms" />
       <q-breadcrumbs-el icon="article" label="Forma" exact />
     </q-breadcrumbs>
 
     <q-card class="shell" bordered>
       <q-card-section class="head">
-        <div class="text-h5 text-weight-bold text-deep-purple-10 safe-text">
+        <div class="title safe-text">
           Forma de Aprendizado
         </div>
-        <div class="text-subtitle2 text-grey-6 q-mt-xs safe-text">
+        <div class="subtitle safe-text">
           Descubra seu estilo de aprendizado predominante e otimize seus estudos!
         </div>
       </q-card-section>
@@ -20,8 +20,8 @@
 
       <q-card-section class="chat">
         <div v-if="loadingPerguntas" class="row items-center q-gutter-sm q-pa-md">
-          <q-spinner color="deep-purple-10" />
-          <div class="text-grey-6">Carregando perguntas…</div>
+          <q-spinner color="red-6" />
+          <div class="text-grey-7">Carregando perguntas…</div>
         </div>
 
         <div v-else>
@@ -107,15 +107,15 @@
               <div class="bubble-title"><span class="text-weight-bold">Flávia Kamila</span></div>
 
               <div v-if="resultado" class="bubble-text safe-text">
-                <div class="text-subtitle1 text-weight-bold q-mb-xs">
+                <div class="text-subtitle1 text-weight-bold q-mb-xs result-title">
                   ✅ {{ resultado.titulo }}
                 </div>
                 <div v-html="resultado.descricao"></div>
               </div>
 
               <div v-else class="row items-center q-gutter-sm">
-                <q-spinner color="deep-purple-10" />
-                <div class="text-grey-6">Calculando…</div>
+                <q-spinner color="red-6" />
+                <div class="text-grey-7">Calculando…</div>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
 
               <div class="q-mt-sm">
                 <q-btn
-                  class="btn-pdf full-width text-grey-3"
+                  class="btn-pdf full-width text-white"
                   unelevated
                   icon="download"
                   label="Baixar PDF com histórico"
@@ -149,9 +149,9 @@
       <payment-component @close="dialogPagamento = false" />
     </q-dialog>
 
-    <q-footer class="progress bg-grad">
-      <q-linear-progress :value="progresso" color="white" track-color="deep-purple-8" />
-      <div class="text-center text-caption q-mt-xs text-white">
+    <q-footer class="progress progress-wrap">
+      <q-linear-progress :value="progresso" color="red-5" track-color="red-1" />
+      <div class="text-center text-caption q-mt-xs progress-text">
         {{ respondidas }} de {{ totalPerguntas }} respondidas
       </div>
     </q-footer>
@@ -366,42 +366,173 @@ function escapeHtml(str) {
 .page { max-width: 900px; margin: 0 auto; }
 .safe-text { overflow-wrap: anywhere; word-break: break-word; }
 
-.crumbs { background: rgba(255,255,255,.92); border: 1px solid rgba(15,23,42,.08); padding: 10px 12px; border-radius: 14px; }
-.shell { margin-top: 14px; border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.94); border: 1px solid rgba(15,23,42,.08); }
+.crumbs {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.crumb-link {
+  color: #c43728;
+}
+
+.shell {
+  margin-top: 14px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 16px 44px rgba(125, 66, 58, 0.06);
+}
+
 .head { padding-bottom: 10px; }
 
-.chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
-.chat-block { padding: 14px 8px; border-bottom: 1px solid rgba(15,23,42,.06); }
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #241717;
+}
+
+.subtitle {
+  color: #755c58;
+  margin-top: 6px;
+}
+
+.chat {
+  background: linear-gradient(180deg, rgba(255, 107, 87, 0.05), rgba(255, 244, 241, 0.9));
+}
+
+.chat-block {
+  padding: 14px 8px;
+  border-bottom: 1px solid rgba(217, 59, 43, 0.06);
+}
 
 .msg-row { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 10px; }
 .left { justify-content: flex-start; }
 .right { justify-content: flex-end; }
 .sent { margin-top: -4px; }
 
-.avatar { border: 1px solid rgba(15,23,42,.10); background: #fff; }
+.avatar {
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  background: #fff;
+}
 
-.bubble { max-width: min(680px, 86%); padding: 10px 12px; border-radius: 16px; border: 1px solid rgba(15,23,42,.10); }
-.bubble-left { background: #ffffff; border-top-left-radius: 10px; }
-.bubble-right { background: linear-gradient(90deg, rgba(124,58,237,.16), rgba(20,184,166,.12)); border-top-right-radius: 10px; }
+.bubble {
+  max-width: min(680px, 86%);
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(217, 59, 43, 0.08);
+}
 
-.bubble-title { font-size: .78rem; opacity: .85; margin-bottom: 4px; }
-.bubble-text { line-height: 1.35; }
+.bubble-left {
+  background: #ffffff;
+  border-top-left-radius: 10px;
+}
 
-.answers { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; max-width: min(680px, 92%); }
-.bubble-option { border-radius: 999px; font-weight: 800; text-transform: none; background: rgba(255,255,255,.92); border: 1px solid rgba(15,23,42,.10); color: rgba(15,23,42,.92); }
-.bubble-option.selected { background: linear-gradient(90deg, rgba(124,58,237,.22), rgba(20,184,166,.16)); border-color: rgba(124,58,237,.35); }
+.bubble-right {
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.10));
+  border-top-right-radius: 10px;
+}
 
-.hint { display: inline-flex; align-items: center; font-size: .85rem; color: rgba(15,23,42,.72); padding-left: 44px; }
+.bubble-title {
+  font-size: .78rem;
+  opacity: .85;
+  margin-bottom: 4px;
+  color: #7d625f;
+}
 
-.done-box { margin: 12px; padding: 12px; border-radius: 14px; background: rgba(16,16,22,.04); border: 1px solid rgba(15,23,42,.08); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-.btn-recalc { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #ffffff; font-weight: 900; border-radius: 12px; }
+.bubble-text { line-height: 1.4; color: #2a1d1d; }
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  max-width: min(680px, 92%);
+}
+
+.bubble-option {
+  border-radius: 999px;
+  font-weight: 800;
+  text-transform: none;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(217,59,43,.10);
+  color: #5f4846;
+}
+
+.bubble-option.selected {
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.14));
+  border-color: rgba(217, 59, 43, 0.25);
+  color: #b13224;
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  font-size: .85rem;
+  color: rgba(72, 44, 41, 0.76);
+  padding-left: 44px;
+}
+
+.done-box {
+  margin: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 248, 246, 0.96);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #664e4b;
+}
+
+.btn-recalc {
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
+  color: #ffffff;
+  font-weight: 900;
+  border-radius: 12px;
+}
+
 .chat-bottom-anchor { width: 100%; height: 1px; }
 
-.progress { position: fixed; bottom: 0; width: 100%; border-top: 1px solid rgba(255,255,255,.12); padding: 10px 12px; }
+.progress-wrap {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid rgba(217, 59, 43, 0.08);
+  padding: 10px 12px;
+  background: rgba(255, 252, 251, 0.96);
+  backdrop-filter: blur(12px);
+}
 
-.result-card { max-width: 560px; width: 92vw; border-radius: 16px; overflow: hidden; }
-.result-head { background: rgba(255,255,255,.96); }
-.result-chat { background: linear-gradient(180deg, rgba(124,58,237,.04), rgba(20,184,166,.03)); }
+.progress-text {
+  color: #8a6a67;
+}
 
-.btn-pdf { background: linear-gradient(90deg, #7c3aed, #9214b8); color: #0b0b10; font-weight: 900; border-radius: 14px; }
+.result-card {
+  max-width: 560px;
+  width: 92vw;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.result-head { background: rgba(255,255,255,.98); }
+
+.result-chat {
+  background: linear-gradient(180deg, rgba(255, 107, 87, 0.05), rgba(255, 244, 241, 0.96));
+}
+
+.result-title {
+  color: #c43728;
+}
+
+.btn-pdf {
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
+  color: #ffffff;
+  font-weight: 900;
+  border-radius: 14px;
+}
 </style>

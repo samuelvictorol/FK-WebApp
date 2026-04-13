@@ -61,3 +61,12 @@ h1, h2, h3, h4, h5, h6, .q-input, .q-btn{
   border-top: 1px solid rgba(255,255,255,.06);
   background: rgba(255,255,255,.02);
 }
+
+
+.btn-primary {
+  background: linear-gradient(135deg, #7e2319, #ff1e00);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(217, 59, 43, 0.20);
+}

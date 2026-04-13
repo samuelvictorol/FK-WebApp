@@ -1,17 +1,17 @@
 <template>
   <q-page class="q-pa-md page">
     <q-breadcrumbs class="crumbs" separator-icon="chevron_right">
-      <q-breadcrumbs-el class="text-deep-purple-10" icon="home" label="Início" to="/app" />
-      <q-breadcrumbs-el class="text-deep-purple-10" icon="list_alt" label="Formulários" to="/app/forms" />
+      <q-breadcrumbs-el class="crumb-link" icon="home" label="Início" to="/app" />
+      <q-breadcrumbs-el class="crumb-link" icon="list_alt" label="Formulários" to="/app/forms" />
       <q-breadcrumbs-el icon="article" label="Cronotipo" exact />
     </q-breadcrumbs>
 
     <q-card class="shell" bordered>
       <q-card-section class="head">
-        <div class="text-h5 text-weight-bold text-deep-purple-10 safe-text">
+        <div class="title safe-text">
           Descubra seu Cronotipo
         </div>
-        <div class="text-subtitle2 text-grey-6 q-mt-xs safe-text">
+        <div class="subtitle safe-text">
           Entenda seus padrões naturais de sono e vigília para otimizar seu dia a dia.
         </div>
       </q-card-section>
@@ -20,13 +20,12 @@
 
       <q-card-section class="chat">
         <div v-if="loadingPerguntas" class="row items-center q-gutter-sm q-pa-md">
-          <q-spinner color="deep-purple-10" />
-          <div class="text-grey-6">Carregando perguntas…</div>
+          <q-spinner color="red-6" />
+          <div class="text-grey-7">Carregando perguntas…</div>
         </div>
 
         <div v-else>
           <div v-for="(pergunta, idx) in perguntasVisiveis" :key="pergunta.id" class="chat-block">
-            <!-- Pergunta (Kamila) -->
             <div class="msg-row left">
               <q-avatar size="34px" class="avatar">
                 <img src="/kamila.png" alt="Kamila" />
@@ -40,16 +39,20 @@
               </div>
             </div>
 
-            <!-- Respostas -->
             <div class="msg-row right">
               <div class="answers">
-                <q-btn v-for="opt in pergunta.options" :key="opt.points" unelevated class="bubble-option"
-                  :class="{ selected: respostas[pergunta.id] === opt.points }" :label="opt.option"
-                  @click="selecionar(pergunta.id, opt.points)" />
+                <q-btn
+                  v-for="opt in pergunta.options"
+                  :key="opt.points"
+                  unelevated
+                  class="bubble-option"
+                  :class="{ selected: respostas[pergunta.id] === opt.points }"
+                  :label="opt.option"
+                  @click="selecionar(pergunta.id, opt.points)"
+                />
               </div>
             </div>
 
-            <!-- Resposta enviada -->
             <div v-if="respostas[pergunta.id] !== undefined" class="msg-row right sent">
               <div class="bubble bubble-right">
                 <div class="bubble-title">Você</div>
@@ -67,12 +70,17 @@
 
           <div v-if="isCompleted" class="done-box q-mt-md">
             <q-icon name="check_circle" size="18px" class="q-mr-xs" />
-            Concluído. Você pode editar respostas acima e recalcular quando quiser.
-            <q-btn unelevated class="btn-recalc q-ml-sm" label="Recalcular" icon="refresh" :loading="loadingResultado"
-              @click="enviar(true)" />
+            Concluído. Você pode editar respostas acima e primayular quando quiser.
+            <q-btn
+              unelevated
+              class="btn-primay q-ml-sm"
+              label="primayular"
+              icon="refresh"
+              :loading="loadingResultado"
+              @click="enviar(true)"
+            />
           </div>
 
-          <!-- âncora pro scroll sempre cair no lugar certo -->
           <div ref="chatBottom" class="chat-bottom-anchor"></div>
         </div>
       </q-card-section>
@@ -80,7 +88,6 @@
 
     <div style="height: 16vh;"></div>
 
-    <!-- RESULTADO: estilo chat + só botão de PDF -->
     <q-dialog v-model="dialogResultado" persistent>
       <q-card class="result-card">
         <q-card-section class="result-head row items-center justify-between">
@@ -102,15 +109,15 @@
               </div>
 
               <div v-if="resultado" class="bubble-text safe-text">
-                <div class="text-subtitle1 text-weight-bold q-mb-xs">
+                <div class="text-subtitle1 text-weight-bold q-mb-xs result-title">
                   ✅ {{ resultado.titulo }}
                 </div>
                 <div v-html="resultado.descricao"></div>
               </div>
 
               <div v-else class="row items-center q-gutter-sm">
-                <q-spinner color="deep-purple-10" />
-                <div class="text-grey-6">Calculando…</div>
+                <q-spinner color="red-6" />
+                <div class="text-grey-7">Calculando…</div>
               </div>
             </div>
           </div>
@@ -129,8 +136,14 @@
               </div>
 
               <div class="q-mt-sm">
-                <q-btn class="btn-pdf full-width text-grey-3" unelevated icon="download"
-                  label="Baixar PDF com histórico" :disable="!resultado" @click="baixarPdfHistorico()" />
+                <q-btn
+                  class="btn-pdf full-width text-white"
+                  unelevated
+                  icon="download"
+                  label="Baixar PDF com histórico"
+                  :disable="!resultado"
+                  @click="baixarPdfHistorico()"
+                />
               </div>
             </div>
           </div>
@@ -138,10 +151,9 @@
       </q-card>
     </q-dialog>
 
-    <!-- Progresso fixo (pedido) -->
-    <q-footer class="progress bg-grad">
-      <q-linear-progress :value="progresso" color="white" track-color="deep-purple-8" />
-      <div class="text-center text-caption q-mt-xs text-white">
+    <q-footer class="progress progress-wrap">
+      <q-linear-progress :value="progresso" color="red-5" track-color="red-1" />
+      <div class="text-center text-caption q-mt-xs progress-text">
         {{ respondidas }} de {{ totalPerguntas }} respondidas
       </div>
     </q-footer>
@@ -161,11 +173,9 @@ const loadingResultado = ref(false)
 
 const dialogResultado = ref(false)
 const resultado = ref(null)
-const descricaoResultado = ref('') // mantém compatibilidade
+const descricaoResultado = ref('')
 
 const autoSubmitted = ref(false)
-
-// scroll âncora
 const chatBottom = ref(null)
 
 api.post('/form/cronotipo')
@@ -223,7 +233,6 @@ function getSelectedLabelPoints(pergunta, points) {
   return opt?.option || ''
 }
 
-// quando aparece nova pergunta -> scroll pro fim
 watch(
   () => perguntasVisiveis.value.length,
   async (len, prev) => {
@@ -288,27 +297,6 @@ async function enviar(forceOpenDialog) {
   }
 }
 
-function buildHistoricoHtml() {
-  const items = perguntas.value.map((p, idx) => {
-    const points = respostas.value[p.id]
-    const answer = points !== undefined ? getSelectedLabelPoints(p, points) : '(sem resposta)'
-    return `
-      <div style="margin: 10px 0;">
-        <div><strong>${idx + 1}. ${escapeHtml(p.question)}</strong></div>
-        <div>Resposta: ${escapeHtml(answer)}</div>
-      </div>
-    `
-  }).join('')
-
-  return `
-    <h2>${escapeHtml(resultado.value?.titulo || 'Resultado')}</h2>
-    <div>${resultado.value?.descricao || ''}</div>
-    <hr />
-    <h3>Histórico (Perguntas e Respostas)</h3>
-    ${items}
-  `
-}
-
 function baixarPdfHistorico() {
   Utils.gerarPDF({
     titulo: resultado.value?.titulo,
@@ -323,7 +311,6 @@ function baixarPdfHistorico() {
   }, 'cronotipo_resultado')
 }
 
-// helper simples p/ evitar quebrar HTML no histórico
 function escapeHtml(str) {
   return String(str || '')
     .replaceAll('&', '&amp;')
@@ -356,31 +343,47 @@ function escapeHtml(str) {
 }
 
 .crumbs {
-  background: rgba(255, 255, 255, .92);
-  border: 1px solid rgba(15, 23, 42, .08);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(217, 59, 43, 0.08);
   padding: 10px 12px;
   border-radius: 14px;
 }
 
+.crumb-link {
+  color: #c43728;
+}
+
 .shell {
   margin-top: 14px;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
-  background: rgba(255, 255, 255, .94);
-  border: 1px solid rgba(15, 23, 42, .08);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(217, 59, 43, 0.08);
+  box-shadow: 0 16px 44px rgba(125, 66, 58, 0.06);
 }
 
 .head {
   padding-bottom: 10px;
 }
 
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #241717;
+}
+
+.subtitle {
+  color: #755c58;
+  margin-top: 6px;
+}
+
 .chat {
-  background: linear-gradient(180deg, rgba(124, 58, 237, .04), rgba(20, 184, 166, .03));
+  background: linear-gradient(180deg, rgba(255, 107, 87, 0.05), rgba(255, 244, 241, 0.9));
 }
 
 .chat-block {
   padding: 14px 8px;
-  border-bottom: 1px solid rgba(15, 23, 42, .06);
+  border-bottom: 1px solid rgba(217, 59, 43, 0.06);
 }
 
 .msg-row {
@@ -403,7 +406,7 @@ function escapeHtml(str) {
 }
 
 .avatar {
-  border: 1px solid rgba(15, 23, 42, .10);
+  border: 1px solid rgba(217, 59, 43, 0.10);
   background: #fff;
 }
 
@@ -411,7 +414,7 @@ function escapeHtml(str) {
   max-width: min(680px, 86%);
   padding: 10px 12px;
   border-radius: 16px;
-  border: 1px solid rgba(15, 23, 42, .10);
+  border: 1px solid rgba(217, 59, 43, 0.08);
 }
 
 .bubble-left {
@@ -420,18 +423,20 @@ function escapeHtml(str) {
 }
 
 .bubble-right {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .16), rgba(20, 184, 166, .12));
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.10));
   border-top-right-radius: 10px;
 }
 
 .bubble-title {
-  font-size: .78rem;
-  opacity: .85;
+  font-size: 0.78rem;
+  opacity: 0.85;
   margin-bottom: 4px;
+  color: #7d625f;
 }
 
 .bubble-text {
-  line-height: 1.35;
+  line-height: 1.4;
+  color: #2a1d1d;
 }
 
 .answers {
@@ -446,21 +451,22 @@ function escapeHtml(str) {
   border-radius: 999px;
   font-weight: 800;
   text-transform: none;
-  background: rgba(255, 255, 255, .92);
-  border: 1px solid rgba(15, 23, 42, .10);
-  color: rgba(15, 23, 42, .92);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(217, 59, 43, 0.10);
+  color: #5f4846;
 }
 
 .bubble-option.selected {
-  background: linear-gradient(90deg, rgba(124, 58, 237, .22), rgba(20, 184, 166, .16));
-  border-color: rgba(124, 58, 237, .35);
+  background: linear-gradient(135deg, rgba(255, 107, 87, 0.18), rgba(217, 59, 43, 0.14));
+  border-color: rgba(217, 59, 43, 0.25);
+  color: #b13224;
 }
 
 .hint {
   display: inline-flex;
   align-items: center;
-  font-size: .85rem;
-  color: rgba(15, 23, 42, .72);
+  font-size: 0.85rem;
+  color: rgba(72, 44, 41, 0.76);
   padding-left: 44px;
 }
 
@@ -468,52 +474,58 @@ function escapeHtml(str) {
   margin: 12px;
   padding: 12px;
   border-radius: 14px;
-  background: rgba(16, 16, 22, .04);
-  border: 1px solid rgba(15, 23, 42, .08);
+  background: rgba(255, 248, 246, 0.96);
+  border: 1px solid rgba(217, 59, 43, 0.08);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+  color: #664e4b;
 }
 
-.btn-recalc {
-  background: linear-gradient(90deg, #7c3aed, #5b14b8);
-  color: #ffffff;
-  font-weight: 900;
-  border-radius: 12px;
-}
 
 .chat-bottom-anchor {
   width: 100%;
   height: 1px;
 }
 
-.progress {
+.progress-wrap {
   position: fixed;
   bottom: 0;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, .12);
+  border-top: 1px solid rgba(217, 59, 43, 0.08);
   padding: 10px 12px;
+  background: rgba(255, 252, 251, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.progress-text {
+  color: #8a6a67;
 }
 
 .result-card {
   max-width: 560px;
   width: 92vw;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
+  background: #fff;
 }
 
 .result-head {
-  background: rgba(255, 255, 255, .96);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .result-chat {
-  background: linear-gradient(180deg, rgba(124, 58, 237, .04), rgba(20, 184, 166, .03));
+  background: linear-gradient(180deg, rgba(255, 107, 87, 0.05), rgba(255, 244, 241, 0.96));
+}
+
+.result-title {
+  color: #c43728;
 }
 
 .btn-pdf {
-  background: linear-gradient(90deg, #7c3aed, #9214b8);
-  color: #0b0b10;
+  background: linear-gradient(135deg, #d93b2b, #ff6b57);
+  color: #ffffff;
   font-weight: 900;
   border-radius: 14px;
 }
