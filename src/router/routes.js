@@ -26,7 +26,7 @@ const routes = [
     children: [
       { path: '', component: () => import('src/pages/admin/IndexPage.vue') },
       { path: 'forms', component: () => import('src/pages/admin/FormsPage.vue') },
-      // { path: 'vendas', component: () => import('src/pages/admin/VendasPage.vue') },
+      { path: 'vendas', component: () => import('src/pages/admin/VendasPage.vue') },
       // { path: 'novo-form', component: () => import('pages/admin/NewFormTemplatePage.vue') },
       { path: 'clientes', component: () => import('pages/admin/ClientesPage.vue') }
     ]

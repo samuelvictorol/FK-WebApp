@@ -118,7 +118,7 @@ import { api } from 'boot/axios'
 
 const router = useRouter()
 const $q = useQuasar()
-const rightDrawerOpen = ref(false)
+const rightDrawerOpen = ref(true)
 const roleCheckInterval = ref(null)
 
 const user = ref({

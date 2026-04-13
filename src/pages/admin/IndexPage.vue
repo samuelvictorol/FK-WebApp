@@ -36,10 +36,10 @@
         <q-card class="kpi-card kpi-main" flat bordered>
           <q-card-section class="row items-center justify-between">
             <div>
-              <div class="text-caption kpi-label">Lucro Total</div>
-              <div class="kpi-value safe-text">{{ formatMoney(lucroTotal) }}</div>
+              <div class="text-caption kpi-label">Faturamento Total</div>
+              <div class="kpi-value safe-text">{{ formatMoney(totalPaymentsValue) }}</div>
               <div class="text-caption kpi-sub q-mt-xs">
-                {{ premiumUsersCount }} usuário(s) premium
+                {{ paymentsCount }} pagamento(s) aprovado(s)
               </div>
             </div>
             <q-icon name="trending_up" size="34px" class="kpi-icon" />
@@ -56,7 +56,7 @@
         </div>
         <div class="row items-center q-gutter-sm">
           <q-chip outline class="chip">
-            {{ premiumUsersCount }} premium
+            {{ paymentsCount }} pagamentos
           </q-chip>
 
           <q-btn
@@ -66,7 +66,7 @@
             label="Atualizar"
             class="refresh-btn"
             :loading="loading"
-            @click="buscarPremiumUsers"
+            @click="buscarPagamentos"
           />
         </div>
       </q-card-section>
@@ -75,7 +75,7 @@
 
       <q-card-section>
         <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-4">
             <q-btn
               class="action-btn btn-main full-width"
               unelevated
@@ -85,13 +85,23 @@
             />
           </div>
 
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-4">
             <q-btn
               class="action-btn btn-soft full-width"
               unelevated
               icon-right="group"
-              label="Clientes"
+              label="Usuários"
               to="/admin/clientes"
+            />
+          </div>
+
+          <div class="col-12 col-md-4">
+            <q-btn
+              class="action-btn btn-paid full-width"
+              unelevated
+              icon-right="paid"
+              label="Pagamentos"
+              to="/admin/vendas"
             />
           </div>
         </div>
@@ -101,13 +111,13 @@
     <q-card class="premium-card" flat bordered>
       <q-card-section class="row items-center justify-between">
         <div>
-          <div class="text-subtitle1 text-weight-bold safe-text section-title">Resumo premium</div>
+          <div class="text-subtitle1 text-weight-bold safe-text section-title">Resumo financeiro</div>
           <div class="text-caption section-sub safe-text">
-            Baseado no endpoint de usuários premium.
+            Baseado na collection de pagamentos aprovados.
           </div>
         </div>
 
-        <q-icon name="workspace_premium" size="22px" class="premium-ic" />
+        <q-icon name="payments" size="22px" class="premium-ic" />
       </q-card-section>
 
       <q-separator />
@@ -115,28 +125,28 @@
       <q-card-section>
         <div v-if="loading" class="row items-center q-gutter-sm loading-text">
           <q-spinner color="red-5" />
-          <span>Carregando dados premium...</span>
+          <span>Carregando pagamentos...</span>
         </div>
 
         <div v-else class="row q-col-gutter-md">
           <div class="col-12 col-sm-6 col-md-4">
             <div class="stat-box">
-              <div class="stat-label">Usuários Premium</div>
-              <div class="stat-value">{{ premiumUsersCount }}</div>
+              <div class="stat-label">Pagamentos aprovados</div>
+              <div class="stat-value">{{ paymentsCount }}</div>
             </div>
           </div>
 
           <div class="col-12 col-sm-6 col-md-4">
             <div class="stat-box">
-              <div class="stat-label">Valor por Premium</div>
-              <div class="stat-value">R$ 49,90</div>
+              <div class="stat-label">Faturamento total</div>
+              <div class="stat-value">{{ formatMoney(totalPaymentsValue) }}</div>
             </div>
           </div>
 
           <div class="col-12 col-sm-6 col-md-4">
             <div class="stat-box">
-              <div class="stat-label">Lucro Total</div>
-              <div class="stat-value">{{ formatMoney(lucroTotal) }}</div>
+              <div class="stat-label">Faturamento hoje</div>
+              <div class="stat-value">{{ formatMoney(todayPaymentsValue) }}</div>
             </div>
           </div>
         </div>
@@ -147,7 +157,7 @@
       <q-card-section class="row items-center no-wrap">
         <q-icon name="info" size="20px" class="q-mr-sm note-ic" />
         <div class="text-caption note-text safe-text">
-          Dica: você pode abrir o menu no canto superior direito para navegar rapidamente.
+          Dica: o total agora considera apenas pagamentos aprovados, sem depender de privilégios manuais.
         </div>
       </q-card-section>
     </q-card>
@@ -162,7 +172,7 @@ import { api } from 'boot/axios'
 const $q = useQuasar()
 
 const loading = ref(false)
-const premiumUsers = ref([])
+const payments = ref([])
 
 const userName = computed(() => {
   try {
@@ -174,30 +184,55 @@ const userName = computed(() => {
   }
 })
 
-const premiumUsersCount = computed(() => premiumUsers.value.length)
+const approvedPayments = computed(() => {
+  return payments.value.filter(payment =>
+    String(payment?.status || '').toLowerCase().includes('paid')
+  )
+})
 
-const lucroTotal = computed(() => {
-  return premiumUsers.value.reduce((total, user) => {
-    return total + Number(user?.lucro || 0)
+const paymentsCount = computed(() => approvedPayments.value.length)
+
+const totalPaymentsValue = computed(() => {
+  return approvedPayments.value.reduce((total, payment) => {
+    return total + Number(payment?.paid_amount || payment?.amount || 0)
+  }, 0)
+})
+
+const todayPaymentsValue = computed(() => {
+  const hoje = new Date()
+
+  return approvedPayments.value.reduce((total, payment) => {
+    const paidAt = new Date(payment?.paidAt || payment?.createdAt || 0)
+
+    const isToday =
+      paidAt.getDate() === hoje.getDate() &&
+      paidAt.getMonth() === hoje.getMonth() &&
+      paidAt.getFullYear() === hoje.getFullYear()
+
+    return total + (isToday ? Number(payment?.paid_amount || payment?.amount || 0) : 0)
   }, 0)
 })
 
 onMounted(() => {
-  buscarPremiumUsers()
+  buscarPagamentos()
 })
 
-async function buscarPremiumUsers() {
+async function buscarPagamentos() {
   loading.value = true
 
   try {
-    const { data } = await api.post('/admin/get-premium-users')
-    premiumUsers.value = Array.isArray(data) ? data : []
+    const { data } = await api.post('/pay/get-payments', {
+      page: 1,
+      limit: 500
+    })
+
+    payments.value = Array.isArray(data?.data) ? data.data : []
   } catch (error) {
-    console.error('[ADMIN_PREMIUM_USERS_ERROR]', error)
+    console.error('[ADMIN_PAYMENTS_ERROR]', error)
 
     $q.notify({
       type: 'negative',
-      message: error?.response?.data?.message || 'Erro ao buscar usuários premium',
+      message: error?.response?.data?.message || 'Erro ao buscar pagamentos',
       icon: 'mdi-alert-circle-outline',
       position: 'top',
       progress: true,
@@ -337,6 +372,11 @@ function formatMoney(value) {
 
 .btn-soft {
   background: linear-gradient(135deg, rgba(255,107,87,.16), rgba(217,59,43,.08));
+  color: #b13224;
+}
+
+.btn-paid {
+  background: linear-gradient(135deg, rgba(217,59,43,.18), rgba(255,107,87,.12));
   color: #b13224;
 }
 

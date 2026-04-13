@@ -43,18 +43,6 @@
           />
         </template>
 
-        <template #body-cell-lucro="props">
-          <q-td :props="props">
-            <q-chip
-              dense
-              :color="Number(props.row.lucro || 0) > 0 ? 'green-7' : 'grey-6'"
-              text-color="white"
-            >
-              {{ formatMoney(props.row.lucro) }}
-            </q-chip>
-          </q-td>
-        </template>
-
         <template #body-cell-planoAtual="props">
           <q-td :props="props">
             <q-chip
@@ -69,7 +57,7 @@
 
         <template #body-cell-actions="props">
           <q-td :props="props">
-            <div class="row items-center no-wrap">
+            <div class="row items-center no-wrap absolute-right q-gutter-x-sm">
               <q-btn dense flat icon="account_circle" class="act act-primary" @click="visualizarUsuario(props.row)">
                 <q-tooltip>Visualizar Usuário</q-tooltip>
               </q-btn>
@@ -190,10 +178,10 @@
               <div class="detail-value">{{ usuarioSelecionado.planoAtual || '-' }}</div>
             </div>
 
-            <div class="detail-item">
+            <!-- <div class="detail-item">
               <div class="detail-label">Lucro</div>
               <div class="detail-value">{{ formatMoney(usuarioSelecionado.lucro) }}</div>
-            </div>
+            </div> -->
 
             <div class="detail-item detail-item-full">
               <div class="detail-label">ID</div>
@@ -384,12 +372,6 @@ const userColumns = ref([
     align: 'left'
   },
   {
-    name: 'lucro',
-    label: 'Lucro',
-    field: row => row.lucro,
-    align: 'left'
-  },
-  {
     name: 'actions',
     label: 'Ações',
     align: 'center'
@@ -517,7 +499,7 @@ function mapUserToRow(user) {
     phone: user?.phone || user?.telefone || '-',
     perfil: extractPerfil(user),
     planoAtual: normalizePlano(role),
-    lucro: Number(user?.lucro || 0)
+    // lucro: Number(user?.lucro || 0)
   }
 }
 
@@ -612,7 +594,7 @@ async function alternarPlano(usuario) {
 
     const novoEhPremium = nextRole.toLowerCase().includes('premium')
     usuario.planoAtual = nextRole
-    usuario.lucro = novoEhPremium ? 49.9 : 0
+    // usuario.lucro = novoEhPremium ? 49.9 : 0
 
     const index = usuariosRows.value.findIndex(item => item._id === usuario._id)
     if (index !== -1) {

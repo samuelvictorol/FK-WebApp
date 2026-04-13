@@ -81,12 +81,13 @@ onMounted(() => {
 })
 
 const router = useRouter()
-const rightDrawerOpen = ref(false)
+const rightDrawerOpen = ref(true)
 
 const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
   { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
+  { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
 ])
 
 function toggleRightDrawer() {
