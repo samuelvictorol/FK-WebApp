@@ -646,13 +646,6 @@ async function handleSubmit() {
   font-weight: 700;
 }
 
-.order-1-mobile {
-  order: 1;
-}
-
-.order-2-mobile {
-  order: 2;
-}
 
 @media (max-width: 1023px) {
   .container {
@@ -674,13 +667,5 @@ async function handleSubmit() {
   }
 }
 
-@media (max-width: 767px) {
-  .order-1-mobile {
-    order: 1;
-  }
 
-  .order-2-mobile {
-    order: 2;
-  }
-}
 </style>
