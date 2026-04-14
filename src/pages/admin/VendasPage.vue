@@ -45,6 +45,16 @@
             </div>
           </div>
         </div>
+
+        <div class="q-mt-md">
+          <q-btn
+            unelevated
+            icon="mdi-whatsapp"
+            label="Solicitar saque pendente"
+            class="whats-btn"
+            @click="irParaWhatsapp"
+          />
+        </div>
       </q-card-section>
     </q-card>
 
@@ -265,13 +275,13 @@ const pagamentosHoje = computed(() => {
 
 const vendasHojeTotal = computed(() => {
   return pagamentosHoje.value.reduce((total, payment) => {
-    return total + Number(payment.paid_amount || payment.amount || 0)
+    return total + normalizeMoneyValue(payment.paid_amount ?? payment.amount)
   }, 0)
 })
 
 const totalGeral = computed(() => {
   return allPaymentsToday.value.reduce((total, payment) => {
-    return total + Number(payment.paid_amount || payment.amount || 0)
+    return total + normalizeMoneyValue(payment.paid_amount ?? payment.amount)
   }, 0)
 })
 
@@ -351,8 +361,8 @@ function mapPaymentRow(payment) {
     transaction_nsu: payment?.transaction_nsu || '-',
     receipt_url: payment?.receipt_url || '',
     capture_method: payment?.capture_method || '-',
-    amount: Number(payment?.amount || 0),
-    paid_amount: Number(payment?.paid_amount || payment?.amount || 0),
+    amount: normalizeMoneyValue(payment?.amount),
+    paid_amount: normalizeMoneyValue(payment?.paid_amount ?? payment?.amount),
     planoName: payment?.planoName || '-',
     paidAt: payment?.paidAt || payment?.createdAt || ''
   }
@@ -361,6 +371,14 @@ function mapPaymentRow(payment) {
 function visualizarPagamento(payment) {
   pagamentoSelecionado.value = { ...payment }
   dialogPagamento.value = true
+}
+
+function normalizeMoneyValue(value) {
+  const numericValue = Number(value || 0)
+
+  if (!numericValue) return 0
+
+  return numericValue >= 100 ? numericValue / 100 : numericValue
 }
 
 function formatMoney(value) {
@@ -387,6 +405,12 @@ function getStatusColor(status) {
   if (normalized.includes('pending')) return 'orange-7'
   if (normalized.includes('cancel')) return 'red-6'
   return 'grey-6'
+}
+
+function irParaWhatsapp() {
+  const message = 'Olá Samuel, gostaria de sacar o valor pendente do FlaviaKamila-App'
+  const url = `https://wa.me/5561981748795?text=${encodeURIComponent(message)}`
+  window.open(url, '_blank')
 }
 </script>
 
@@ -461,6 +485,14 @@ function getStatusColor(status) {
   background: rgba(255,255,255,.84);
   color: #c43728;
   border: 1px solid rgba(217,59,43,.10);
+}
+
+.whats-btn {
+  border-radius: 14px;
+  background: #25d366;
+  color: white;
+  font-weight: 800;
+  text-transform: none;
 }
 
 .tbl {

@@ -87,7 +87,7 @@ const menuOptions = ref([
   { icon: 'home', to: '/admin', label: 'Início' },
   { icon: 'list_alt', to: '/admin/forms', label: 'Formulários' },
   { icon: 'group', to: '/admin/clientes', label: 'Clientes' },
-  { icon: 'paid', to: '/admin/vendas', label: 'Vendas' },
+  { icon: 'paid', to: '/admin/vendas', label: 'Pagamentos' },
 ])
 
 function toggleRightDrawer() {

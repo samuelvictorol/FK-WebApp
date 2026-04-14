@@ -152,15 +152,6 @@
         </div>
       </q-card-section>
     </q-card>
-
-    <q-card class="note-card" flat bordered>
-      <q-card-section class="row items-center no-wrap">
-        <q-icon name="info" size="20px" class="q-mr-sm note-ic" />
-        <div class="text-caption note-text safe-text">
-          Dica: o total agora considera apenas pagamentos aprovados, sem depender de privilégios manuais.
-        </div>
-      </q-card-section>
-    </q-card>
   </q-page>
 </template>
 
@@ -178,9 +169,9 @@ const userName = computed(() => {
   try {
     const raw = localStorage.getItem('auth_user')
     const user = raw ? JSON.parse(raw) : {}
-    return user?.name || 'Administrador'
+    return user?.name || 'Flávia Kamila'
   } catch {
-    return 'Administrador'
+    return 'Flávia Kamila'
   }
 })
 
@@ -194,7 +185,7 @@ const paymentsCount = computed(() => approvedPayments.value.length)
 
 const totalPaymentsValue = computed(() => {
   return approvedPayments.value.reduce((total, payment) => {
-    return total + Number(payment?.paid_amount || payment?.amount || 0)
+    return total + getPaymentValue(payment)
   }, 0)
 })
 
@@ -209,7 +200,7 @@ const todayPaymentsValue = computed(() => {
       paidAt.getMonth() === hoje.getMonth() &&
       paidAt.getFullYear() === hoje.getFullYear()
 
-    return total + (isToday ? Number(payment?.paid_amount || payment?.amount || 0) : 0)
+    return total + (isToday ? getPaymentValue(payment) : 0)
   }, 0)
 })
 
@@ -241,6 +232,14 @@ async function buscarPagamentos() {
   } finally {
     loading.value = false
   }
+}
+
+function getPaymentValue(payment) {
+  const rawValue = Number(payment?.paid_amount ?? payment?.amount ?? 0)
+
+  if (!Number.isFinite(rawValue)) return 0
+
+  return rawValue > 999 ? rawValue / 100 : rawValue
 }
 
 function formatMoney(value) {
@@ -376,8 +375,8 @@ function formatMoney(value) {
 }
 
 .btn-paid {
-  background: linear-gradient(135deg, rgba(217,59,43,.18), rgba(255,107,87,.12));
-  color: #b13224;
+  background: linear-gradient(135deg, rgba(43, 217, 115, 0.18), rgba(6, 185, 75, 0.555));
+  color: #186600;
 }
 
 .chip {
