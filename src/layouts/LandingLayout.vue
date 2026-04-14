@@ -3,7 +3,11 @@
     <q-header elevated class="topbar">
       <q-toolbar class="toolbar container">
         <q-toolbar-title class="brand-title">
-          <div class="brand-main animate__animated animate__fadeInLeft animate__slow">
+          <q-avatar v-if="isMobile" size="60px"
+            class="q-mb-md animate__animated animate__fadeInDown animate__slow q-pt-sm">
+            <img src="/ceo2.jpeg" alt="Logo" @click="showImage('/ceo2.jpeg')" />
+          </q-avatar>
+          <div class="brand-main animate__animated animate__fadeInLeft animate__slow q-pb-sm">
             <strong>Flávia</strong><strong>Kamila</strong>
           </div>
           <div v-if="!isMobile" class="brand-sub">
@@ -18,25 +22,13 @@
           <q-btn flat class="btn-nav desktop-only" label="Planos" @click="scrollTo('planos')" />
           <q-btn flat class="btn-nav desktop-only" label="Contato" @click="scrollTo('contato')" />
 
-          <q-btn
-            dense
-            unelevated
-            class="btn-login q-px-md"
-            icon="login"
-            label="Entrar"
-            to="/login"
-          />
+          <q-btn dense unelevated class="btn-login q-px-md" icon="login" label="Entrar" to="/login" />
 
-          <q-btn
-            dense
-            unelevated
-            class="btn-primary q-px-md desktop-only"
-            icon="person_add"
-            label="Registrar"
-            to="/login"
-          />
+          <q-btn dense unelevated class="btn-primary q-px-md desktop-only" icon="person_add" label="Registrar"
+            to="/login" />
 
-          <q-btn dense flat round icon="menu" class="mobile-only btn-menu animate__animated animate__flipInY animate__slower animate__delay-1s">
+          <q-btn dense flat round icon="menu"
+            class="mobile-only btn-menu animate__animated animate__flipInY animate__slower animate__delay-1s">
             <q-menu class="menu-mobile" anchor="bottom right" self="top right">
               <q-list style="min-width: 220px">
                 <q-item clickable v-close-popup @click="scrollTo('inicio')">
@@ -91,59 +83,37 @@
         <div class="container hero-content relative">
           <div class="row items-center q-col-gutter-xl">
             <div class="col-12 col-md-7">
-              <q-avatar v-if="isMobile" size="100px" class="q-mb-md absolute-top animate__animated animate__fadeInDown animate__slow" style="top:-92px;left: 35%;">
-                <img src="/home.png" alt="Logo" />
-              </q-avatar>
-              <div
-                class="eyebrow q-mt-md animate__animated animate__fadeInDown animate__faster"
-              >
-                <q-icon name="favorite" size="16px" class="q-mr-sm" />
+
+              <div class="eyebrow animate__animated animate__fadeInDown animate__faster">
+                <q-icon name="favorite" size="16px" class="q-mr-md" />
                 Aprenda com estratégia, leveza e clareza
               </div>
 
               <div
-                class="hero-title text-h4 q-pa-sm rounded-borders safe-text animate__animated animate__fadeInLeft animate__slow"
-              >
+                class="hero-title text-h4 q-pa-sm rounded-borders safe-text animate__animated animate__fadeInLeft animate__slow">
                 Descubra o <span class="grad">Cronotipo</span>, o seu <span class="grad">Estilo</span> e a melhor
                 <span class="grad">Forma de Aprendizado</span> para <span class="grad">você</span>.
               </div>
 
-              <p
-                class="hero-sub safe-text text-dark animate__animated animate__fadeInUp animate__slow"
-              >
+              <p class="hero-sub safe-text text-dark animate__animated animate__fadeInUp animate__slow">
                 Um diagnóstico prático e personalizado para estudar com mais foco, constância e inteligência,
                 respeitando o seu ritmo.
               </p>
 
               <div class="row q-col-gutter-sm q-mt-lg">
                 <div class="col-12 col-sm-auto">
-                  <q-btn
-                    class="btn-cta full-width text-white animate__animated animate__fadeInUp animate__delay-1s"
-                    unelevated
-                    icon-right="arrow_forward"
-                    label="Começar agora"
-                    to="/app"
-                  />
+                  <q-btn class="btn-cta full-width text-white animate__animated animate__fadeInUp animate__delay-1s"
+                    unelevated icon-right="arrow_forward" label="Começar agora" to="/app" />
                 </div>
 
                 <div class="col-12 col-sm-auto">
-                  <q-btn
-                    class="btn-soft full-width animate__animated animate__fadeInUp animate__delay-1s"
-                    unelevated
-                    icon-right="apps"
-                    label="PDF grátis"
-                    @click="openNewTab('https://flaviakamila.com.br')"
-                  />
+                  <q-btn class="btn-soft full-width animate__animated animate__fadeInUp animate__delay-1s" unelevated
+                    icon-right="apps" label="PDF grátis" @click="openNewTab('https://flaviakamila.com.br')" />
                 </div>
 
                 <div class="col-12 col-sm-auto">
-                  <q-btn
-                    class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__delay-2s"
-                    unelevated
-                    icon="play_circle"
-                    label="Ver como funciona"
-                    @click="scrollTo('como')"
-                  />
+                  <q-btn class="btn-ghost-strong full-width animate__animated animate__fadeInUp animate__delay-2s"
+                    unelevated icon="play_circle" label="Ver como funciona" @click="scrollTo('como')" />
                 </div>
               </div>
 
@@ -193,10 +163,7 @@
             </div>
 
             <div class="col-12 col-md-5">
-              <q-card
-                class="hero-card animate__animated animate__fadeInRight animate__slow"
-                bordered
-              >
+              <q-card class="hero-card animate__animated animate__fadeInRight animate__slow" bordered>
                 <q-card-section>
                   <div class="text-h6 text-weight-bold q-mb-xs">
                     Diagnóstico + Relatório
@@ -244,34 +211,18 @@
                     </div>
                   </div>
 
-                  <q-btn
-                    class="btn-cta q-mt-lg full-width text-white"
-                    unelevated
-                    label="Quero meu relatório"
-                    icon-right="auto_awesome"
-                    to="/app"
-                  />
+                  <q-btn class="btn-cta q-mt-lg full-width text-white" unelevated label="Quero meu relatório"
+                    icon-right="auto_awesome" to="/app" />
 
-                  <q-btn
-                    class="btn-outline-soft q-mt-sm full-width"
-                    unelevated
-                    label="Já tenho conta"
-                    icon="login"
-                    to="/login"
-                  />
+                  <q-btn class="btn-outline-soft q-mt-sm full-width" unelevated label="Já tenho conta" icon="login"
+                    to="/login" />
                 </q-card-section>
               </q-card>
             </div>
           </div>
         </div>
 
-        <q-btn
-          class="scroll-down desktop-only"
-          round
-          flat
-          icon="keyboard_arrow_down"
-          @click="scrollTo('como')"
-        />
+        <q-btn class="scroll-down desktop-only" round flat icon="keyboard_arrow_down" @click="scrollTo('como')" />
       </section>
 
       <!-- COMO FUNCIONA -->
@@ -339,23 +290,13 @@
               </div>
             </div>
 
-            <q-btn
-              class="btn-cta text-white"
-              unelevated
-              label="Começar agora"
-              icon-right="arrow_forward"
-              to="/app"
-            />
+            <q-btn class="btn-cta text-white" unelevated label="Começar agora" icon-right="arrow_forward" to="/app" />
           </div>
         </div>
       </section>
 
       <!-- SOBRE -->
-      <section
-        id="sobre"
-        class="section section-light"
-        :style="isMobile ? 'padding-top: 60px;' : 'padding-top: 20px;'"
-      >
+      <section id="sobre" class="section section-light" :style="isMobile ? 'padding-top: 60px;' : 'padding-top: 20px;'">
         <div class="parallax-wrap desktop-only">
           <div class="parallax-img" />
           <div class="parallax-overlay" />
@@ -407,11 +348,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <img
-                src="/missao.png"
-                alt="Sobre"
-                class="img-soft full-width animate__animated animate__fadeInRight"
-              />
+              <img src="/missao.png" alt="Sobre" class="img-soft full-width animate__animated animate__fadeInRight" />
             </div>
           </div>
 
@@ -435,7 +372,8 @@
                 <q-card-section>
                   <div class="text-h6 text-weight-bold">Visão</div>
                   <div class="text-body2 text-grey-7 q-mt-xs safe-text">
-                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com propósito.
+                    Ser referência em estratégias individualizadas, transformando vidas por meio do estudo com
+                    propósito.
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pt-none">
@@ -504,13 +442,8 @@
                     </div>
                   </div>
 
-                  <q-btn
-                    class="btn-cta q-mt-md full-width text-white"
-                    unelevated
-                    label="Garantir meu relatório"
-                    icon-right="arrow_forward"
-                    to="/app"
-                  />
+                  <q-btn class="btn-cta q-mt-md full-width text-white" unelevated label="Garantir meu relatório"
+                    icon-right="arrow_forward" to="/app" />
 
                   <div class="text-caption pricing-caption q-mt-sm">
                     Ao continuar, você será direcionado para os formulários do diagnóstico.
@@ -537,52 +470,21 @@
               </div>
 
               <q-form class="contact-form">
-                <q-input
-                  v-model="form.name"
-                  color="red-6"
-                  outlined
-                  bg-color="white"
-                  label="Nome"
-                  class="q-mb-md"
-                />
+                <q-input v-model="form.name" color="red-6" outlined bg-color="white" label="Nome" class="q-mb-md" />
 
-                <q-input
-                  v-model="form.email"
-                  color="red-6"
-                  outlined
-                  bg-color="white"
-                  label="E-mail"
-                  type="email"
-                  class="q-mb-md"
-                />
+                <q-input v-model="form.email" color="red-6" outlined bg-color="white" label="E-mail" type="email"
+                  class="q-mb-md" />
 
-                <q-input
-                  v-model="form.message"
-                  color="red-6"
-                  outlined
-                  bg-color="white"
-                  label="Mensagem"
-                  type="textarea"
-                  autogrow
-                  class="q-mb-md"
-                />
+                <q-input v-model="form.message" color="red-6" outlined bg-color="white" label="Mensagem" type="textarea"
+                  autogrow class="q-mb-md" />
 
-                <q-btn
-                  label="Enviar mensagem"
-                  class="btn-cta q-py-md text-white full-width"
-                  icon-right="send"
-                  @click="salvarLead"
-                />
+                <q-btn label="Enviar mensagem" class="btn-cta q-py-md text-white full-width" icon-right="send"
+                  @click="salvarLead" />
               </q-form>
 
               <div class="row items-center q-gutter-sm q-mt-lg">
                 <img src="/insta.png" style="width: 34px" alt="Instagram" />
-                <a
-                  class="insta-link"
-                  href="https://instagram.com/flaviakamilaf"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a class="insta-link" href="https://instagram.com/flaviakamilaf" target="_blank" rel="noreferrer">
                   @flaviakamilaf
                 </a>
               </div>
@@ -631,13 +533,8 @@
                     </div>
                   </div>
 
-                  <q-btn
-                    class="btn-cta q-mt-md full-width text-white"
-                    unelevated
-                    label="Fazer o diagnóstico agora"
-                    icon-right="auto_awesome"
-                    to="/app"
-                  />
+                  <q-btn class="btn-cta q-mt-md full-width text-white" unelevated label="Fazer o diagnóstico agora"
+                    icon-right="auto_awesome" to="/app" />
                 </q-card-section>
               </q-card>
             </div>
@@ -680,6 +577,22 @@ const $q = useQuasar()
 
 const isMobile = ref(window.innerWidth < 650)
 
+function showImage(src) {
+  $q.dialog({
+    title: 'Quem é Flávia Kamila?',
+    message: `
+      <div>
+        <img src="${src}" alt="Imagem" style="max-width: 100%; height: auto;" />
+        <p>
+          Olá! Sou advogada, mãe e mentora de aprendizagem. Estou aqui para te ajudar a estudar com mais estratégia e leveza, respeitando seu ritmo e sua rotina. Se tiver qualquer dúvida ou quiser saber mais, é só me chamar no Instagram @flaviakamilaf. Será um prazer te ajudar na sua jornada de estudos!
+        </p>
+      </div>
+    `,
+    html: true,
+    ok: 'Fechar',
+    cancel: false
+  })
+}
 const form = ref({
   name: '',
   email: '',
